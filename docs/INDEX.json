@@ -1,0 +1,175 @@
+{
+  "protocol": "OOS Context Protocol",
+  "version": "0.1.0",
+  "project": {
+    "id": "github:993693501",
+    "name": "aoblak/ai-agent-web",
+    "repository": "https://github.com/aoblak/ai-agent-web",
+    "visibility": "PUBLIC",
+    "lifecycle": "UNKNOWN",
+    "review_status": "NEEDS-REVIEW",
+    "base_revision": "ea91e40ba2b5693cda617283a6a3852801cb9b8a"
+  },
+  "bootstrap_order": [
+    "docs/INDEX.md",
+    "docs/GOVERNANCE.md",
+    "docs/GLOSSARY.md",
+    "docs/PROJECT_STATE.md",
+    "docs/MASTER_JOURNAL.md"
+  ],
+  "source_priority": [
+    "SOURCE OF TRUTH",
+    "JOURNAL",
+    "PROJECT STATE",
+    "GLOBAL KNOWLEDGE",
+    "INDEX/LINKS"
+  ],
+  "documents": [
+    {
+      "path": "AGENTS.md",
+      "visibility": "PUBLIC",
+      "sha256": "da6ce9cac0d33253d68d5265b83020cc3cca29e0b9951dcbcd0bf1b263885890"
+    },
+    {
+      "path": "docs/INDEX.md",
+      "visibility": "PUBLIC",
+      "sha256": "d51b0556cf04a2381dcb81c7a39292ecf5d1e492a7c30f6b893ef4f646470b97"
+    },
+    {
+      "path": "docs/GOVERNANCE.md",
+      "visibility": "PUBLIC",
+      "sha256": "31420f2281178f37d194821b75583953d7d543b75d8cc303c3d1d5c1be0e41f2"
+    },
+    {
+      "path": "docs/GLOSSARY.md",
+      "visibility": "PUBLIC",
+      "sha256": "ac95cc37a3846c96ba98c8705b9c445042b64c8e7bec9a7495c2d0101ff899f2"
+    },
+    {
+      "path": "docs/PROJECT_STATE.md",
+      "visibility": "PUBLIC",
+      "sha256": "4ea75484aa56f3f40c3cc0f7f0839afaa47a879abf8eb6b588bf31be9daeadd1"
+    },
+    {
+      "path": "docs/MASTER_JOURNAL.md",
+      "visibility": "PUBLIC",
+      "sha256": "8f1b2b8edfbde2327d8aaa5f84858720cd5debd97925edddba9b7602d4464dbd"
+    },
+    {
+      "path": "scripts/oos_context.py",
+      "visibility": "PUBLIC",
+      "sha256": "0e660a4983ba49477666471314f2ac8cbab8f12808e79a8481a06c4782e2a38f"
+    },
+    {
+      "path": "tests/test_oos_context.py",
+      "visibility": "PUBLIC",
+      "sha256": "d38feed77d7152b13f3526ac09695a9f1d4f33b8f3a0a40300a417d1fa00a2a8"
+    },
+    {
+      "path": "docs/OOS_CONTEXT_PROTOCOL.md",
+      "visibility": "PUBLIC",
+      "sha256": "a8f9d55fb7121070abd709f8ed23ad1cd3df4c987263989602b730cf475c545e"
+    }
+  ],
+  "glossary": {
+    "MJ": {
+      "meaning": "Master Journal",
+      "description": "cross-project chronology, constitutional rules, shared architecture decisions and concise traceable summaries.",
+      "status": "VERIFIED",
+      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
+    },
+    "PJ": {
+      "meaning": "Project Journal",
+      "description": "detailed dated project-level decisions, implementation, tests, results, evidence, risks and next actions.",
+      "status": "VERIFIED",
+      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
+    },
+    "XJ": {
+      "meaning": "Cross-Journal / Cross-Source Check",
+      "description": "inspect all materially related journals and authoritative sources before consequential decisions or promotion.",
+      "status": "VERIFIED",
+      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
+    },
+    "SOT": {
+      "meaning": "Source of Truth",
+      "description": "type-specific authoritative source for a fact.",
+      "status": "VERIFIED",
+      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
+    },
+    "UM": {
+      "meaning": "Unified Memory update with verification",
+      "description": "review current context and related evidence, then retain only durable, verified decisions/corrections/open items without unnecessary duplication. UM is not permission to override higher-authority repo/provider evidence.",
+      "status": "VERIFIED",
+      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
+    },
+    "FMU": {
+      "meaning": "Folder Memory Update",
+      "description": "update the durable memory/journal representation associated with a scoped project/folder after verification; preserve provenance and avoid duplicate authority.",
+      "status": "VERIFIED",
+      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
+    },
+    "GS": {
+      "meaning": "Git State",
+      "description": "report the relevant repository/branch, working tree when observable, latest commit, changed/uncommitted files when observable, ahead/behind or remote sync when observable, and relevant open PR/issues if available. Clearly separate confirmed from unavailable/unknown state.",
+      "status": "VERIFIED",
+      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
+    },
+    "NEEDS-REVIEW": {
+      "meaning": "Unresolved or conflicting evidence",
+      "status": "VERIFIED",
+      "source": "OOS Context Protocol 0.1.0"
+    },
+    "UNKNOWN": {
+      "meaning": "Required information is unavailable",
+      "status": "VERIFIED",
+      "source": "OOS Context Protocol 0.1.0"
+    }
+  },
+  "sources": [
+    {
+      "id": "repository-baseline",
+      "locator": "https://github.com/aoblak/ai-agent-web/tree/ea91e40ba2b5693cda617283a6a3852801cb9b8a",
+      "revision": "ea91e40ba2b5693cda617283a6a3852801cb9b8a",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "accepted-context-protocol",
+      "locator": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/CONTEXT-BOOTSTRAP.md",
+      "revision": "a165ad489a34c8def8f8bd819d4fa35d3bec0d88",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "governance-glossary",
+      "locator": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md",
+      "revision": "a165ad489a34c8def8f8bd819d4fa35d3bec0d88",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "portfolio-journal-baseline",
+      "locator": "https://github.com/aoblak/aljosa-oblak/blob/442f224ad34df9df1b8cacc63c4573bbb66384b3/MASTER-CHATGPT-JOURNAL.md",
+      "revision": "442f224ad34df9df1b8cacc63c4573bbb66384b3",
+      "status": "NEEDS-REVIEW",
+      "visibility": "PUBLIC",
+      "note": "Available version 0.1.5 reconstructed baseline dated 2026-08-30; not a complete current portfolio export."
+    }
+  ],
+  "journal_entries": [
+    {
+      "id": "CTX-20260908-001",
+      "title": "CTX-20260908-001 — OOS context package integrity verified",
+      "topics": [
+        "context",
+        "bootstrap",
+        "governance"
+      ],
+      "recorded_at": "2026-09-08T15:48:11+00:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "4365bc348c9e8932157c5eacfdd62bc2f2b98d929bd5c34acc63cb7abad5c637"
+    }
+  ]
+}
