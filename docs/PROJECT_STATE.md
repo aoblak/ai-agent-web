@@ -4,18 +4,18 @@ Project: aoblak/ai-agent-web
 
 Stable repository ID: github:993693501
 
-Goal: Apply the accepted OOS Context Protocol v0.1 with reproducible local context discovery and validation.
+Goal: Maintain a public-safe, MIT-licensed OOS context reference with reproducible discovery, validation and clear Master/Project/Code Journal routing.
 
 Application lifecycle: UNKNOWN.
 
-Review status: NEEDS-REVIEW for prior application state; protocol integrity checks are separately reported.
+Review status: NEEDS-REVIEW for prior application state and unavailable historical upstream locators; repository-local protocol integrity is reported separately.
 
-Inspected base revision: `ea91e40ba2b5693cda617283a6a3852801cb9b8a`.
+Inspected base revision: `e1f790b93db2ec7ac7d68cc7336693615f82f67e`.
 
-Current evidence: The repository baseline and its file paths were inspected. Application lifecycle, pending product work and deployment state have not been established by this context installation.
+Current evidence: GitHub reports this repository as PUBLIC with `main` at the inspected base revision. The MIT license permits use, copy, modification and distribution subject to its notice. Application lifecycle, pending product work and deployment state have not been established by this documentation repair.
 
-Context availability: present in this revision. Whether this revision is merged or deployed is a Git/provider observation, not inferred from these files.
+Context availability: the original context package is present on `main`; the public bootstrap, Code Journal routing and locator repair are prepared on a review branch until GitHub proves merge status.
 
-Canonical shorthand: the accepted glossary defines MJ, PJ, XJ, UM, FMU, GS and SOT. GS means Git State.
+Canonical shorthand: the repository-local glossary defines MJ, PJ, CJ, XJ, UM, FMU, GS and SOT. GS means Git State.
 
-Next action: inspect the current Git state and relevant source/journal records before the next product change; record substantive work and refresh/validate the context index before completion.
+Next action: review the public-context repair PR, verify CI or local tests, merge only after review, then read back `main` and update the branch/merge state with provider evidence.
