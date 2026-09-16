@@ -63,7 +63,7 @@
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "d9b5b6ceb6149d7aa18e38a54cd2bba1e75b9b56fc1e01a2549ea69fdd5c08ca"
+      "sha256": "086461e9a1c9316cfcaa39b918d00763e56c11c507602aa408f02cf09f65d6bd"
     },
     {
       "path": "scripts/oos_context.py",
@@ -83,12 +83,12 @@
     {
       "path": "docs/CODE_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "2c3735abcc7cc89b701b6329e9e961e1575ba4cd0ef48d4996d87a3a62c1865b"
+      "sha256": "030462d0741cafe3fdc24c296ecf7761b0cbf37b5bcd2794ca502eaabb1e8dcf"
     },
     {
       "path": "docs/ARCHITECT_BOOTSTRAP_PROMPT.md",
       "visibility": "PUBLIC",
-      "sha256": "1250be7c538b54e6df7770b2e2dacd3daee07c2b556dfad0356bde3140ecb05f"
+      "sha256": "b56b5389432249e1b703ea5d5c830c3cc4fc7202ed6e1b40f6e0f2d17e5f50a9"
     }
   ],
   "glossary": {
@@ -228,6 +228,21 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "97c8c5b972f381886608d4e0f4ed8b4f5367b88df3db5674b8bf723a6ec9bfdf"
+    },
+    {
+      "id": "CTX-20260916-003",
+      "title": "CTX-20260916-003 — Bootstrap reads pinned to the supplied Git ref",
+      "topics": [
+        "bootstrap",
+        "git-ref",
+        "correction",
+        "read-only"
+      ],
+      "recorded_at": "2026-09-16T04:03:24+00:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "3a3fc0dee714fa25e29756d7e0419352d2dfd64b3584f26f0778e5d5512ddb3b"
     }
   ]
 }

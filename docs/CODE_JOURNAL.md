@@ -41,11 +41,11 @@ Next: Exact next action
 - Branch/Patch: `docs/public-architect-bootstrap-20260916`; PR [#2](https://github.com/aoblak/ai-agent-web/pull/2)
 - Scope: README, AGENTS, public governance/index/glossary/state/journals and bootstrap prompt
 - Before: Public context existed and validated structurally, but the README described a private agent, no Code Journal was routed, and historical upstream links were malformed or unavailable.
-- Change: Clarified public/copy-safe scope, added CJ routing and a no-Git bootstrap prompt, and replaced unsupported live-source claims with explicit repository-local scope.
+- Change: Clarified public/copy-safe scope, added CJ routing and a no-Git bootstrap prompt, pinned all prompt reads to the provided Git ref until merge, and replaced unsupported live-source claims with explicit repository-local scope.
 - Tests: Context reindex and validation completed; all 16 unit tests passed. The first local diff check missed an untracked new file; provider-branch verification found its trailing whitespace, which was repaired and fully rechecked in the follow-up commit.
 - Three passes: Integrity PASS — manifest/hashes and journal locators regenerated and validated; independent PASS — GitHub metadata, MIT license and all public source URLs checked separately; adverse PASS — remote base-to-head diff, current tree and Git history were checked, the bounded scan found no credential-shaped patterns, and merge/deployment remain explicitly unclaimed.
 - Migration/Deployment: NOT-RUN; documentation review branch only.
 - Risks: Public-safety review is necessarily bounded; the package must never be treated as private portfolio history.
 - Rollback: Close the PR or revert its commits without changing unrelated history.
-- Evidence: Commits `dc49de101faa29d97dc23a7d707a4eed8ff09e05` and `ef447b76d745375216e2a729684b0e55dfa6f482`; GitHub PR #2; validator/test output; provider read-back and correction entry CTX-20260916-002.
+- Evidence: GitHub PR #2 and its commit history; validator/test output; provider read-back; correction entries CTX-20260916-002 and CTX-20260916-003.
 - Next: Review PR #2, merge only after owner review, then read back `main` before reporting adoption.

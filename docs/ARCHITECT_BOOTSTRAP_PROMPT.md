@@ -11,6 +11,8 @@ https://github.com/aoblak/ai-agent-web
 
 Ovaj repozitorij smiješ čitati i koristiti kao javni OOS referentni paket. Sav njegov sadržaj je namjerno javan i pod MIT licencom. On nije privatni portfolio Master Journal i ne daje ti pristup nijednom privatnom projektu.
 
+Važno: ako si ovaj prompt otvorio preko poveznice na određeni commit, granu ili pull request, sve dolje navedene datoteke čitaj iz tog istog Git refa. Nemoj neprimjetno prijeći na `main`, jer ondje promjena možda još nije spojena. `main` koristi tek kada GitHub izričito pokaže da je odgovarajući PR spojen.
+
 ## 1. Najprije dokaži pristup
 
 Otvori repozitorij i redom pročitaj:

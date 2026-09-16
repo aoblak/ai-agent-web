@@ -36,3 +36,14 @@ Adverse: PASS — all retained public links returned HTTP 200 after punctuation-
 Rollback: Close PR #2 or revert its commits; no default-branch or deployment state changed.
 Next: Push the correction commit to PR #2, fetch the resulting head, and repeat validation against the exact provider branch before requesting review.
 <!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20260916-003", "recorded_at": "2026-09-16T04:03:24+00:00", "occurred_at": "2026-09-16T04:03:24+00:00", "actor": "Codex", "topics": ["bootstrap", "git-ref", "correction", "read-only"], "status": "VERIFIED", "visibility": "PUBLIC"} -->
+## CTX-20260916-003 — Bootstrap reads pinned to the supplied Git ref
+Summary: The public prompt originally linked to the repository root while its new Code Journal still existed only in PR #2. It now requires every referenced file to be read from the same supplied commit, branch or PR until GitHub confirms merge to main.
+Sources: [PR #2](https://github.com/aoblak/ai-agent-web/pull/2); docs/ARCHITECT_BOOTSTRAP_PROMPT.md; docs/CODE_JOURNAL.md.
+Integrity: PASS — the ref-pinning instruction and all referenced paths were reviewed, reindexed and structurally validated.
+Independent: PASS — GitHub provider state confirmed PR #2 remained open and unmerged while the files were readable from its head ref.
+Adverse: PASS — the rule covers stale main, branch names containing slashes, public read-only access and false assumptions that a PR is already adopted.
+Rollback: Revert the prompt/journal correction commit without altering unrelated PR history.
+Next: Push the correction, fetch the exact PR head, rerun validation/tests and give the reader an immutable commit link.
+<!-- /oos:event -->
