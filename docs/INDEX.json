@@ -63,7 +63,7 @@
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "e4c693ce1dcd799bc928434e2b78b4284bf17562f8a1b623628e9fbd424073dd"
+      "sha256": "d9b5b6ceb6149d7aa18e38a54cd2bba1e75b9b56fc1e01a2549ea69fdd5c08ca"
     },
     {
       "path": "scripts/oos_context.py",
@@ -83,7 +83,7 @@
     {
       "path": "docs/CODE_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "837d199a071dc559d61c793ba4fc028446d1179d493bfa39e56d67f1b12a6f38"
+      "sha256": "2c3735abcc7cc89b701b6329e9e961e1575ba4cd0ef48d4996d87a3a62c1865b"
     },
     {
       "path": "docs/ARCHITECT_BOOTSTRAP_PROMPT.md",
@@ -212,7 +212,22 @@
       "status": "VERIFIED",
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
-      "sha256": "b7a38c7d1cf135918493cd8f9604bacb11417555f7097a39d3686ab08b608660"
+      "sha256": "bf49b889d06a85619dfc2cb8860992313c2886ef7fc5dc800bf2b8884df91539"
+    },
+    {
+      "id": "CTX-20260916-002",
+      "title": "CTX-20260916-002 — Remote diff verification exposed a local check gap",
+      "topics": [
+        "verification",
+        "correction",
+        "git-diff",
+        "public-scope"
+      ],
+      "recorded_at": "2026-09-16T03:56:59+00:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "97c8c5b972f381886608d4e0f4ed8b4f5367b88df3db5674b8bf723a6ec9bfdf"
     }
   ]
 }

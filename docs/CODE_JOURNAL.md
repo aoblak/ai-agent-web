@@ -34,18 +34,18 @@ Next: Exact next action
 
 ## CJ-20260916-001 — Public context and journal routing repair
 
-Recorded: 2026-09-16T03:47:46Z  
-Task: OOS-PUBLIC-CONTEXT-20260916  
-Status: VERIFIED  
-Base: `e1f790b93db2ec7ac7d68cc7336693615f82f67e`  
-Branch/Patch: `docs/public-architect-bootstrap-20260916`; PR [#2](https://github.com/aoblak/ai-agent-web/pull/2)  
-Scope: README, AGENTS, public governance/index/glossary/state/journals and bootstrap prompt  
-Before: Public context existed and validated structurally, but the README described a private agent, no Code Journal was routed, and historical upstream links were malformed or unavailable.  
-Change: Clarified public/copy-safe scope, added CJ routing and a no-Git bootstrap prompt, and replaced unsupported live-source claims with explicit repository-local scope.  
-Tests: `python3 scripts/oos_context.py --root . reindex --write` completed; `validate` returned `VALID` for 13 indexed documents and 2 journal events; all 16 unit tests passed; `git diff --check` passed.  
-Three passes: Integrity PASS — manifest/hashes and journal locators regenerated and validated; independent PASS — GitHub metadata, MIT license and all public source URLs checked separately; adverse PASS — current tree and Git history showed no credential-shaped patterns in the bounded scan, public/private boundaries were reviewed, and merge/deployment remain explicitly unclaimed.  
-Migration/Deployment: NOT-RUN; documentation branch only.  
-Risks: Public-safety review is necessarily bounded; the package must never be treated as private portfolio history.  
-Rollback: Close the PR or revert its commit without changing unrelated history.  
-Evidence: Commit `dc49de101faa29d97dc23a7d707a4eed8ff09e05`; GitHub PR #2; changed files; validator/test output; provider read-back of the public branch and PR.  
-Next: Review PR #2, merge only after owner review, then read back `main` before reporting adoption.
+- Recorded: 2026-09-16T03:47:46Z
+- Task: OOS-PUBLIC-CONTEXT-20260916
+- Status: VERIFIED
+- Base: `e1f790b93db2ec7ac7d68cc7336693615f82f67e`
+- Branch/Patch: `docs/public-architect-bootstrap-20260916`; PR [#2](https://github.com/aoblak/ai-agent-web/pull/2)
+- Scope: README, AGENTS, public governance/index/glossary/state/journals and bootstrap prompt
+- Before: Public context existed and validated structurally, but the README described a private agent, no Code Journal was routed, and historical upstream links were malformed or unavailable.
+- Change: Clarified public/copy-safe scope, added CJ routing and a no-Git bootstrap prompt, and replaced unsupported live-source claims with explicit repository-local scope.
+- Tests: Context reindex and validation completed; all 16 unit tests passed. The first local diff check missed an untracked new file; provider-branch verification found its trailing whitespace, which was repaired and fully rechecked in the follow-up commit.
+- Three passes: Integrity PASS — manifest/hashes and journal locators regenerated and validated; independent PASS — GitHub metadata, MIT license and all public source URLs checked separately; adverse PASS — remote base-to-head diff, current tree and Git history were checked, the bounded scan found no credential-shaped patterns, and merge/deployment remain explicitly unclaimed.
+- Migration/Deployment: NOT-RUN; documentation review branch only.
+- Risks: Public-safety review is necessarily bounded; the package must never be treated as private portfolio history.
+- Rollback: Close the PR or revert its commits without changing unrelated history.
+- Evidence: Commits `dc49de101faa29d97dc23a7d707a4eed8ff09e05` and `ef447b76d745375216e2a729684b0e55dfa6f482`; GitHub PR #2; validator/test output; provider read-back and correction entry CTX-20260916-002.
+- Next: Review PR #2, merge only after owner review, then read back `main` before reporting adoption.
