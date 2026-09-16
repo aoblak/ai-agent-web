@@ -14,8 +14,8 @@ Inspected base revision: `e1f790b93db2ec7ac7d68cc7336693615f82f67e`.
 
 Current evidence: GitHub reports this repository as PUBLIC with `main` at the inspected base revision. The MIT license permits use, copy, modification and distribution subject to its notice. Application lifecycle, pending product work and deployment state have not been established by this documentation repair.
 
-Context availability: the original context package is present on `main`; the public bootstrap, Code Journal routing and locator repair are prepared on a review branch until GitHub proves merge status.
+Context availability: the original context package is present on `main`; the public bootstrap, Code Journal routing and locator repair are available in public PR [#2](https://github.com/aoblak/ai-agent-web/pull/2) and remain unmerged until GitHub proves otherwise.
 
 Canonical shorthand: the repository-local glossary defines MJ, PJ, CJ, XJ, UM, FMU, GS and SOT. GS means Git State.
 
-Next action: review the public-context repair PR, verify CI or local tests, merge only after review, then read back `main` and update the branch/merge state with provider evidence.
+Next action: review public PR #2, merge only after owner review, then read back `main` and update the branch/merge state with provider evidence.
