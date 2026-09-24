@@ -7,7 +7,6 @@ These terms are canonical unless superseded by a later accepted governance decis
 
 - **MJ — Master Journal**: cross-project chronology, constitutional rules, shared architecture decisions and concise traceable summaries.
 - **PJ — Project Journal**: detailed dated project-level decisions, implementation, tests, results, evidence, risks and next actions.
-- **CJ — Code Journal**: repository-level explanation of implementation changes, tests, migrations, deployment evidence, risks and rollback; it complements but never replaces Git history or executable evidence.
 - **XJ — Cross-Journal / Cross-Source Check**: inspect all materially related journals and authoritative sources before consequential decisions or promotion.
 - **SOT — Source of Truth**: type-specific authoritative source for a fact.
 - **UM — Unified Memory update with verification**: review current context and related evidence, then retain only durable, verified decisions/corrections/open items without unnecessary duplication. UM is not permission to override higher-authority repo/provider evidence.
@@ -50,4 +49,4 @@ Control states:
 
 ## Snapshot provenance
 
-This is the controlled public repository-local glossary. The historical upstream locator recorded during the first context import is currently unavailable and must not be presented as live evidence. Until a valid upstream revision is recovered and reviewed, this glossary is authoritative only for this public repository; it does not replace the private portfolio glossary or create a new authority over other projects.
+Controlled snapshot of the [accepted OOS glossary](https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md). Consult the source and record an explicit update when terminology changes. This file is not a new authority layer.
