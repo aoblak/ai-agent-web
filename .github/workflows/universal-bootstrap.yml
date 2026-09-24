@@ -69,4 +69,9 @@ jobs:
           python - "$tmp/result.json" <<'PY'
           import json, sys
           data = json.load(open(sys.argv[1], encoding="utf-8"))
-          assert data["results"]["MASTER_PROMPT.md"] == "WRITTEN", data\n          assert data["results"]["AI_START_HERE.md"] == "WRITTEN", data\n          assert data["results"]["STORAGE_MANIFEST.md"] == "WRITTEN", data\n          assert data["results"]["AGENTS.md"] == "SKIPPED_SYMLINK", data\n          assert data["results"]["STORAGE_INDEX.json"] == "SKIPPED_SYMLINK", data\n          PY
+          assert data["results"]["MASTER_PROMPT.md"] == "WRITTEN", data
+          assert data["results"]["AI_START_HERE.md"] == "WRITTEN", data
+          assert data["results"]["STORAGE_MANIFEST.md"] == "WRITTEN", data
+          assert data["results"]["AGENTS.md"] == "SKIPPED_SYMLINK", data
+          assert data["results"]["STORAGE_INDEX.json"] == "SKIPPED_SYMLINK", data
+          PY
