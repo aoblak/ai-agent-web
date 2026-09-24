@@ -9,7 +9,8 @@ from __future__ import annotations
 
 import argparse
 import json
-import shutil
+import os
+import tempfile
 from itertools import islice
 from datetime import datetime, timezone
 from pathlib import Path
@@ -94,15 +95,36 @@ def bounded_entries(root: Path, depth: int) -> tuple[list[dict], bool]:
     return out, root_truncated
 
 
+def atomic_write_bytes(path: Path, data: bytes) -> None:
+    """Replace only the selected directory entry; never mutate another hard link's inode."""
+    fd, tmp_name = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
+    tmp = Path(tmp_name)
+    try:
+        with os.fdopen(fd, "wb") as stream:
+            stream.write(data)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.chmod(tmp, 0o644)
+        os.replace(tmp, path)
+    finally:
+        if tmp.exists():
+            tmp.unlink()
+
+
+def atomic_write_text(path: Path, content: str) -> None:
+    atomic_write_bytes(path, content.encode("utf-8"))
+
+
 def write_if_allowed(path: Path, content: str, force: bool) -> str:
-    # Never follow symlinks, even with --force. A separate explicit migration can handle them.
+    # Never follow symlinks, even with --force. Atomic replacement also prevents
+    # overwriting through hard-linked inodes outside the selected storage root.
     if path.is_symlink():
         return "SKIPPED_SYMLINK"
     if path.exists() and path.is_dir():
         return "SKIPPED_NONFILE"
     if path.exists() and not force:
         return "SKIPPED_EXISTS"
-    path.write_text(content, encoding="utf-8")
+    atomic_write_text(path, content)
     return "WRITTEN"
 
 
@@ -115,7 +137,7 @@ def copy_prompt_if_available(path: Path, force: bool) -> str:
         return "SKIPPED_EXISTS"
     if not SOURCE_MASTER_PROMPT.is_file():
         return "SOURCE_UNAVAILABLE_USE_PUBLIC_URL"
-    shutil.copyfile(SOURCE_MASTER_PROMPT, path)
+    atomic_write_bytes(path, SOURCE_MASTER_PROMPT.read_bytes())
     return "WRITTEN"
 
 
@@ -159,7 +181,7 @@ def main() -> int:
             "note": "Navigation metadata only; not authority over file contents or project state.",
             "entries": entries,
         }
-        index_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        atomic_write_text(index_path, json.dumps(payload, indent=2, ensure_ascii=False) + "\n")
         results["STORAGE_INDEX.json"] = "WRITTEN"
 
     print(json.dumps({"root": str(root), "canonical_prompt_url": CANONICAL_PUBLIC_PROMPT_URL, "results": results}, indent=2, ensure_ascii=False))
