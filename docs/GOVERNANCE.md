@@ -10,21 +10,6 @@ The exact repository revision, verified artifact or provider observation is the 
 
 Each repository must identify its own code/artifact source, PJ and portfolio MJ locators in `docs/INDEX.json`. A local `docs/MASTER_JOURNAL.md` may be a controlled excerpt or handoff journal. Label that role explicitly. Keep the canonical portfolio history at its existing location. Do not create a new competing portfolio master by copying everything into each repo.
 
-## Record routing and deduplication
-
-Keep one canonical home for each fact or event and link to it elsewhere:
-
-- **Source/code/artifact/provider state:** what actually exists or runs.
-- **Master Journal (MJ):** cross-project chronology, constitutional rules and shared architecture decisions.
-- **Project Journal (PJ):** one project's decisions, results, risks and next actions.
-- **Code Journal (CJ):** repository-level implementation intent, changed behavior, tests, migrations, deployment evidence and rollback context. It is not a copy of `git log`.
-- **Subjournal:** a bounded workstream with an independent lifecycle or evidence volume, such as security or deployment. Do not create one merely because a new chat or agent appeared.
-- **Project State:** the current evidence-backed snapshot and exact next action.
-- **Index:** paths, classifications, hashes and locators only; never a competing narrative.
-- **ADR:** a durable architectural decision and its trade-offs; journals link to it rather than reproducing it.
-
-When one event affects several layers, write the full record once and use concise links elsewhere. Before creating a new journal, search case-insensitively for existing Master, Project, Code, State, ADR and Index records. Preserve established names and paths unless a reviewed migration explicitly replaces them.
-
 ## Three verification passes
 
 1. **Integrity:** file existence, readable content, hashes, schema, linked files and expected artifact/version.
@@ -46,8 +31,6 @@ Do not change repository visibility or permissions to distribute this protocol. 
 The human or agent performing a substantive operation is responsible for recording it during the same task, before reporting completion. Another actor may record a recovery entry only with its true recording time, separate from the historical event time and with the original author left `UNKNOWN` when unverified.
 
 Record implementation details in the authoritative PJ. Add a concise portfolio MJ delta only for cross-project/constitutional decisions. If the portfolio location is unavailable, record `PENDING-MJ-SYNC` as a workflow condition in the local state and keep a source-linked delta; never claim it was synchronized. No automatic ChatGPT-to-iCloud or GitHub-to-iCloud writer is installed by this package.
-
-For repository-level implementation work, the PJ may delegate technical detail to the CJ. A CJ entry records task ID, base revision, branch or patch, affected paths, behavior before/after, commands and actual results, risks, migration/deployment state, rollback and evidence locators. Use `NOT-RUN`, `UNKNOWN` or `NEEDS-REVIEW` instead of filling gaps with expected results.
 
 Each event in `docs/MASTER_JOURNAL.md` uses the following form:
 
