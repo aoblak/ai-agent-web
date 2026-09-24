@@ -8,7 +8,7 @@
     "visibility": "PUBLIC",
     "lifecycle": "UNKNOWN",
     "review_status": "NEEDS-REVIEW",
-    "base_revision": "e1f790b93db2ec7ac7d68cc7336693615f82f67e"
+    "base_revision": "ea91e40ba2b5693cda617283a6a3852801cb9b8a"
   },
   "bootstrap_order": [
     "docs/INDEX.md",
@@ -26,44 +26,34 @@
   ],
   "documents": [
     {
-      "path": "README.md",
-      "visibility": "PUBLIC",
-      "sha256": "c54d0ce2d93f4df048263599c7550560facb7c62bb5adae4369e1895b46b9f64"
-    },
-    {
-      "path": "LICENSE",
-      "visibility": "PUBLIC",
-      "sha256": "a01bfbb29e5f9d9bcc5f233e484265be984acb74d6418ab6bc6aef61ca31800c"
-    },
-    {
       "path": "AGENTS.md",
       "visibility": "PUBLIC",
-      "sha256": "63e0becad862d966c779d7af26abcf91bedf0f7aaec8ab4317d56275a7d7e3b3"
+      "sha256": "da6ce9cac0d33253d68d5265b83020cc3cca29e0b9951dcbcd0bf1b263885890"
     },
     {
       "path": "docs/INDEX.md",
       "visibility": "PUBLIC",
-      "sha256": "7c62fe1c5963e9251766236f29256d1564541ced15463f573e589f00a67db1bf"
+      "sha256": "d51b0556cf04a2381dcb81c7a39292ecf5d1e492a7c30f6b893ef4f646470b97"
     },
     {
       "path": "docs/GOVERNANCE.md",
       "visibility": "PUBLIC",
-      "sha256": "a18a301dd18f939074accd8e600c33cf0870ab40ccd3e00c15bb0e6b2261e781"
+      "sha256": "31420f2281178f37d194821b75583953d7d543b75d8cc303c3d1d5c1be0e41f2"
     },
     {
       "path": "docs/GLOSSARY.md",
       "visibility": "PUBLIC",
-      "sha256": "0e97e6137cc29c50aec7ed9238cf8c78d87f381fe97978d6e366cf0409e99c40"
+      "sha256": "ac95cc37a3846c96ba98c8705b9c445042b64c8e7bec9a7495c2d0101ff899f2"
     },
     {
       "path": "docs/PROJECT_STATE.md",
       "visibility": "PUBLIC",
-      "sha256": "29b5edd00e87b7269b60a42b0e0f6e3a7b942dd19622ae2585b45d8c19c8c3ef"
+      "sha256": "4ea75484aa56f3f40c3cc0f7f0839afaa47a879abf8eb6b588bf31be9daeadd1"
     },
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "086461e9a1c9316cfcaa39b918d00763e56c11c507602aa408f02cf09f65d6bd"
+      "sha256": "8f1b2b8edfbde2327d8aaa5f84858720cd5debd97925edddba9b7602d4464dbd"
     },
     {
       "path": "scripts/oos_context.py",
@@ -78,17 +68,7 @@
     {
       "path": "docs/OOS_CONTEXT_PROTOCOL.md",
       "visibility": "PUBLIC",
-      "sha256": "1485df96aeb3171ba6e11d8133d36cf4c216c8471d27b31c8c848a564e4b5b60"
-    },
-    {
-      "path": "docs/CODE_JOURNAL.md",
-      "visibility": "PUBLIC",
-      "sha256": "030462d0741cafe3fdc24c296ecf7761b0cbf37b5bcd2794ca502eaabb1e8dcf"
-    },
-    {
-      "path": "docs/ARCHITECT_BOOTSTRAP_PROMPT.md",
-      "visibility": "PUBLIC",
-      "sha256": "b56b5389432249e1b703ea5d5c830c3cc4fc7202ed6e1b40f6e0f2d17e5f50a9"
+      "sha256": "a8f9d55fb7121070abd709f8ed23ad1cd3df4c987263989602b730cf475c545e"
     }
   ],
   "glossary": {
@@ -96,49 +76,43 @@
       "meaning": "Master Journal",
       "description": "cross-project chronology, constitutional rules, shared architecture decisions and concise traceable summaries.",
       "status": "VERIFIED",
-      "source": "https://github.com/aoblak/ai-agent-web/blob/e1f790b93db2ec7ac7d68cc7336693615f82f67e/docs/GLOSSARY.md"
+      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
     },
     "PJ": {
       "meaning": "Project Journal",
       "description": "detailed dated project-level decisions, implementation, tests, results, evidence, risks and next actions.",
       "status": "VERIFIED",
-      "source": "https://github.com/aoblak/ai-agent-web/blob/e1f790b93db2ec7ac7d68cc7336693615f82f67e/docs/GLOSSARY.md"
-    },
-    "CJ": {
-      "meaning": "Code Journal",
-      "description": "repository-level implementation context, tests, migrations, deployment evidence, risks and rollback; it never replaces Git or executable evidence.",
-      "status": "VERIFIED",
-      "source": "https://github.com/aoblak/ai-agent-web/blob/e1f790b93db2ec7ac7d68cc7336693615f82f67e/docs/GLOSSARY.md"
+      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
     },
     "XJ": {
       "meaning": "Cross-Journal / Cross-Source Check",
       "description": "inspect all materially related journals and authoritative sources before consequential decisions or promotion.",
       "status": "VERIFIED",
-      "source": "https://github.com/aoblak/ai-agent-web/blob/e1f790b93db2ec7ac7d68cc7336693615f82f67e/docs/GLOSSARY.md"
+      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
     },
     "SOT": {
       "meaning": "Source of Truth",
       "description": "type-specific authoritative source for a fact.",
       "status": "VERIFIED",
-      "source": "https://github.com/aoblak/ai-agent-web/blob/e1f790b93db2ec7ac7d68cc7336693615f82f67e/docs/GLOSSARY.md"
+      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
     },
     "UM": {
       "meaning": "Unified Memory update with verification",
       "description": "review current context and related evidence, then retain only durable, verified decisions/corrections/open items without unnecessary duplication. UM is not permission to override higher-authority repo/provider evidence.",
       "status": "VERIFIED",
-      "source": "https://github.com/aoblak/ai-agent-web/blob/e1f790b93db2ec7ac7d68cc7336693615f82f67e/docs/GLOSSARY.md"
+      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
     },
     "FMU": {
       "meaning": "Folder Memory Update",
       "description": "update the durable memory/journal representation associated with a scoped project/folder after verification; preserve provenance and avoid duplicate authority.",
       "status": "VERIFIED",
-      "source": "https://github.com/aoblak/ai-agent-web/blob/e1f790b93db2ec7ac7d68cc7336693615f82f67e/docs/GLOSSARY.md"
+      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
     },
     "GS": {
       "meaning": "Git State",
       "description": "report the relevant repository/branch, working tree when observable, latest commit, changed/uncommitted files when observable, ahead/behind or remote sync when observable, and relevant open PR/issues if available. Clearly separate confirmed from unavailable/unknown state.",
       "status": "VERIFIED",
-      "source": "https://github.com/aoblak/ai-agent-web/blob/e1f790b93db2ec7ac7d68cc7336693615f82f67e/docs/GLOSSARY.md"
+      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
     },
     "NEEDS-REVIEW": {
       "meaning": "Unresolved or conflicting evidence",
@@ -161,19 +135,17 @@
     },
     {
       "id": "accepted-context-protocol",
-      "locator": "https://github.com/aoblak/ai-agent-web/blob/e1f790b93db2ec7ac7d68cc7336693615f82f67e/docs/OOS_CONTEXT_PROTOCOL.md",
-      "revision": "e1f790b93db2ec7ac7d68cc7336693615f82f67e",
+      "locator": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/CONTEXT-BOOTSTRAP.md",
+      "revision": "a165ad489a34c8def8f8bd819d4fa35d3bec0d88",
       "status": "VERIFIED",
-      "visibility": "PUBLIC",
-      "note": "Repository-local public baseline; it does not establish private portfolio authority."
+      "visibility": "PUBLIC"
     },
     {
       "id": "governance-glossary",
-      "locator": "https://github.com/aoblak/ai-agent-web/blob/e1f790b93db2ec7ac7d68cc7336693615f82f67e/docs/GLOSSARY.md",
-      "revision": "e1f790b93db2ec7ac7d68cc7336693615f82f67e",
+      "locator": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md",
+      "revision": "a165ad489a34c8def8f8bd819d4fa35d3bec0d88",
       "status": "VERIFIED",
-      "visibility": "PUBLIC",
-      "note": "Repository-local public glossary; historical upstream locator is unavailable."
+      "visibility": "PUBLIC"
     },
     {
       "id": "portfolio-journal-baseline",
@@ -198,51 +170,6 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "4365bc348c9e8932157c5eacfdd62bc2f2b98d929bd5c34acc63cb7abad5c637"
-    },
-    {
-      "id": "CTX-20260916-001",
-      "title": "CTX-20260916-001 — Public context repair prepared for review",
-      "topics": [
-        "context",
-        "public-scope",
-        "journal-routing",
-        "correction"
-      ],
-      "recorded_at": "2026-09-16T03:47:46+00:00",
-      "status": "VERIFIED",
-      "visibility": "PUBLIC",
-      "path": "docs/MASTER_JOURNAL.md",
-      "sha256": "bf49b889d06a85619dfc2cb8860992313c2886ef7fc5dc800bf2b8884df91539"
-    },
-    {
-      "id": "CTX-20260916-002",
-      "title": "CTX-20260916-002 — Remote diff verification exposed a local check gap",
-      "topics": [
-        "verification",
-        "correction",
-        "git-diff",
-        "public-scope"
-      ],
-      "recorded_at": "2026-09-16T03:56:59+00:00",
-      "status": "VERIFIED",
-      "visibility": "PUBLIC",
-      "path": "docs/MASTER_JOURNAL.md",
-      "sha256": "97c8c5b972f381886608d4e0f4ed8b4f5367b88df3db5674b8bf723a6ec9bfdf"
-    },
-    {
-      "id": "CTX-20260916-003",
-      "title": "CTX-20260916-003 — Bootstrap reads pinned to the supplied Git ref",
-      "topics": [
-        "bootstrap",
-        "git-ref",
-        "correction",
-        "read-only"
-      ],
-      "recorded_at": "2026-09-16T04:03:24+00:00",
-      "status": "VERIFIED",
-      "visibility": "PUBLIC",
-      "path": "docs/MASTER_JOURNAL.md",
-      "sha256": "3a3fc0dee714fa25e29756d7e0419352d2dfd64b3584f26f0778e5d5512ddb3b"
     }
   ]
 }
