@@ -1,31 +1,15 @@
-# OOS Public Context Lab
+# ai-agent-web
+Private AI Agent with access to world wide web
 
-This repository is a deliberately public, reusable reference for the OOS context and journal protocol. It contains public-safe governance, journal structures, validation code and a bootstrap prompt for humans or AI assistants that do not have private Git access.
+## Universal AI Bootstrap
 
-Everything committed here must be safe to read, copy and adapt under the [MIT License](LICENSE). If copying an item would expose a secret, customer, private project, credential, commercial detail or sensitive operating information, that item does not belong here.
+This public repository distributes one platform-neutral initial assistant contract:
 
-## Start here
+- [MASTER_PROMPT.md](MASTER_PROMPT.md) — canonical copy/paste prompt.
+- [AI_START_HERE.md](AI_START_HERE.md) — storage/workspace arrival entrypoint.
+- [STORAGE_MANIFEST.md](STORAGE_MANIFEST.md) — storage navigation template.
+- [CLAUDE.md](CLAUDE.md), [GEMINI.md](GEMINI.md), and [.github/copilot-instructions.md](.github/copilot-instructions.md) — compatibility pointers only; they do not define separate protocols.
+- [scripts/install_storage_bootstrap.py](scripts/install_storage_bootstrap.py) — non-destructive storage-root bootstrap/index installer.
+- [tests/test_master_prompt_contract.py](tests/test_master_prompt_contract.py) — deterministic 44 × 10 = 440 contract checks; not 440 live provider calls.
 
-1. Read [AGENTS.md](AGENTS.md).
-2. Follow the [context index](docs/INDEX.md).
-3. Read the [governance rules](docs/GOVERNANCE.md) and [glossary](docs/GLOSSARY.md).
-4. Check the [current project state](docs/PROJECT_STATE.md).
-5. Use the [public architect bootstrap prompt](docs/ARCHITECT_BOOTSTRAP_PROMPT.md) when an assistant has web access but no Git integration.
-
-## Public operating model
-
-Before making a public commitment, run a small internal feasibility test. Announce only the part that has survived that test and is substantially under our control.
-
-**Najavi. Napravi. Dokaži.**
-
-**Declare. Deliver. Prove.**
-
-An announcement states a concrete result and how completion will be visible. Delivery produces the result. Evidence shows what actually happened. A failed or blocked attempt is reported honestly instead of being rewritten as success.
-
-## Boundaries
-
-- This public repository is a protocol reference and controlled handoff source. It is not the private portfolio Master Journal.
-- A fork or copy is a derived version, not a new authority over this repository or private OOS records.
-- Git history, tested code and observed provider/runtime state remain the evidence for implementation claims.
-- Public documentation never authorizes access to private repositories, credentials, deployments or third-party systems.
-- No assistant may claim a Git write, commit, push, pull request, merge or deployment without reading back provider evidence.
+The private OOS implementation remains separate. This public package contains only reusable, public-safe operating rules.
