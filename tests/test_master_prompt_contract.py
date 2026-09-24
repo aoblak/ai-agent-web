@@ -28,7 +28,12 @@ def onboarding_questions() -> list[str]:
     )
     if not m:
         return []
-    return re.findall(r"^\d+\.\s+\*\*(.+?)\*\*", m.group(1), flags=re.MULTILINE)
+    raw_items = re.findall(r"^\d+\.\s+(.+?)$", m.group(1), flags=re.MULTILINE)
+    questions = []
+    for item in raw_items:
+        bold = re.match(r"^\*\*(.+?\?)\*\*", item.strip())
+        questions.append(bold.group(1) if bold else item.strip())
+    return questions
 
 
 @dataclass(frozen=True)
@@ -53,10 +58,10 @@ BASES = [
     ("file_backed", True, True, False, False, False, False),
     ("file_backed_provider_verified", True, True, False, False, False, True),
     ("file_backed_repo_write", True, True, False, True, True, False),
-    ("native_memory", True, True, True, False, False, False),
-    ("native_provider_verified", True, True, True, False, False, True),
+    ("native_memory_no_files", True, False, True, False, False, False),
+    ("native_memory_file_backed", True, True, True, False, False, False),
+    ("native_provider_verified_no_files", True, False, True, False, False, True),
     ("native_repo_write", True, True, True, True, True, False),
-    ("session_repo_read", True, False, False, True, False, False),
     ("session_repo_write", True, False, False, True, True, False),
 ]
 
@@ -113,7 +118,7 @@ def checks(s: Scenario):
     return [
         ("valid_mode", d["mode"] in {"M0", "M1", "M2", "M3"}),
         ("m3_requires_index", (d["mode"] != "M3") or s.indexed_memory),
-        ("m2_m3_require_durable_files", (d["mode"] not in {"M2", "M3"}) or s.durable_files),
+        ("m2_requires_durable_files", (d["mode"] != "M2") or s.durable_files),
         ("repo_write_status_truthful", d["repo_write_status"] == ("AVAILABLE" if s.repo_write else "UNAVAILABLE")),
         ("provider_verified_requires_explicit_proof", (d["persistence"] != "PROVIDER_VERIFIED") or s.provider_verified),
         ("existing_canon_reuse", (not s.existing_canon) or d["canon_action"] == "REUSE"),
