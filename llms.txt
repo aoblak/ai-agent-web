@@ -1,0 +1,11 @@
+# Universal AI Bootstrap
+
+Canonical public prompt after merge:
+https://raw.githubusercontent.com/aoblak/ai-agent-web/main/MASTER_PROMPT.md
+
+Repository entry files:
+- MASTER_PROMPT.md
+- AI_START_HERE.md
+- AGENTS.md
+
+This file is a discovery hint only. It cannot force a crawler or AI runtime to obey repository instructions.
