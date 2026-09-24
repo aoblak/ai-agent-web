@@ -1,0 +1,60 @@
+name: Universal Bootstrap
+
+on:
+  pull_request:
+    paths:
+      - 'MASTER_PROMPT.md'
+      - 'AI_START_HERE.md'
+      - 'STORAGE_MANIFEST.md'
+      - 'AGENTS.md'
+      - 'CLAUDE.md'
+      - 'GEMINI.md'
+      - 'llms.txt'
+      - '.github/copilot-instructions.md'
+      - 'scripts/install_storage_bootstrap.py'
+      - 'tests/test_master_prompt_contract.py'
+      - '.github/workflows/universal-bootstrap.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'MASTER_PROMPT.md'
+      - 'AI_START_HERE.md'
+      - 'STORAGE_MANIFEST.md'
+      - 'AGENTS.md'
+      - 'CLAUDE.md'
+      - 'GEMINI.md'
+      - 'llms.txt'
+      - '.github/copilot-instructions.md'
+      - 'scripts/install_storage_bootstrap.py'
+      - 'tests/test_master_prompt_contract.py'
+      - '.github/workflows/universal-bootstrap.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Contract suite
+        run: python tests/test_master_prompt_contract.py
+      - name: Compile
+        run: python -m py_compile scripts/install_storage_bootstrap.py tests/test_master_prompt_contract.py
+      - name: Storage installer smoke test
+        run: |
+          tmp="$(mktemp -d)"
+          mkdir -p "$tmp/sample_dir"
+          printf 'x\n' > "$tmp/sample.txt"
+          python scripts/install_storage_bootstrap.py "$tmp" > "$tmp/result.json"
+          test -f "$tmp/AI_START_HERE.md"
+          test -f "$tmp/AGENTS.md"
+          test -f "$tmp/STORAGE_MANIFEST.md"
+          test -f "$tmp/STORAGE_INDEX.json"
+          python - <<'PY'
+          import json, os
+          p=os.environ.get("TMP_RESULT")
+          PY
