@@ -4,7 +4,7 @@ Implementation package for the existing accepted OOS Context Protocol v0.1, addi
 
 ## Package
 
-The core consists of AGENTS.md and docs/INDEX.md, GOVERNANCE.md, GLOSSARY.md, PROJECT_STATE.md, MASTER_JOURNAL.md. The public package also indexes CODE_JOURNAL.md and ARCHITECT_BOOTSTRAP_PROMPT.md. docs/INDEX.json supplies machine-readable paths, classifications, hashes and journal entry locators. scripts/oos_context.py provides bootstrap, validation and index regeneration using Python 3 standard-library modules only.
+The core consists of AGENTS.md and docs/INDEX.md, GOVERNANCE.md, GLOSSARY.md, PROJECT_STATE.md, MASTER_JOURNAL.md. docs/INDEX.json supplies machine-readable paths, classifications, hashes and journal entry locators. scripts/oos_context.py provides bootstrap, validation and index regeneration using Python 3 standard-library modules only.
 
 ## Commands
 
