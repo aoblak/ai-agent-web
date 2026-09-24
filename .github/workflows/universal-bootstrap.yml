@@ -45,7 +45,9 @@ jobs:
       - name: Compile
         run: python -m py_compile scripts/install_storage_bootstrap.py tests/test_master_prompt_contract.py
       - name: Storage installer smoke test
+        shell: bash
         run: |
+          set -euo pipefail
           tmp="$(mktemp -d)"
           mkdir -p "$tmp/sample_dir"
           printf 'x\n' > "$tmp/sample.txt"
@@ -54,7 +56,8 @@ jobs:
           test -f "$tmp/AGENTS.md"
           test -f "$tmp/STORAGE_MANIFEST.md"
           test -f "$tmp/STORAGE_INDEX.json"
-          python - <<'PY'
-          import json, os
-          p=os.environ.get("TMP_RESULT")
+          python - "$tmp/result.json" <<'PY'
+          import json, sys
+          data = json.load(open(sys.argv[1], encoding="utf-8"))
+          assert all(v == "WRITTEN" for v in data["results"].values()), data
           PY
