@@ -66,6 +66,15 @@ jobs:
           test ! -e "$outside/index-target.json"
           cmp MASTER_PROMPT.md "$tmp/MASTER_PROMPT.md"
           grep -F '395c197617c505708236af65418fb96bbce78784/MASTER_PROMPT.md' "$tmp/STORAGE_MANIFEST.md"
+
+          # Force-overwrite a hard-linked bootstrap entry. The external inode must stay unchanged.
+          rm "$tmp/AI_START_HERE.md"
+          printf 'outside-hardlink-sentinel\n' > "$outside/hardlink-target.md"
+          ln "$outside/hardlink-target.md" "$tmp/AI_START_HERE.md"
+          python scripts/install_storage_bootstrap.py --force "$tmp" > "$tmp/result-force.json"
+          grep -Fx 'outside-hardlink-sentinel' "$outside/hardlink-target.md"
+          grep -F 'Universal Personal & Business AI Assistant' "$tmp/AI_START_HERE.md"
+
           python - "$tmp/result.json" <<'PY'
           import json, sys
           data = json.load(open(sys.argv[1], encoding="utf-8"))
