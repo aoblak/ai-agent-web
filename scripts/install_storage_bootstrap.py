@@ -10,10 +10,12 @@ from __future__ import annotations
 import argparse
 import json
 import shutil
+from itertools import islice
 from datetime import datetime, timezone
 from pathlib import Path
 
 VERSION = "1.1.0"
+MAX_INDEX_ENTRIES = 500
 CANONICAL_PUBLIC_PROMPT_URL = (
     "https://raw.githubusercontent.com/aoblak/ai-agent-web/"
     "395c197617c505708236af65418fb96bbce78784/MASTER_PROMPT.md"
@@ -57,10 +59,18 @@ def occupied(path: Path) -> bool:
     return path.exists() or path.is_symlink()
 
 
-def bounded_entries(root: Path, depth: int) -> list[dict]:
+def bounded_directory_entries(directory: Path, limit: int = MAX_INDEX_ENTRIES) -> tuple[list[Path], bool]:
+    """Read at most limit+1 entries so high-fanout directories remain bounded."""
+    sample = list(islice(directory.iterdir(), limit + 1))
+    truncated = len(sample) > limit
+    return sorted(sample[:limit], key=lambda x: x.name.lower()), truncated
+
+
+def bounded_entries(root: Path, depth: int) -> tuple[list[dict], bool]:
     out: list[dict] = []
     root = root.resolve()
-    for p in sorted(root.iterdir(), key=lambda x: x.name.lower()):
+    entries, root_truncated = bounded_directory_entries(root)
+    for p in entries:
         try:
             stat = p.lstat()
         except OSError as e:
@@ -75,13 +85,13 @@ def bounded_entries(root: Path, depth: int) -> list[dict]:
         }
         if depth > 1 and not is_link and p.is_dir():
             try:
-                children = [c.name for c in sorted(p.iterdir(), key=lambda x: x.name.lower())]
-                item["children"] = children[:500]
-                item["children_truncated"] = len(children) > 500
+                children, truncated = bounded_directory_entries(p)
+                item["children"] = [c.name for c in children]
+                item["children_truncated"] = truncated
             except OSError as e:
                 item["children_error"] = str(e)
         out.append(item)
-    return out
+    return out, root_truncated
 
 
 def write_if_allowed(path: Path, content: str, force: bool) -> str:
@@ -134,14 +144,20 @@ def main() -> int:
     elif index_path.exists() and not args.force:
         results["STORAGE_INDEX.json"] = "SKIPPED_EXISTS"
     else:
+        entries, entries_truncated = bounded_entries(root, args.depth)
         payload = {
             "schema": "universal-storage-index/1",
             "bootstrap_version": VERSION,
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "root": str(root),
-            "scope": {"depth": args.depth, "recursive": False},
+            "scope": {
+                "depth": args.depth,
+                "recursive": False,
+                "max_entries_per_directory": MAX_INDEX_ENTRIES,
+                "entries_truncated": entries_truncated,
+            },
             "note": "Navigation metadata only; not authority over file contents or project state.",
-            "entries": bounded_entries(root, args.depth),
+            "entries": entries,
         }
         index_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         results["STORAGE_INDEX.json"] = "WRITTEN"
