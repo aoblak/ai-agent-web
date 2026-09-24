@@ -1,0 +1,77 @@
+name: Universal Bootstrap
+
+on:
+  pull_request:
+    paths:
+      - 'MASTER_PROMPT.md'
+      - 'AI_START_HERE.md'
+      - 'STORAGE_MANIFEST.md'
+      - 'AGENTS.md'
+      - 'CLAUDE.md'
+      - 'GEMINI.md'
+      - 'llms.txt'
+      - '.github/copilot-instructions.md'
+      - 'scripts/install_storage_bootstrap.py'
+      - 'tests/test_master_prompt_contract.py'
+      - '.github/workflows/universal-bootstrap.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'MASTER_PROMPT.md'
+      - 'AI_START_HERE.md'
+      - 'STORAGE_MANIFEST.md'
+      - 'AGENTS.md'
+      - 'CLAUDE.md'
+      - 'GEMINI.md'
+      - 'llms.txt'
+      - '.github/copilot-instructions.md'
+      - 'scripts/install_storage_bootstrap.py'
+      - 'tests/test_master_prompt_contract.py'
+      - '.github/workflows/universal-bootstrap.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Universal contract suite
+        run: python tests/test_master_prompt_contract.py
+      - name: Existing repository regression suite
+        run: python -m unittest discover -s tests -v
+      - name: Compile
+        run: python -m py_compile scripts/install_storage_bootstrap.py tests/test_master_prompt_contract.py
+      - name: Storage installer smoke test
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          mkdir -p "$tmp/sample_dir"
+          printf 'x\n' > "$tmp/sample.txt"
+          outside="$(mktemp -d)"
+          ln -s "$outside/agent-target.md" "$tmp/AGENTS.md"
+          ln -s "$outside/index-target.json" "$tmp/STORAGE_INDEX.json"
+          python scripts/install_storage_bootstrap.py "$tmp" > "$tmp/result.json"
+          test -f "$tmp/MASTER_PROMPT.md"
+          test -f "$tmp/AI_START_HERE.md"
+          test -f "$tmp/STORAGE_MANIFEST.md"
+          test -L "$tmp/AGENTS.md"
+          test -L "$tmp/STORAGE_INDEX.json"
+          test ! -e "$outside/agent-target.md"
+          test ! -e "$outside/index-target.json"
+          cmp MASTER_PROMPT.md "$tmp/MASTER_PROMPT.md"
+          grep -F '395c197617c505708236af65418fb96bbce78784/MASTER_PROMPT.md' "$tmp/STORAGE_MANIFEST.md"
+          python - "$tmp/result.json" <<'PY'
+          import json, sys
+          data = json.load(open(sys.argv[1], encoding="utf-8"))
+          assert data["results"]["MASTER_PROMPT.md"] == "WRITTEN", data
+          assert data["results"]["AI_START_HERE.md"] == "WRITTEN", data
+          assert data["results"]["STORAGE_MANIFEST.md"] == "WRITTEN", data
+          assert data["results"]["AGENTS.md"] == "SKIPPED_SYMLINK", data
+          assert data["results"]["STORAGE_INDEX.json"] == "SKIPPED_SYMLINK", data
+          PY
