@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Deterministic contract suite: 44 runtime/storage scenarios × 10 invariants = 440 checks.
+"""Synthetic protocol-model matrix: 44 runtime/storage scenarios × 10 Boolean invariants = 440 evaluations.
 
-This validates the protocol model; it does not impersonate or call commercial AI models.
+This is deterministic model-level checking, not 440 independent runtime tests and not live calls to commercial AI systems.
 """
 from __future__ import annotations
 
