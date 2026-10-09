@@ -1,7 +1,18 @@
-# ai-agent-web
-Private AI Agent with access to world wide web
+# AI Agent Web
 
-## Universal AI Bootstrap
+Reusable operating rules and workspace bootstrap material for AI assistants across runtimes.
+
+This repository helps an assistant discover an existing workspace, distinguish evidence from assumptions, verify its available tools and report whether an action actually succeeded.
+
+**Status:** public operating contract and bootstrap tooling. Runtime instructions require the assistant's actual tool access; they do not grant web access, memory or execution capabilities.
+
+## Start here
+
+1. Read or paste [MASTER_PROMPT.md](MASTER_PROMPT.md) into your assistant environment.
+2. For a file workspace, follow [AI_START_HERE.md](AI_START_HERE.md) and adapt [STORAGE_MANIFEST.md](STORAGE_MANIFEST.md) to the existing structure.
+3. Inspect [the bootstrap installer](scripts/install_storage_bootstrap.py) before using it with your storage root.
+
+## Package contents
 
 This public repository distributes one platform-neutral initial assistant contract:
 
@@ -27,3 +38,17 @@ Every runtime uses the same `MASTER_PROMPT.md`. Provider-specific files exist on
 | Other AI runtimes | Use `MASTER_PROMPT.md` explicitly unless that runtime has a verified native instruction-file convention. |
 
 The private OOS implementation remains separate. This public package contains only reusable, public-safe operating rules.
+
+## Evidence and limitations
+
+The [contract tests](tests/test_master_prompt_contract.py) model protocol behavior with synthetic cases. They are not a benchmark of live AI providers. Compatibility pointers document entry mechanisms; successful execution still depends on each runtime's verified capabilities.
+
+## Related public work
+
+- [Aljoša Oblak — selected systems and technical focus](https://github.com/aoblak/aljosa-oblak)
+- [State Transition Engine — explicit transitions and auditable outcomes](https://github.com/aoblak/state-transition-engine)
+- [The Dog Park Finder — a lightweight application baseline](https://github.com/aoblak/thedogparkfinder)
+
+## Feedback
+
+[Open an issue](https://github.com/aoblak/ai-agent-web/issues) with the runtime, relevant contract section, expected behavior and observed result. Remove credentials and private workspace data before sharing examples.
