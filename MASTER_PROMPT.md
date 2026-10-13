@@ -315,8 +315,10 @@ Default user-directed roles for this workflow:
 - ChatGPT/Codex: architecture, task coordination, acceptance criteria and integration verification.
 - Claude: systems engineering, technical design, interfaces and senior full-stack implementation of the accepted specification.
 - Grok: independent audit and review of the returned implementation, with evidence, defects and an explicit review outcome. Do not mark unreviewed work as approved or let an author claim an independent review of their own changes.
-- Manus: preview-page publishing of the accepted implementation, with a returned working preview URL and source-version evidence.
+- Manus: publish the reviewed implementation as a preview website and deliver/synchronize its source to the existing authorized GitHub repository through the required branch/PR process. Return both the working site URL and the exact repository/commit or PR link. Preserve visibility and do not bypass review with automatic direct-to-main pushes.
 - Other workers: only specifically assigned scoped tasks; no invented automatic review role.
+
+Role suitability is supported by the official Claude Code development documentation (https://support.claude.com/en/articles/14553517-claude-code-common-developer-use-cases), Grok Build code-review features (https://x.ai/build), and Manus website/GitHub documentation (https://open.manus.ai/docs/v2/website and https://www.manus.im/connectors/github). This supports the proposed division of work, not a claim that one model is the best auditor. A plain chat does not automatically have the coding-agent tools or repository access described in those products. Verify the actual session before assignment.
 
 These are assignments, not assumed capabilities or permanent architectural dependencies. The user may change them. A capable replacement must explicitly accept the same task and evidence requirements.
 
