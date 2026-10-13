@@ -48,12 +48,12 @@
     {
       "path": "docs/PROJECT_STATE.md",
       "visibility": "PUBLIC",
-      "sha256": "4ea75484aa56f3f40c3cc0f7f0839afaa47a879abf8eb6b588bf31be9daeadd1"
+      "sha256": "c416d960bc81d6fb689e25e9efbc69beff964f0fb88907db7913da37deafe413"
     },
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "8f1b2b8edfbde2327d8aaa5f84858720cd5debd97925edddba9b7602d4464dbd"
+      "sha256": "d1f836e6f727b88d10057006b21afdc2078933ecc64516520d7a6304058958fb"
     },
     {
       "path": "scripts/oos_context.py",
@@ -170,6 +170,20 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "4365bc348c9e8932157c5eacfdd62bc2f2b98d929bd5c34acc63cb7abad5c637"
+    },
+    {
+      "id": "CTX-20261013-001",
+      "title": "CTX-20261013-001 — Shared bootstrap with verified dependency handoffs",
+      "topics": [
+        "bootstrap",
+        "handoff",
+        "coordination"
+      ],
+      "recorded_at": "2026-10-13T02:11:54.598856+00:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "514d800bd290bcf4901eb4e484945e702242f26e3eb03e703653dc7f9ee905b1"
     }
   ]
 }

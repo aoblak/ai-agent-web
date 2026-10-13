@@ -52,3 +52,10 @@ The [contract tests](tests/test_master_prompt_contract.py) model protocol behavi
 ## Feedback
 
 [Open an issue](https://github.com/aoblak/ai-agent-web/issues) with the runtime, relevant contract section, expected behavior and observed result. Remove credentials and private workspace data before sharing examples.
+
+
+## One shared entry prompt
+
+> Open https://github.com/aoblak/ai-agent-web/blob/main/MASTER_PROMPT.md, load the linked sources relevant to my task, and continue under its rules.
+
+Version 1.2.0 adds existing-chat routing, scoped journal placeholders, task ownership and a verified-result gate before dependent handoffs. Authenticated sessions still require verified connector access; these instructions do not install cross-chat automation. Private project sources remain in their existing authenticated stores.

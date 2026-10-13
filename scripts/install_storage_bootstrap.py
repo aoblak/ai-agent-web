@@ -14,11 +14,11 @@ from itertools import islice
 from datetime import datetime, timezone
 from pathlib import Path
 
-VERSION = "1.1.0"
+VERSION = "1.2.0"
 MAX_INDEX_ENTRIES = 500
 CANONICAL_PUBLIC_PROMPT_URL = (
     "https://raw.githubusercontent.com/aoblak/ai-agent-web/"
-    "395c197617c505708236af65418fb96bbce78784/MASTER_PROMPT.md"
+    "main/MASTER_PROMPT.md"
 )
 PACKAGE_ROOT = Path(__file__).resolve().parents[1]
 SOURCE_MASTER_PROMPT = PACKAGE_ROOT / "MASTER_PROMPT.md"
@@ -27,7 +27,7 @@ START = f"""# AI START HERE
 
 This storage/workspace uses the Universal Personal & Business AI Assistant contract v{VERSION}.
 
-1. Read `MASTER_PROMPT.md` when present locally. If it is not present, use the immutable public copy: {CANONICAL_PUBLIC_PROMPT_URL}
+1. Read `MASTER_PROMPT.md` when present locally. If it is not present, use the maintained public copy: {CANONICAL_PUBLIC_PROMPT_URL}
 2. Read `STORAGE_MANIFEST.md`, `STORAGE_INDEX.json`, and any more specific repository/project `AGENTS.md`.
 3. Perform a runtime capability handshake. Never assume memory, Git, filesystem, connector or write access.
 4. Use progressive discovery. Do not move, rename, delete, deduplicate or reorganize during discovery without explicit authorization.
@@ -43,7 +43,7 @@ Start with `AI_START_HERE.md` and `MASTER_PROMPT.md` when available locally. Thi
 MANIFEST = f"""# STORAGE MANIFEST
 
 - Bootstrap version: {VERSION}
-- Canonical immutable public prompt: {CANONICAL_PUBLIC_PROMPT_URL}
+- Canonical maintained public prompt: {CANONICAL_PUBLIC_PROMPT_URL}
 - Local prompt file: `MASTER_PROMPT.md`
 - Index: `STORAGE_INDEX.json`
 - Discovery: bounded/progressive by default

@@ -65,7 +65,7 @@ jobs:
           test ! -e "$outside/agent-target.md"
           test ! -e "$outside/index-target.json"
           cmp MASTER_PROMPT.md "$tmp/MASTER_PROMPT.md"
-          grep -F '395c197617c505708236af65418fb96bbce78784/MASTER_PROMPT.md' "$tmp/STORAGE_MANIFEST.md"
+          grep -F 'main/MASTER_PROMPT.md' "$tmp/STORAGE_MANIFEST.md"
           python - "$tmp/result.json" <<'PY'
           import json, sys
           data = json.load(open(sys.argv[1], encoding="utf-8"))
@@ -75,3 +75,4 @@ jobs:
           assert data["results"]["AGENTS.md"] == "SKIPPED_SYMLINK", data
           assert data["results"]["STORAGE_INDEX.json"] == "SKIPPED_SYMLINK", data
           PY
+
