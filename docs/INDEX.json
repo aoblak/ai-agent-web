@@ -48,12 +48,12 @@
     {
       "path": "docs/PROJECT_STATE.md",
       "visibility": "PUBLIC",
-      "sha256": "c416d960bc81d6fb689e25e9efbc69beff964f0fb88907db7913da37deafe413"
+      "sha256": "3dbe178ad7909b805104f66fdd85926209c80b7aeee00edb5e51aa61cccf704a"
     },
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "d1f836e6f727b88d10057006b21afdc2078933ecc64516520d7a6304058958fb"
+      "sha256": "5989bfef90d14bdc987d3a9fd5e483e87d8d92b52a85c5a6071e19336e4da575"
     },
     {
       "path": "scripts/oos_context.py",
@@ -184,6 +184,19 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "514d800bd290bcf4901eb4e484945e702242f26e3eb03e703653dc7f9ee905b1"
+    },
+    {
+      "id": "CTX-20261013-002",
+      "title": "CTX-20261013-002 — Correct role assignments and task blocker interpretation",
+      "topics": [
+        "bootstrap",
+        "handoff"
+      ],
+      "recorded_at": "2026-10-13T02:38:22.389169+00:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "0fc7d76a8c36f139ecb5237a31c05871013581d980227ee8f1be8eb27bedfb2c"
     }
   ]
 }
