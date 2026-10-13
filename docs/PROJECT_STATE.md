@@ -24,3 +24,5 @@ Next action: inspect the current Git state and relevant source/journal records b
 Bootstrap update 2026-10-13: v1.2.0 prepared for review; merge/publication must be verified from GitHub. Context journal CTX-20261013-001 records scope and limitations. Cross-provider automation is NOT INSTALLED by this change.
 
 Contract v1.2.1 correction: Claude handles systems engineering; Grok handles senior full-stack development. Continuation sessions do not repeat onboarding. Loaded bootstrap and task BLOCKED are independent state fields. Verify adoption from the current Git revision.
+
+Latest role correction (supersedes preceding role note): Claude handles systems engineering and full-stack development; Grok handles independent audit/review. The superseded branch interpretation was corrected before merge.

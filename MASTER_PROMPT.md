@@ -313,8 +313,8 @@ Use the existing shared TODO/Issue system. Every task has a stable ID, original 
 
 Default user-directed roles for this workflow:
 - ChatGPT/Codex: architecture, task coordination, acceptance criteria and integration verification.
-- Claude: systems engineering, technical design and interfaces for the assigned task.
-- Grok: senior full-stack development and implementation of the accepted specification.
+- Claude: systems engineering, technical design, interfaces and senior full-stack implementation of the accepted specification.
+- Grok: independent audit and review of the returned implementation, with evidence, defects and an explicit review outcome. Do not mark unreviewed work as approved or let an author claim an independent review of their own changes.
 - Manus: preview-page publishing of the accepted implementation, with a returned working preview URL and source-version evidence.
 - Other workers: only specifically assigned scoped tasks; no invented automatic review role.
 

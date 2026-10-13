@@ -37,3 +37,14 @@ Adverse: No claim of automatic cross-provider messaging, missing access, or comp
 Rollback: Revert this correction commit while retaining event history.
 Next: Verify publication and synchronize the corrected assignments to the existing private task journal.
 <!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261013-003", "recorded_at": "2026-10-13T02:39:06.533902+00:00", "occurred_at": null, "actor": "Codex", "topics": ["bootstrap", "handoff"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261013-003 — Correct provisional role interpretation before adoption
+Summary: Latest user clarification assigns systems engineering AND full-stack development to Claude, and independent audit/review to Grok. This supersedes the role interpretation in CTX-20261013-002 before its branch was merged. Prior history is retained.
+Sources: MASTER_PROMPT.md 14.3; same correction PR and latest explicit user clarification.
+Integrity: Rerun contract/context checks on this corrected branch before integration.
+Independent: The user determines assignments; no claim that another worker has accepted or executed work.
+Adverse: Authors cannot count their own review as independent; missing review evidence blocks the dependent integration/publishing stage.
+Rollback: Revert this correction as a Git change, retaining historical events.
+Next: Verify corrected roles on the published source, then synchronize the existing private task journal.
+<!-- /oos:event -->
