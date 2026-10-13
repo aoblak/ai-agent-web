@@ -14,7 +14,7 @@ from itertools import islice
 from datetime import datetime, timezone
 from pathlib import Path
 
-VERSION = "1.2.0"
+VERSION = "1.2.1"
 MAX_INDEX_ENTRIES = 500
 CANONICAL_PUBLIC_PROMPT_URL = (
     "https://raw.githubusercontent.com/aoblak/ai-agent-web/"

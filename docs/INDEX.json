@@ -48,12 +48,12 @@
     {
       "path": "docs/PROJECT_STATE.md",
       "visibility": "PUBLIC",
-      "sha256": "c416d960bc81d6fb689e25e9efbc69beff964f0fb88907db7913da37deafe413"
+      "sha256": "a0c6e836185997d9eb32b950e2ac2d8447da0aafb0f7c69374e3052fd706d329"
     },
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "d1f836e6f727b88d10057006b21afdc2078933ecc64516520d7a6304058958fb"
+      "sha256": "b24161630a2c2f7675cc46c7febe9df1af105969f46d07b46726f1751813ba5a"
     },
     {
       "path": "scripts/oos_context.py",
@@ -184,6 +184,32 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "514d800bd290bcf4901eb4e484945e702242f26e3eb03e703653dc7f9ee905b1"
+    },
+    {
+      "id": "CTX-20261013-002",
+      "title": "CTX-20261013-002 — Correct role assignments and task blocker interpretation",
+      "topics": [
+        "bootstrap",
+        "handoff"
+      ],
+      "recorded_at": "2026-10-13T02:38:22.389169+00:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "0fc7d76a8c36f139ecb5237a31c05871013581d980227ee8f1be8eb27bedfb2c"
+    },
+    {
+      "id": "CTX-20261013-003",
+      "title": "CTX-20261013-003 — Correct provisional role interpretation before adoption",
+      "topics": [
+        "bootstrap",
+        "handoff"
+      ],
+      "recorded_at": "2026-10-13T02:39:06.533902+00:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "a677bc11ff5ac8c47b7ca54bebb1136fb326d9e3ff430edb562c8b638c352362"
     }
   ]
 }
