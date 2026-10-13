@@ -43,6 +43,8 @@ The private OOS implementation remains separate. This public package contains on
 
 The [contract tests](tests/test_master_prompt_contract.py) model protocol behavior with synthetic cases. They are not a benchmark of live AI providers. Compatibility pointers document entry mechanisms; successful execution still depends on each runtime's verified capabilities.
 
+The [handoff gate](docs/OOS_CONTEXT_PROTOCOL.md#executable-handoff-gate) adds a separate executable check over structured events in the existing journal. It binds an expected task, attempt, actors, source commit and journal revision to returned local artifact bytes, review, coordinator confirmation and next-owner receipt. `guarded_continue` invokes a caller-supplied continuation only after those checks pass. [Negative tests](tests/test_handoff_gate.py) assert that invalid evidence never invokes the continuation. This gate does not authenticate providers, send messages, install a dispatcher or grant deployment approval; it validates recorded attestations supplied by a trusted caller.
+
 ## Related public work
 
 - [Aljoša Oblak — selected systems and technical focus](https://github.com/aoblak/aljosa-oblak)

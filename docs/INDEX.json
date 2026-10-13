@@ -48,17 +48,17 @@
     {
       "path": "docs/PROJECT_STATE.md",
       "visibility": "PUBLIC",
-      "sha256": "f8053b9edf0b7ede37ae99a064d357958de8423dfd11734fc1e9f54432483514"
+      "sha256": "28c2f17982daee5f9310550baae5e2a4ac39c39ac714d3eb89d25b69c8b670e6"
     },
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "13bbecbd9acf4980a8b9fe2fa3fdf98376fcc25b5d8e7855e5ff2625cd42347f"
+      "sha256": "b640b32f05337aadbe60acd19ae1ae71343ddf062ef911dd878aebabd0396a31"
     },
     {
       "path": "scripts/oos_context.py",
       "visibility": "PUBLIC",
-      "sha256": "0e660a4983ba49477666471314f2ac8cbab8f12808e79a8481a06c4782e2a38f"
+      "sha256": "ac6dd79bef1f3d9571ea4399cc0279002d2b68e1a20108605c6b9e2c5a16fa07"
     },
     {
       "path": "tests/test_oos_context.py",
@@ -68,7 +68,12 @@
     {
       "path": "docs/OOS_CONTEXT_PROTOCOL.md",
       "visibility": "PUBLIC",
-      "sha256": "a8f9d55fb7121070abd709f8ed23ad1cd3df4c987263989602b730cf475c545e"
+      "sha256": "a108bb7d713a4f95809c08d79f47ed993ddcf626fee04411144a38e59290ff1b"
+    },
+    {
+      "path": "tests/test_handoff_gate.py",
+      "visibility": "PUBLIC",
+      "sha256": "dd86fa420d2288638978973df2e3897ccdfce8f514162d87e8b3f510bdb41cc6"
     }
   ],
   "glossary": {
@@ -238,6 +243,20 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "960b3a581726771afea2d56e3573a2b005ed2805a5fce1cea35ebcc404ab339d"
+    },
+    {
+      "id": "CTX-20261013-006",
+      "title": "CTX-20261013-006 — Executable handoff precondition prepared for review",
+      "topics": [
+        "handoff",
+        "gate",
+        "tests"
+      ],
+      "recorded_at": "2026-10-13T07:07:52.202629+00:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "f82ad15df357e810ca94ca8f1fa21b54f760774fbe7c203df398f313913e5016"
     }
   ]
 }

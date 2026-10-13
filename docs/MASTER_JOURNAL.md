@@ -70,3 +70,15 @@ Adverse: Missing attachments retain commands; UNKNOWN differs from nonexistence;
 Rollback: Revert the adoption commit while retaining historical event records.
 Next: Verify publication; synchronize existing portfolio journal; full historical reconciliation remains open.
 <!-- /oos:event -->
+
+
+<!-- oos:event {"id": "CTX-20261013-006", "recorded_at": "2026-10-13T07:07:52.202629+00:00", "occurred_at": "2026-10-13T07:07:52.202629+00:00", "actor": "Codex", "topics": ["handoff", "gate", "tests"], "status": "PROPOSED", "visibility": "PUBLIC", "task_id": "github:993693501/issues/9", "phase_id": "IMPL-01", "event_kind": "IMPLEMENTATION-RECORD", "model_id": "UNKNOWN", "chat_id": "UNKNOWN"} -->
+## CTX-20261013-006 — Executable handoff precondition prepared for review
+Summary: Extend the existing Python context tool with a read-only handoff-gate and guarded_continue API over structured events in the existing journal. Issue #9 owns the task; no parallel ledger or bootstrap is introduced. Contract remains v1.2.3.
+Sources: https://github.com/aoblak/ai-agent-web/issues/9; base 90c92bc9228fe52ef1efd9cc2f39034498079c3a; scripts/oos_context.py; tests/test_handoff_gate.py; docs/OOS_CONTEXT_PROTOCOL.md.
+Integrity: 28 focused handoff tests passed before this record; full regression/index/CI verification follows before delivery. Reindex is a derived manifest update, not approval of recorded claims.
+Independent: Existing contract and provider main/issue state inspected; reviewer/caller identity authentication remains outside this local gate. No external independent agent review has occurred.
+Adverse: Missing stages/results, wrong hashes/source/actors, self-review, failed checks, stale journals, changed evidence, duplicate receipts and superseded attempts block the continuation; callback failures propagate.
+Rollback: Close the review PR or revert its eventual merge; preserve prior journal bytes and unrelated commits.
+Next: Review and verify CI; authenticated transport, writer authorization, transactional/idempotent dispatch and real cross-provider execution remain unimplemented by this change. Portfolio synchronization remains PENDING-MJ-SYNC.
+<!-- /oos:event -->

@@ -21,6 +21,12 @@ PRIORITY = ["SOURCE OF TRUTH", "JOURNAL", "PROJECT STATE",
 STATUSES = {"PROPOSED", "VERIFIED", "NEEDS-REVIEW", "UNKNOWN", "SUPERSEDED"}
 VISIBILITIES = {"PUBLIC", "PRIVATE", "UNKNOWN"}
 FIELDS = ["Summary", "Sources", "Integrity", "Independent", "Adverse", "Rollback", "Next"]
+HANDOFF_STEPS = [("READY", "coordinator"), ("ASSIGNED", "coordinator"),
+                 ("ACCEPTED", "owner"), ("IN_PROGRESS", "owner"),
+                 ("RESULT_RETURNED", "owner"), ("VERIFIED", "reviewer"),
+                 ("VERIFIED", "coordinator"), ("HANDED_OFF", "next_owner")]
+HANDOFF_BINDINGS = ["task_id", "attempt_id", "owner", "reviewer", "coordinator",
+                    "next_owner", "source_commit"]
 EVENT = re.compile(r'<!-- oos:event (\{[^\n]+\}) -->\n(.*?)<!-- /oos:event -->', re.S)
 ID = re.compile(r"[A-Z][A-Z0-9._-]{2,79}\Z")
 
@@ -128,6 +134,157 @@ def parse_events(text):
                    "sha256": sha(match.group(0).encode("utf-8"))}
         events.append((locator, match.group(0)))
     return events
+
+
+def required_text(value, field):
+    if (not isinstance(value, str) or not value.strip() or value != value.strip()
+            or value.upper() == "UNKNOWN" or "[" in value or "]" in value):
+        raise ContextError("Missing or unresolved handoff field: " + field)
+    return value
+
+
+def handoff_gate(root, policy):
+    """Read-only gate over the existing journal; policy comes from a trusted caller.
+
+    This validates recorded attestations, not provider identities or signatures.
+    A dispatcher must authenticate writers and serialize dispatch against its ledger.
+    """
+    for field in HANDOFF_BINDINGS + ["journal_sha256"]:
+        required_text(policy.get(field), field)
+    if not re.fullmatch(r"[0-9a-f]{40}", policy["source_commit"]):
+        raise ContextError("Handoff source must be an exact Git commit SHA")
+    if not re.fullmatch(r"[0-9a-f]{64}", policy["journal_sha256"]):
+        raise ContextError("Handoff journal must have an expected SHA-256")
+    if policy["owner"] == policy["reviewer"]:
+        raise ContextError("Independent reviewer must differ from result owner")
+    root = Path(root).resolve()
+    manifest, _ = load_manifest(root)
+    errors, _, snapshots, _ = inspect(root, manifest)
+    if errors:
+        raise ContextError("Context invalid: " + "; ".join(errors))
+    journal = snapshots["docs/MASTER_JOURNAL.md"]
+    if sha(journal) != policy["journal_sha256"]:
+        raise ContextError("Stale handoff journal revision")
+    selected, attempts = [], []
+    for match in EVENT.finditer(journal.decode("utf-8")):
+        meta = decode_json(match.group(1))
+        if "handoff" not in meta:
+            continue  # Legacy prose entries cannot authorize a handoff.
+        h = meta["handoff"]
+        if not isinstance(h, dict) or h.get("schema") != "oos-handoff/1":
+            raise ContextError("Invalid structured handoff record")
+        if h.get("task_id") != policy["task_id"]:
+            continue
+        attempt = required_text(h.get("attempt_id"), "attempt_id")
+        if not attempts or attempts[-1] != attempt:
+            if attempt in attempts:
+                raise ContextError("Interleaved or reopened handoff attempt")
+            attempts.append(attempt)
+        if attempt == policy["attempt_id"]:
+            selected.append((meta, h))
+    if not attempts or attempts[-1] != policy["attempt_id"]:
+        raise ContextError("Missing or superseded handoff attempt")
+    if len(selected) != len(HANDOFF_STEPS):
+        raise ContextError("Incomplete, duplicate or invalidated handoff sequence")
+    previous_time, criteria, artifacts = None, None, {}
+    messages, file_snapshots = set(), {}
+    for i, ((meta, h), (state, role)) in enumerate(zip(selected, HANDOFF_STEPS)):
+        if h.get("state") != state or h.get("role") != role:
+            raise ContextError("Invalid handoff transition at " + meta["id"])
+        if any(h.get(field) != policy[field] for field in HANDOFF_BINDINGS):
+            raise ContextError("Handoff owner, task, attempt or source mismatch")
+        if meta["actor"] != policy[role] or meta["status"] != "VERIFIED":
+            raise ContextError("Unverified event or unexpected handoff actor")
+        timestamp(meta["occurred_at"], meta["id"] + ".occurred_at")
+        event_time = datetime.fromisoformat(meta["occurred_at"].replace("Z", "+00:00"))
+        recorded_time = datetime.fromisoformat(meta["recorded_at"].replace("Z", "+00:00"))
+        if recorded_time < event_time or (previous_time and event_time < previous_time):
+            raise ContextError("Handoff event timestamps are out of order")
+        previous_time = event_time
+        current_criteria = h.get("criteria")
+        if not isinstance(current_criteria, list) or not current_criteria:
+            raise ContextError("Handoff requires acceptance criteria")
+        for item in current_criteria:
+            required_text(item, "criteria")
+        if len(set(current_criteria)) != len(current_criteria):
+            raise ContextError("Duplicate acceptance criterion")
+        if criteria is None:
+            criteria = current_criteria
+        elif criteria != current_criteria:
+            raise ContextError("Acceptance criteria changed within an attempt")
+        if i in {1, 2, 4, 5, 6, 7}:
+            message = required_text(h.get("message_id"), "message_id")
+            if message in messages:
+                raise ContextError("Duplicate handoff delivery/receipt")
+            messages.add(message)
+        if i == 2 and h.get("in_reply_to") != selected[1][0]["id"]:
+            raise ContextError("Acceptance does not reference this assignment")
+        if i == 4:
+            result = h.get("artifacts")
+            if not isinstance(result, list) or not result:
+                raise ContextError("Returned result requires actual artifacts")
+            for artifact in result:
+                if not isinstance(artifact, dict):
+                    raise ContextError("Invalid returned artifact")
+                artifact_id = required_text(artifact.get("id"), "artifact.id")
+                path = required_text(artifact.get("path"), "artifact.path")
+                digest = artifact.get("sha256")
+                if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest):
+                    raise ContextError("Invalid artifact SHA-256")
+                if artifact_id in artifacts or path in file_snapshots:
+                    raise ContextError("Duplicate returned artifact")
+                if PurePosixPath(path).as_posix() != path:
+                    raise ContextError("Artifact path must be canonical and relative")
+                file = local_file(root, path)
+                if file.stat().st_size > 64 * 1024 * 1024:
+                    raise ContextError("Artifact exceeds 64 MiB gate limit")
+                data = file.read_bytes()
+                if sha(data) != digest:
+                    raise ContextError("Returned artifact hash mismatch: " + path)
+                artifacts[artifact_id] = artifact
+                file_snapshots[path] = data
+        if i == 5:
+            if h.get("result_event_id") != selected[4][0]["id"]:
+                raise ContextError("Review does not reference this result")
+            checks = h.get("checks")
+            if not isinstance(checks, list) or len(checks) != len(criteria):
+                raise ContextError("Review must cover every acceptance criterion")
+            checked = set()
+            for check in checks:
+                if not isinstance(check, dict):
+                    raise ContextError("Invalid review check")
+                criterion = check.get("criterion")
+                if not isinstance(criterion, str) or criterion not in criteria or criterion in checked:
+                    raise ContextError("Invalid or duplicate reviewed criterion")
+                evidence = check.get("evidence")
+                if (check.get("ok") is not True or not isinstance(evidence, list) or not evidence
+                        or not all(isinstance(e, str) and e in artifacts for e in evidence)):
+                    raise ContextError("Review failed or lacks returned evidence")
+                checked.add(criterion)
+        if i == 6 and h.get("review_event_id") != selected[5][0]["id"]:
+            raise ContextError("Coordinator did not confirm this review")
+        if i == 7 and h.get("confirmation_event_id") != selected[6][0]["id"]:
+            raise ContextError("Next owner did not acknowledge this confirmation")
+    # Fail if a cooperative writer changed evidence while it was being checked.
+    if local_file(root, "docs/MASTER_JOURNAL.md").read_bytes() != journal:
+        raise ContextError("Handoff journal changed during verification")
+    for path, data in file_snapshots.items():
+        if local_file(root, path).read_bytes() != data:
+            raise ContextError("Handoff artifact changed during verification")
+    return {"status": "HANDOFF_VERIFIED", "scope": "recorded-attestations-and-local-bytes",
+            **{field: policy[field] for field in HANDOFF_BINDINGS + ["journal_sha256"]},
+            "confirmation_event_id": selected[6][0]["id"],
+            "receipt_event_id": selected[7][0]["id"],
+            "artifacts": list(artifacts.values())}
+
+
+def guarded_continue(root, policy, continuation):
+    """Invoke a trusted caller's continuation only after successful verification.
+
+    No command/callback is loaded from journal content. This is not an exactly-once
+    dispatcher: the caller owns its transaction/lock and authenticated transport.
+    """
+    return continuation(handoff_gate(root, policy))
 
 
 def check_links(root, relative, text):
@@ -242,6 +399,10 @@ def inspect(root, manifest, compare_hashes=True):
 
 def run(args):
     root = Path(args.root).resolve()
+    if args.command == "handoff-gate":
+        policy = {field: getattr(args, field) for field in HANDOFF_BINDINGS + ["journal_sha256"]}
+        print(json.dumps(handoff_gate(root, policy), indent=2))
+        return 0
     manifest, index_before = load_manifest(root)
     errors, warnings, snapshots, events = inspect(root, manifest, compare_hashes=args.command != "reindex")
     if errors:
@@ -313,6 +474,9 @@ def main():
     boot.add_argument("--max-entries", type=int, choices=range(1, 21), default=5)
     reindex = commands.add_parser("reindex")
     reindex.add_argument("--write", action="store_true")
+    gate = commands.add_parser("handoff-gate", help="Fail closed unless the exact handoff has verified evidence and receipt")
+    for field in HANDOFF_BINDINGS + ["journal_sha256"]:
+        gate.add_argument("--" + field.replace("_", "-"), required=True)
     args = parser.parse_args()
     try:
         return run(args)

@@ -26,3 +26,6 @@ Current contract: v1.2.3. Latest assignments: ChatGPT/Codex coordinates architec
 Clarification is an internal gate with retrieval first. Resume/handoff refreshes the same bootstrap URL, tracks unanswered questions, and links source fragments to context in existing stores. START/END attribution remains required. These are published contract requirements, not an installed cross-provider notification service or a completed historical ingestion. Verify merge/adoption from GitHub.
 
 Historical reconciliation remains incomplete: retrieved prior decisions are discovery evidence, not an enumerated audit of all chats or archives. Full export/log coverage remains unverified. Portfolio delta synchronization: PENDING-MJ-SYNC until the existing canonical private journal is updated.
+
+
+Issue #9 implementation: executable handoff precondition and 28 targeted synthetic tests prepared on a review branch from 90c92bc9228fe52ef1efd9cc2f39034498079c3a. The gate validates pinned recorded attestations and local artifact bytes before a caller continuation. It does not authenticate providers or install a dispatcher. Main adoption, external review and live cross-provider execution require separate verification. See CTX-20261013-006 and the existing OOS Context Protocol documentation.
