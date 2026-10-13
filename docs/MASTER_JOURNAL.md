@@ -48,3 +48,14 @@ Adverse: Authors cannot count their own review as independent; missing review ev
 Rollback: Revert this correction as a Git change, retaining historical events.
 Next: Verify corrected roles on the published source, then synchronize the existing private task journal.
 <!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261013-004", "recorded_at": "2026-10-13T02:42:13.804422+00:00", "occurred_at": null, "actor": "Codex", "topics": ["bootstrap", "attribution"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261013-004 — Task start/end attribution
+Summary: Add START/END attribution linking task, chat, executor, exposed model, mode, subscription plan, timestamps and versioned evidence in the existing event store. Do not infer hidden model identity or fabricate active work time.
+Sources: User-directed attribution requirement; MASTER_PROMPT.md 14.6; previous published contract v1.2.1.
+Integrity: Run existing contract/context checks before integration.
+Independent: Exact model identity requires exposed runtime/provider evidence; this change makes no model-identification or automation claim.
+Adverse: UNKNOWN identity, model changes, interrupted sessions, retrospective entries and binary/code artifacts are handled explicitly.
+Rollback: Revert this adoption commit while retaining event history.
+Next: Verify the published contract and use the start/end fields in the existing task journal.
+<!-- /oos:event -->
