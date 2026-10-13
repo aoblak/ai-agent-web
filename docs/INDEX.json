@@ -28,22 +28,22 @@
     {
       "path": "AGENTS.md",
       "visibility": "PUBLIC",
-      "sha256": "9734e9d9c9d96ad8d7a5850fcaf8fd9dc950f0af007ac0921b8866a5d177dea4"
+      "sha256": "afa19c5ba22c4c10ac293b8b230b89815c05a7be5f9d15535a891ab5f1a00c01"
     },
     {
       "path": "docs/INDEX.md",
       "visibility": "PUBLIC",
-      "sha256": "e3a7d7ac2080313c02607ba18dce026aeadb02c77abb7d2a452d0abfa43dac53"
+      "sha256": "d51b0556cf04a2381dcb81c7a39292ecf5d1e492a7c30f6b893ef4f646470b97"
     },
     {
       "path": "docs/GOVERNANCE.md",
       "visibility": "PUBLIC",
-      "sha256": "981e5109b9cfe4c83f20c0d595f3ee495c133ebe1cb3d9fa96fae62b5e18fa92"
+      "sha256": "31420f2281178f37d194821b75583953d7d543b75d8cc303c3d1d5c1be0e41f2"
     },
     {
       "path": "docs/GLOSSARY.md",
       "visibility": "PUBLIC",
-      "sha256": "7555999e28a6e344bf8f001fbb7b25e15d85482e9e2c73c6351b13a7d2432a7f"
+      "sha256": "ac95cc37a3846c96ba98c8705b9c445042b64c8e7bec9a7495c2d0101ff899f2"
     },
     {
       "path": "docs/PROJECT_STATE.md",
@@ -53,22 +53,22 @@
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "00d6959f63b813c67874615ee5c65304c7f5217b3e1d69861315b89849b7d650"
+      "sha256": "d1f836e6f727b88d10057006b21afdc2078933ecc64516520d7a6304058958fb"
     },
     {
       "path": "scripts/oos_context.py",
       "visibility": "PUBLIC",
-      "sha256": "f6e1f5eb85e733fb566e86a69da105affb2780161e1a3b642f986d1f3f603971"
+      "sha256": "0e660a4983ba49477666471314f2ac8cbab8f12808e79a8481a06c4782e2a38f"
     },
     {
       "path": "tests/test_oos_context.py",
       "visibility": "PUBLIC",
-      "sha256": "af351d89eb19d71bb0e02c7c7267a97a33fcc1513177112e53f38ee6e533679a"
+      "sha256": "d38feed77d7152b13f3526ac09695a9f1d4f33b8f3a0a40300a417d1fa00a2a8"
     },
     {
       "path": "docs/OOS_CONTEXT_PROTOCOL.md",
       "visibility": "PUBLIC",
-      "sha256": "653d54424431fb656703ab904d9272a1d14d8eb47c50663884d04e0abf6afab2"
+      "sha256": "a8f9d55fb7121070abd709f8ed23ad1cd3df4c987263989602b730cf475c545e"
     }
   ],
   "glossary": {

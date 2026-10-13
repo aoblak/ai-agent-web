@@ -16,7 +16,6 @@ Next: Verify repository branch/merge state before reporting adoption; applicatio
 <!-- /oos:event -->
 
 
-
 <!-- oos:event {"id": "CTX-20261013-001", "recorded_at": "2026-10-13T02:11:54.598856+00:00", "occurred_at": null, "actor": "Codex", "topics": ["bootstrap", "handoff", "coordination"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
 ## CTX-20261013-001 — Shared bootstrap with verified dependency handoffs
 Summary: Prepare contract v1.2.0 with a short shared entry prompt, scoped journal identity, existing-chat routing, task ownership, concurrent-write rules and verified returns before dependent work. Maintain the same entry URL and remove the obsolete v1.1.0 fallback pin from new installations.
