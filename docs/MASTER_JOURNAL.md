@@ -14,3 +14,16 @@ Adverse: PASS — 16 regression checks cover lost files, stale hashes, private/p
 Rollback: Revert this context change as a Git commit; preserve unrelated commits and earlier journal history.
 Next: Verify repository branch/merge state before reporting adoption; application and deployment status remain independently verified facts.
 <!-- /oos:event -->
+
+
+
+<!-- oos:event {"id": "CTX-20261013-001", "recorded_at": "2026-10-13T02:11:54.598856+00:00", "occurred_at": null, "actor": "Codex", "topics": ["bootstrap", "handoff", "coordination"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261013-001 — Shared bootstrap with verified dependency handoffs
+Summary: Prepare contract v1.2.0 with a short shared entry prompt, scoped journal identity, existing-chat routing, task ownership, concurrent-write rules and verified returns before dependent work. Maintain the same entry URL and remove the obsolete v1.1.0 fallback pin from new installations.
+Sources: Base aoblak/ai-agent-web@4d9e96233981089368e3ad61e406ee2d51e52797; MASTER_PROMPT.md sections 14.1–14.5; public-safe workflow requirements.
+Integrity: PASS — 440 synthetic protocol-model checks, 16 regression tests, structural context validation and installer smoke check. Structural validation retains the pre-existing unresolved portfolio-journal-baseline locator warning; no private-store access is claimed.
+Independent: Existing repository entrypoints and provider tree inspected at the base revision. No live cross-provider execution is claimed.
+Adverse: Unavailable access, absent chat IDs, stale writes, missing results, unacknowledged handoffs and private data are explicitly handled without fabricated success.
+Rollback: Revert the adoption commit while retaining prior history.
+Next: Publish through a reviewable PR and verify the final entrypoint. Private portfolio sync tracked outside this public repository.
+<!-- /oos:event -->

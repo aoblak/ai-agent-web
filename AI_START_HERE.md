@@ -9,3 +9,5 @@ This storage/workspace uses a universal, capability-first AI operating contract.
 5. For Git repositories, follow the repository's own `AGENTS.md`, current state, Journal, Issues/PRs and Git history.
 6. Do not recursively scan, move, rename or delete storage content during discovery unless explicitly authorized.
 7. Never claim DONE until the requested effect is verified.
+
+8. Follow MASTER_PROMPT.md sections 14.1–14.5 for existing-chat routing, scoped journal identity, task ownership, concurrent writes and verified handoff returns. A dependent stage remains blocked until the preceding result is returned and verified. Record the exact bootstrap commit read.

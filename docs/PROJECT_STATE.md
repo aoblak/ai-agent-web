@@ -19,3 +19,6 @@ Context availability: present in this revision. Whether this revision is merged 
 Canonical shorthand: the accepted glossary defines MJ, PJ, XJ, UM, FMU, GS and SOT. GS means Git State.
 
 Next action: inspect the current Git state and relevant source/journal records before the next product change; record substantive work and refresh/validate the context index before completion.
+
+
+Bootstrap update 2026-10-13: v1.2.0 prepared for review; merge/publication must be verified from GitHub. Context journal CTX-20261013-001 records scope and limitations. Cross-provider automation is NOT INSTALLED by this change.
