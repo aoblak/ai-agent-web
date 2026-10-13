@@ -50,3 +50,5 @@ Control states:
 ## Snapshot provenance
 
 Controlled snapshot of the [accepted OOS glossary](https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md). Consult the source and record an explicit update when terminology changes. This file is not a new authority layer.
+
+Public retrieval correction (2026-10-13): the preceding source URL is a historical locator and did not return readable content during this check. The glossary body in the existing public snapshot at revision `90c92bc9228fe52ef1efd9cc2f39034498079c3a` was compared with the historical source through authorized access. Use the pinned public snapshot in `INDEX.json` for public retrieval; it remains a controlled copy, not a new authority. No private destination is disclosed.

@@ -33,7 +33,7 @@
     {
       "path": "docs/INDEX.md",
       "visibility": "PUBLIC",
-      "sha256": "d51b0556cf04a2381dcb81c7a39292ecf5d1e492a7c30f6b893ef4f646470b97"
+      "sha256": "c21af79c6429bf2955a9d06a0b42eeea1310f10b5da4d26060998d734a64ecc7"
     },
     {
       "path": "docs/GOVERNANCE.md",
@@ -43,17 +43,17 @@
     {
       "path": "docs/GLOSSARY.md",
       "visibility": "PUBLIC",
-      "sha256": "ac95cc37a3846c96ba98c8705b9c445042b64c8e7bec9a7495c2d0101ff899f2"
+      "sha256": "a438007a6089a65265c462884152f7cebc25f5d5386e385d467e8c3adbb4a680"
     },
     {
       "path": "docs/PROJECT_STATE.md",
       "visibility": "PUBLIC",
-      "sha256": "f8053b9edf0b7ede37ae99a064d357958de8423dfd11734fc1e9f54432483514"
+      "sha256": "0673bbf4fdad17904a5d80d149c6206c25d15771c7db18d343d4fdc4be649c74"
     },
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "13bbecbd9acf4980a8b9fe2fa3fdf98376fcc25b5d8e7855e5ff2625cd42347f"
+      "sha256": "6ba19893b4d3696bf6022a3e88058b0d9178a2178b73430e6071313210b4829a"
     },
     {
       "path": "scripts/oos_context.py",
@@ -76,43 +76,50 @@
       "meaning": "Master Journal",
       "description": "cross-project chronology, constitutional rules, shared architecture decisions and concise traceable summaries.",
       "status": "VERIFIED",
-      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
+      "source": "https://github.com/aoblak/ai-agent-web/blob/90c92bc9228fe52ef1efd9cc2f39034498079c3a/docs/GLOSSARY.md",
+      "historical_source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
     },
     "PJ": {
       "meaning": "Project Journal",
       "description": "detailed dated project-level decisions, implementation, tests, results, evidence, risks and next actions.",
       "status": "VERIFIED",
-      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
+      "source": "https://github.com/aoblak/ai-agent-web/blob/90c92bc9228fe52ef1efd9cc2f39034498079c3a/docs/GLOSSARY.md",
+      "historical_source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
     },
     "XJ": {
       "meaning": "Cross-Journal / Cross-Source Check",
       "description": "inspect all materially related journals and authoritative sources before consequential decisions or promotion.",
       "status": "VERIFIED",
-      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
+      "source": "https://github.com/aoblak/ai-agent-web/blob/90c92bc9228fe52ef1efd9cc2f39034498079c3a/docs/GLOSSARY.md",
+      "historical_source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
     },
     "SOT": {
       "meaning": "Source of Truth",
       "description": "type-specific authoritative source for a fact.",
       "status": "VERIFIED",
-      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
+      "source": "https://github.com/aoblak/ai-agent-web/blob/90c92bc9228fe52ef1efd9cc2f39034498079c3a/docs/GLOSSARY.md",
+      "historical_source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
     },
     "UM": {
       "meaning": "Unified Memory update with verification",
       "description": "review current context and related evidence, then retain only durable, verified decisions/corrections/open items without unnecessary duplication. UM is not permission to override higher-authority repo/provider evidence.",
       "status": "VERIFIED",
-      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
+      "source": "https://github.com/aoblak/ai-agent-web/blob/90c92bc9228fe52ef1efd9cc2f39034498079c3a/docs/GLOSSARY.md",
+      "historical_source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
     },
     "FMU": {
       "meaning": "Folder Memory Update",
       "description": "update the durable memory/journal representation associated with a scoped project/folder after verification; preserve provenance and avoid duplicate authority.",
       "status": "VERIFIED",
-      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
+      "source": "https://github.com/aoblak/ai-agent-web/blob/90c92bc9228fe52ef1efd9cc2f39034498079c3a/docs/GLOSSARY.md",
+      "historical_source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
     },
     "GS": {
       "meaning": "Git State",
       "description": "report the relevant repository/branch, working tree when observable, latest commit, changed/uncommitted files when observable, ahead/behind or remote sync when observable, and relevant open PR/issues if available. Clearly separate confirmed from unavailable/unknown state.",
       "status": "VERIFIED",
-      "source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
+      "source": "https://github.com/aoblak/ai-agent-web/blob/90c92bc9228fe52ef1efd9cc2f39034498079c3a/docs/GLOSSARY.md",
+      "historical_source": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md"
     },
     "NEEDS-REVIEW": {
       "meaning": "Unresolved or conflicting evidence",
@@ -137,15 +144,21 @@
       "id": "accepted-context-protocol",
       "locator": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/CONTEXT-BOOTSTRAP.md",
       "revision": "a165ad489a34c8def8f8bd819d4fa35d3bec0d88",
-      "status": "VERIFIED",
-      "visibility": "PUBLIC"
+      "status": "NEEDS-REVIEW",
+      "visibility": "PUBLIC",
+      "historical_status": "VERIFIED",
+      "note": "Historical source content was read at the recorded revision through authorized access on 2026-10-13. The retained historical public locator did not return readable content. Current public source access remains unresolved; no deletion is inferred. Private destinations are not published. docs/OOS_CONTEXT_PROTOCOL.md describes the local implementation, not an identical source snapshot."
     },
     {
       "id": "governance-glossary",
-      "locator": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md",
-      "revision": "a165ad489a34c8def8f8bd819d4fa35d3bec0d88",
+      "locator": "https://github.com/aoblak/ai-agent-web/blob/90c92bc9228fe52ef1efd9cc2f39034498079c3a/docs/GLOSSARY.md",
+      "revision": "90c92bc9228fe52ef1efd9cc2f39034498079c3a",
       "status": "VERIFIED",
-      "visibility": "PUBLIC"
+      "visibility": "PUBLIC",
+      "historical_locator": "https://github.com/aoblak/https-github.com-aoblak-self-improving-ai-agent-sdk/blob/a165ad489a34c8def8f8bd819d4fa35d3bec0d88/docs/governance/GLOSSARY.md",
+      "historical_revision": "a165ad489a34c8def8f8bd819d4fa35d3bec0d88",
+      "sha256": "ac95cc37a3846c96ba98c8705b9c445042b64c8e7bec9a7495c2d0101ff899f2",
+      "note": "VERIFIED scope: existing public controlled snapshot at the pinned revision; glossary body compared with the historical source through authorized access. Historical locator retained for provenance, not promised publicly readable. This is not a new authority layer."
     },
     {
       "id": "portfolio-journal-baseline",
@@ -238,6 +251,32 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "960b3a581726771afea2d56e3573a2b005ed2805a5fce1cea35ebcc404ab339d"
+    },
+    {
+      "id": "CTX-20261013-LOCATORS-START",
+      "title": "CTX-20261013-LOCATORS-START — Source locator reconciliation",
+      "topics": [
+        "context",
+        "provenance"
+      ],
+      "recorded_at": "2026-10-13T07:31:16.327832+00:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "f2aae09b28d8101787ff14527f8cf32fff310a97d70e71f5bfc1865c51087d2d"
+    },
+    {
+      "id": "CTX-20261013-LOCATORS-END",
+      "title": "CTX-20261013-LOCATORS-END — Source reconciliation prepared for review",
+      "topics": [
+        "context",
+        "provenance"
+      ],
+      "recorded_at": "2026-10-13T07:31:42.504397+00:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "5e09089b9d92dd4f49da8d2a0f97895449ff2abfd0adb716aff66760e3221154"
     }
   ]
 }

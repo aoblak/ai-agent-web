@@ -17,3 +17,5 @@ Run `python3 scripts/oos_context.py --root . bootstrap --topic "topic"` from the
 The JSON index records document hashes and journal entry IDs, titles, topics and byte-content hashes. Journal content remains in the Markdown source; editing the index cannot change what the journal says. External sources are recorded as locators and must be fetched explicitly when needed.
 
 An unresolved portfolio locator, abbreviation or historical record does not authorize inventing one. Record `UNKNOWN` or `NEEDS-REVIEW`, and continue tasks that do not depend on it.
+
+Source reconciliation (2026-10-13): `governance-glossary` points to the existing pinned public snapshot with its SHA-256; the original locator is retained as history. `accepted-context-protocol` retains historical verification separately from unresolved public retrieval (`NEEDS-REVIEW`). Authorized retrieval is not proof of public access. Portfolio completeness and overall project review remain `NEEDS-REVIEW`.

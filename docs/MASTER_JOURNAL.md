@@ -70,3 +70,25 @@ Adverse: Missing attachments retain commands; UNKNOWN differs from nonexistence;
 Rollback: Revert the adoption commit while retaining historical event records.
 Next: Verify publication; synchronize existing portfolio journal; full historical reconciliation remains open.
 <!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261013-LOCATORS-START", "recorded_at": "2026-10-13T07:31:16.327832+00:00", "occurred_at": null, "actor": "ChatGPT/Codex", "topics": ["context", "provenance"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261013-LOCATORS-START — Source locator reconciliation
+Summary: START; task CONTEXT-LOCATORS; owner ChatGPT/Codex; attempt 1. Scope: existing index, glossary provenance, state and local journal. Bootstrap 1.2.3 read at 90c92bc9228fe52ef1efd9cc2f39034498079c3a. Chat ID, model ID, original request timestamp and external reviewer: UNKNOWN. Earlier read-only discovery preceded this event; no historical start time is invented.
+Sources: Current repository base and its existing source records; user authorized continuation.
+Integrity: Baseline structural validation PASS; pytest unavailable in this runtime.
+Independent: Existing GitHub PRs inspected; PR #10 is a separate handoff-gate change and is not modified.
+Adverse: Public index must not disclose private source destinations.
+Rollback: Discard this isolated branch before merge, or revert the eventual change commit.
+Next: Reconcile source evidence and run the repository unittest suite.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261013-LOCATORS-END", "recorded_at": "2026-10-13T07:31:42.504397+00:00", "occurred_at": null, "actor": "ChatGPT/Codex", "topics": ["context", "provenance"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261013-LOCATORS-END — Source reconciliation prepared for review
+Summary: END of local implementation attempt 1, task CONTEXT-LOCATORS. Five existing documentation/index files updated; bootstrap 1.2.3 retained. No portfolio master created or changed. Model ID, chat ID and measured active duration remain UNKNOWN. Publication/acceptance must be verified from the eventual PR; this event does not claim merge.
+Sources: Base 90c92bc9228fe52ef1efd9cc2f39034498079c3a; pinned public glossary snapshot; existing historical source records. Original proposal attributed by the user to Manus; this correction and verification by ChatGPT/Codex.
+Integrity: PASS — 16 unittest regression tests; 440 synthetic contract checks; structural validation with two explicit unresolved-source warnings. pytest was unavailable; the repository native unittest runner was used.
+Independent: Historical glossary body compared with the existing public snapshot, equal apart from trailing whitespace; source content SHA-256 51c82c416ca837f18408276599f2b959d8caf65b7fa8acc48cbe972463a4a7ba. Pinned full snapshot hash separately verified against Git. No independent-agent review claimed.
+Adverse: Prior journal remains a byte-for-byte prefix; no private destination or private payload added. Protocol public retrieval and portfolio completeness remain NEEDS-REVIEW; failed retrieval is not evidence of deletion. PR #10 edits shared files and must be reconciled before integration.
+Rollback: Revert the eventual change commit; preserve earlier journal history.
+Next: Publish draft PR, verify remote bytes, obtain independent review and merge approval, then validate main. Portfolio synchronization remains PENDING-MJ-SYNC; no external-agent receipt is claimed.
+<!-- /oos:event -->
