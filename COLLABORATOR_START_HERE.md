@@ -1,6 +1,6 @@
 # Neovisni suradnik — OOS početni ulaz
 
-Ovaj javni ulaz povezuje **zajednički operativni ugovor** s **vlastitim privatnim radnim prostorom drugog korisnika**. Nije kopija tuđe memorije, novi zajednički bootstrap ni instalacija OOS programskog sustava. Ne sadrži privatne podatke, vjerodajnice ni ovlasti pristupa.
+Ovaj javni ulaz povezuje **zajednički operativni ugovor** s **vlastitim privatnim radnim prostorom drugog korisnika**. Cilj postavljanja uključuje svih pet slojeva memorije i zasebnu provjerenu instalaciju OOS programskog sustava. Učitavanje ovog dokumenta samo po sebi nije instalacija. Zajednički kod i arhitektura mogu se ponovno upotrijebiti; tuđa privatna memorija ne prenosi se. Ne sadrži privatne podatke, vjerodajnice ni ovlasti pristupa.
 
 ## 1. Učitaj zajednička pravila
 
@@ -24,19 +24,80 @@ Provjeri dostupne alate za GitHub čitanje, stvaranje repozitorija i upis. Ako j
 
 Ako alat nedostaje, objasni točno što nedostaje i pripremi datoteke za ručni unos u odabrani repozitorij. Ne pokušavaj preuzeti ovlasti drugog računa. Ne stvaraj javni repozitorij kao zamjenu za privatni. Ne pretpostavljaj da read-only konektor može spremati memoriju.
 
-## 3. Postavi najmanju vlastitu strukturu
+## 3. Postavi cijelu arhitekturu memorije i izvršne komponente
 
-Nakon potvrđenog izbora i pristupa prvo pregledaj postojeće ulazne datoteke i kanonske lokacije. Ponovno ih upotrijebi; ne prepisuj postojeće podatke ni stvaraj drugi glavni dnevnik.
+Zahtjev nije samo četiri početne datoteke. Obvezna hijerarhija je:
+**SOURCE OF TRUTH → JOURNAL → PROJECT STATE → GLOBAL KNOWLEDGE → INDEX/LINKS**.
+Najprije mapiraj postojeće kanonske lokacije; ne stvaraj dodatni master ili paralelno stanje.
+Samo za novi odobreni prostor koristi čistu strukturu:
 
-Samo za novi odobreni prostor pripremi:
-- `AI_START_HERE.md`: vlasnik, točan repozitorij, poveznica na ovaj ulaz i zajednički MASTER_PROMPT, lokacije kanonskih datoteka te uputa za nastavak.
-- `AGENTS.md`: pravila korisnika, granice ovlasti, postupak provjere, izolacija memorije i Git branch → PR → review → merge postupak.
-- `JOURNAL.md`: potvrđene odluke, ispravci, izvor i vrijeme; prethodne zapise čuvaj.
-- `registry/state.yaml`: vlasnik i repozitorij, verzija sheme, projekti, aktivni zadaci, blokade, sljedeći koraci te reference na izvore.
+| Sloj | Kanonsko mjesto | Pravilo |
+| --- | --- | --- |
+| SOT | Izvorni artefakti/točni Git commitovi; `docs/SOURCES.md` kao registar izvora | Sačuvaj original, identitet, reviziju i vidljivost |
+| Journal | `docs/MASTER_JOURNAL.md` | Vlastiti početno prazan dnevnik; događaje dopisuj, ispravke poveži |
+| Project State | `docs/PROJECT_STATE.md` | Trenutno stanje s dokazima; nije drugi dnevnik |
+| Global Knowledge | `docs/KNOWLEDGE.md` | Samo potvrđeno znanje povezano s izvorima i odlukama |
+| Index/Links | `docs/INDEX.md` i izvedeni `docs/INDEX.json` | Lokatori, hashovi, statusi; nisu autoritet iznad izvora |
 
-Ne stvaraj prazno stablo dodatnih profila, baza i indeksa. Na početku su projekti i zadaci prazni dok ih korisnik ili provjereni izvori ne utvrde. Nedostajuće vrijednosti ostaju UNKNOWN/null prema shemi. Za novi odnos primijeni pet uvodnih pitanja iz bootstrapa, preskočivši već pouzdano odgovorena.
+Ulazne upute su `AI_START_HERE.md`, `AGENTS.md` i isti `MASTER_PROMPT.md`.
+U ovom novom rasporedu ne stvaraj dodatni `JOURNAL.md` ili `registry/state.yaml`.
+Ako oni već postoje kod korisnika, zadrži njegov kanon i pripremi kompatibilno mapiranje;
+ne pokreći generator preko postojećeg prostora.
 
-Prikaži planirane početne datoteke prije odobrenja upisa. Nakon upisa provjeri točan udaljeni sadržaj i commit. Odvoji zapis na radnoj grani od prihvaćenog kanona: podatak u nespojenom PR-u nije već prihvaćen na glavnoj grani. Memoriju opiši kao vanjsku pohranu koju chat mora ponovno dohvatiti; ne obećavaj automatsku memoriju svakog budućeg chata.
+### 3.1 Izvršna priprema OOS memorijskog/kontekstnog sloja
+
+Ovaj PR uključuje `scripts/prepare_collaborator_workspace.py`. Generator koristi
+postojeći javni OOS Context kod, bez kopiranja Aljošina dnevnika, stanja ili profila.
+Izvor izvršnog alata je točno `4a71d44acf4f402ceee16fc3a0f4172555e70785` (PR #10,
+verzija pod recenzijom; nije tvrdnja da je prihvaćena na mainu).
+Preuzmi ovaj ulaz i generator iz istog provjerenog commita PR-a #12. U lokalnom
+Git checkoutu javnog repozitorija osiguraj dostupnost navedenog izvornog commita:
+
+```sh
+git fetch origin 4a71d44acf4f402ceee16fc3a0f4172555e70785
+python3 scripts/prepare_collaborator_workspace.py /odabrani/novi/lokalni/paket --repository Fiskalna123/oos-workspace
+python3 /odabrani/novi/lokalni/paket/scripts/oos_context.py --root /odabrani/novi/lokalni/paket validate
+```
+
+Putanju i repozitorij zamijeni stvarnim korisnikovim izborom; primjer nije odobrenje.
+Generator odbija postojeće odredište, priprema svih pet slojeva, uključuje postojeći
+validator i `guarded_continue`, provjerava hashove i lokalni ponovni dohvat.
+Ne stvara GitHub repozitorij, ne upisuje na Markov račun i ne instalira puni runtime.
+`LOCAL_CONTEXT_PREPARED` označava samo lokalno pripremljen kontekstni sloj.
+
+Prije upisa pokaži datoteke i pribavi korisnikovo odobrenje konkretnog privatnog
+odredišta. Nakon odobrenog branch/PR postupka ponovno dohvati udaljeni commit,
+provjeri sadržaj i privatnost. Memorija je vanjska pohrana koju svaki chat mora
+učitati; nisu instalirani automatska sinkronizacija ni skriveni pozadinski procesi.
+Za nastavak izvršavanja `guarded_continue` mora biti povezan s autentificiranim
+kanalom i kontrolom ponovljene isporuke; sama tekstualna potvrda nije dokaz autora.
+
+### 3.2 Obvezno postavljanje punog OOS runtimea
+
+Nemoj proglasiti cijeli zahtjev dovršenim nakon memorijskog sloja. Potreban je i
+OOS programski runtime, s dokazom instalacije i prolaznih testova. On nije isti
+program kao `oos_context.py`.
+
+1. U dostupnom ovlaštenom izvornom kanalu utvrdi točan odobreni OOS commit,
+   komponente, ovisnosti, instalacijske upute i pripadajuće testove.
+2. Koristi izdvojenu distribuciju koda odobrenu za suradnika. Ne zrcali privatni
+   repozitorij ni njegovu Git povijest jer sadrže tuđe dnevnike i operativne podatke.
+   Iz javnog ulaza ne zaključuj da je privatni izvor dostupan.
+3. U Markovu odobrenom prostoru prikaži konkretan paket i plan instalacije;
+   instaliraj odobrene komponente, konfiguriraj njegov identitet i njegove izvore.
+   Vjerodajnice idu samo u njegov odobreni secret store. Troškovi i vanjske radnje
+   zahtijevaju njegova odgovarajuća ovlaštenja.
+4. Pokreni testove instaliranog commita, provjeri lokalni rad i udaljeno spremljene
+   datoteke. Zabilježi stvarno implementirane komponente, ne popis ideja iz README-a.
+5. Ako čista distribucija ili ovlašten pristup nisu dostupni, status punog runtimea
+   ostaje `BLOCKED — nedostaje odobreni distribucijski paket/točan izvor i pristup`.
+   Dovrši nezavisni memorijski sloj, ali ne zamijeni puni OOS njime i ne traži od
+   Marka da izmišlja arhitekturu. Odgovornost za distribuciju ostaje na koordinatoru.
+
+Novi prostor počinje bez naslijeđenih osobnih projekata i odluka. Nepoznate vrijednosti
+ostaju UNKNOWN/null. Tehnički odabir odredišta zaseban je postupak postavljanja prema
+izričitoj uputi korisnika. Pet profilnih pitanja iz zajedničkog bootstrapa ostaje zaseban
+uvodni razgovor, bez dodatnih pitanja u tom intervjuu i bez ponavljanja poznatih odgovora.
 
 ## 4. Omogući povezivanje preko Gita bez spajanja privatnih memorija
 
@@ -65,6 +126,7 @@ Izvijesti odvojeno:
 1. Bootstrap: učitana verzija/commit ili konkretan problem.
 2. Privatni prostor: URL, vlasnik, vidljivost i stvarne dozvole.
 3. Trajna pohrana: udaljeni zapis, provjereni commit i prihvaćena grana ili točna blokada.
-4. Suradnja: odabrani kanal, ovlasti i stanje stvarne isporuke/prihvaćanja, ili NIJE POVEZANO.
+4. Puni OOS runtime: točan instalirani commit, komponente i rezultati testova ili konkretni BLOCKED status.
+5. Suradnja: odabrani kanal, ovlasti i stanje stvarne isporuke/prihvaćanja, ili NIJE POVEZANO.
 
 Dokaz preuzimanja ovog dokumenta nije dokaz instaliranog OOS-a, trajne memorije ili međusobne komunikacije.
