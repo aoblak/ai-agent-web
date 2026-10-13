@@ -1,0 +1,6 @@
+{
+  "completed_effect_ids": [
+    "write:42"
+  ],
+  "requested_effect_id": "write:42"
+}

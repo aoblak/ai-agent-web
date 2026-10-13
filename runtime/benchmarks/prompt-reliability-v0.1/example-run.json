@@ -1,0 +1,43 @@
+{
+  "run_id": "example-001",
+  "prompt_id": "oos-reliability-demo",
+  "prompt_version": "1.0.0",
+  "prompt_source": "external-or-internal-source-neutral",
+  "model": "example-model",
+  "context_version": "fixture-v1",
+  "test_suite": "prompt-reliability-v0.1",
+  "output_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "claims": [
+    {
+      "claim_id": "c1",
+      "status": "VERIFIED",
+      "verifiable": true,
+      "evidence_refs": ["oracle:1"]
+    },
+    {
+      "claim_id": "c2",
+      "status": "SUPPORTED",
+      "verifiable": true,
+      "evidence_refs": ["source:2"]
+    },
+    {
+      "claim_id": "c3",
+      "status": "UNSUPPORTED",
+      "verifiable": true,
+      "evidence_refs": []
+    },
+    {
+      "claim_id": "c4",
+      "status": "CONTRADICTED",
+      "verifiable": true,
+      "evidence_refs": ["oracle:4"]
+    },
+    {
+      "claim_id": "c5",
+      "status": "UNKNOWN",
+      "verifiable": false,
+      "expected_unknown": true,
+      "evidence_refs": []
+    }
+  ]
+}

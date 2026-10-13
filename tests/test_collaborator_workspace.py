@@ -2,10 +2,12 @@
 import importlib.util
 import json
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location("collaborator", ROOT / "scripts/prepare_collaborator_workspace.py")
@@ -18,7 +20,13 @@ class CollaboratorChecks(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             target = Path(tmp) / "workspace"
             result = module.prepare(target, "Fiskalna123/oos-workspace")
-            self.assertEqual(result["full_oos_runtime"], "NOT_INSTALLED")
+            self.assertEqual(result["full_oos_runtime"], "OFFLINE_TESTED_CANDIDATE")
+            self.assertEqual(result["runtime_verification"]["status"], "OFFLINE_RUNTIME_TESTED")
+            self.assertGreaterEqual(result["runtime_verification"]["tests"], 288)
+            self.assertEqual(result["live_handoff"], "NOT_CONNECTED")
+            self.assertEqual(len(list((target / "runtime/oos").glob("*.py"))), 17)
+            for path, data in module.runtime_payload().items():
+                self.assertEqual((target / "runtime" / path).read_bytes(), data)
             index = json.loads((target / "docs/INDEX.json").read_text())
             self.assertEqual(index["source_priority"], module.PRIORITY)
             self.assertEqual(index["journal_entries"], [])
@@ -56,6 +64,17 @@ class CollaboratorChecks(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     module.prepare(target, name)
                 self.assertFalse(target.exists())
+
+    def test_tampered_distribution_blocks_preparation(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            runtime = Path(tmp) / "runtime"
+            shutil.copytree(module.RUNTIME_ROOT, runtime, ignore=shutil.ignore_patterns("__pycache__"))
+            target = Path(tmp) / "workspace"
+            (runtime / "oos/execution.py").write_text("# altered payload\n")
+            with patch.object(module, "RUNTIME_ROOT", runtime):
+                with self.assertRaisesRegex(ValueError, "checksum mismatch"):
+                    module.prepare(target, "Fiskalna123/oos-workspace")
+            self.assertFalse(target.exists())
 
 
 if __name__ == "__main__":

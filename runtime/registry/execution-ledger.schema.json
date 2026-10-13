@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "oos://schemas/execution-ledger/1.0.0",
+  "title": "OOS Execution Ledger Record",
+  "type": "object",
+  "required": [
+    "execution_id",
+    "manifest_digest",
+    "started_at",
+    "completed_at",
+    "status",
+    "task_success",
+    "policy_compliant",
+    "verifiable",
+    "failure_codes",
+    "metrics"
+  ],
+  "properties": {
+    "execution_id": {"type": "string", "minLength": 1},
+    "manifest_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "started_at": {"type": "string"},
+    "completed_at": {"type": "string"},
+    "status": {"enum": ["SUCCESS", "FAILED", "PARTIAL", "BLOCKED", "CANCELLED"]},
+    "task_success": {"type": "boolean"},
+    "policy_compliant": {"type": "boolean"},
+    "verifiable": {"type": "boolean"},
+    "failure_codes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "HALLUCINATION",
+          "WRONG_CONTEXT",
+          "MISSING_CONTEXT",
+          "POLICY_VIOLATION",
+          "TOOL_ERROR",
+          "MODEL_ERROR",
+          "BAD_PROMPT",
+          "AMBIGUOUS_INTENT",
+          "SCHEMA_ERROR",
+          "TIMEOUT",
+          "HUMAN_REJECTED"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "input_tokens": {"type": "number", "minimum": 0},
+        "output_tokens": {"type": "number", "minimum": 0},
+        "latency_ms": {"type": "number", "minimum": 0},
+        "cost": {"type": "number", "minimum": 0}
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

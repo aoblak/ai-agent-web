@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Prepare an isolated memory workspace using existing, pinned public OOS code.
+"""Prepare an isolated memory workspace and pinned OOS runtime distribution.
 
 Local preparation only. Does not authenticate, create a GitHub repository, upload,
-or install the private OOS application runtime. Existing destinations are refused.
+or connect live providers. Existing destinations are refused.
 """
 import argparse
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import re
@@ -14,6 +15,7 @@ import sys
 import tempfile
 
 PACKAGE = Path(__file__).resolve().parents[1]
+RUNTIME_ROOT = PACKAGE / "runtime"
 SOURCE = "4a71d44acf4f402ceee16fc3a0f4172555e70785"
 PUBLIC_REPO = "https://github.com/aoblak/ai-agent-web"
 COPY = ("MASTER_PROMPT.md", "scripts/oos_context.py", "docs/GOVERNANCE.md",
@@ -25,6 +27,13 @@ ORDER = ["docs/INDEX.md", "docs/GOVERNANCE.md", "docs/GLOSSARY.md",
 
 def source_bytes(path):
     return subprocess.check_output(["git", "-C", str(PACKAGE), "show", SOURCE + ":" + path])
+
+
+def runtime_payload():
+    spec = importlib.util.spec_from_file_location("oos_distribution", PACKAGE / "runtime/check_install.py")
+    checker = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(checker)
+    return checker.verified_payload(RUNTIME_ROOT)
 
 
 def prepare(destination, repository):
@@ -39,7 +48,9 @@ def prepare(destination, repository):
         raise ValueError("Destination needs an existing non-symlink parent")
     owner = repository.split("/")[0]
     files = {path: source_bytes(path) for path in COPY}
+    files.update({"runtime/" + path: data for path, data in runtime_payload().items()})
     text = {
+        ".gitignore": "__pycache__/\n*.py[cod]\n.env\n.env.*\n*.sqlite\n*.sqlite-*\n",
         "AI_START_HERE.md": f"""# Independent OOS workspace
 Owner: {owner}; intended private repository: https://github.com/{repository}
 These are requested identities, not proof of authenticated access.
@@ -83,9 +94,9 @@ Intended owner: {owner}; repository: {repository}; intended visibility: PRIVATE.
 Remote identity, visibility, access and writes: UNVERIFIED.
 Projects and tasks: none supplied. Knowledge and personal history: not imported.
 Local OOS Context code: pinned to {SOURCE}; source PR #10 remains under review.
-Full OOS application runtime: NOT_INSTALLED; requires an approved clean distribution,
-verified source revision, dependency setup and its own tests. Do not mark setup complete
-until that requirement is fulfilled or the owner explicitly accepts a narrower scope.
+Reusable OOS runtime: OFFLINE_TESTED_CANDIDATE; see runtime/DISTRIBUTION.json for exact
+sources and checksums, and runtime/README.md for scope and adapter requirements.
+Owner configuration and independent review: PENDING. No private history imported.
 Live provider communication: NOT_CONNECTED. No credentials or background jobs installed.
 """,
         "docs/KNOWLEDGE.md": """# Reusable knowledge
@@ -113,6 +124,9 @@ journal reference, scope, status and last verification. Retain superseded versio
             target.write_bytes(data)
         subprocess.run([sys.executable, str(stage / "scripts/oos_context.py"),
                         "--root", str(stage), "validate"], check=True, capture_output=True)
+        verified = subprocess.run([sys.executable, str(stage / "runtime/check_install.py")],
+                                  check=True, capture_output=True, text=True)
+        runtime_result = json.loads(verified.stdout)
         # Exclusive claim: a racing setup or existing owner store is never replaced.
         destination.mkdir()
         for path, data in files.items():
@@ -123,8 +137,9 @@ journal reference, scope, status and last verification. Retain superseded versio
         for path, data in files.items():
             if (destination / path).read_bytes() != data:
                 raise ValueError("Local readback failed: " + path)
-    return dict(status="LOCAL_CONTEXT_PREPARED", path=str(destination), source_commit=SOURCE,
-                files=len(files), remote_persistence="UNVERIFIED", full_oos_runtime="NOT_INSTALLED",
+    return dict(status="LOCAL_OOS_PREPARED", path=str(destination), source_commit=SOURCE,
+                files=len(files), remote_persistence="UNVERIFIED", full_oos_runtime="OFFLINE_TESTED_CANDIDATE",
+                runtime_verification=runtime_result,
                 live_handoff="NOT_CONNECTED")
 
 

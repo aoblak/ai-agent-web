@@ -1,0 +1,72 @@
+{
+  "schema_version": "0.1",
+  "registry_type": "prompts",
+  "principle": "simple_shareable_prompt_not_skill",
+  "prompts": [
+    {
+      "prompt_id": "oos.prompt-registry-evaluator",
+      "name": "OOS Prompt Registry Evaluator",
+      "version": "1.0.0",
+      "status": "approved",
+      "purpose": "Evaluate prompt definitions and execution evidence without production side effects.",
+      "owner": "oos-core",
+      "template": "Evaluate candidate {{candidate_ref}} against test case {{test_case_ref}}. Return only evidence-backed status and metrics.",
+      "variables_schema": {
+        "candidate_ref": {
+          "type": "string"
+        },
+        "test_case_ref": {
+          "type": "string"
+        }
+      },
+      "required_context": [
+        "canonical_git_ref",
+        "candidate_definition",
+        "evaluation_case"
+      ],
+      "allowed_tools": [],
+      "policy_refs": [
+        "oos:read-only-evaluation@1"
+      ],
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "evidence"
+        ],
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "object"
+          }
+        }
+      },
+      "evaluation_refs": [
+        "evals/datasets/prompt-registry-golden.json"
+      ],
+      "created_at": "2026-09-11",
+      "supersedes": null,
+      "content_digest": "sha256:8b888c4c0fe5efbb59234404226ac609c7b26ab098616aa3a65fb5a82de48988"
+    }
+  ],
+  "versioning": {
+    "strategy": "semantic-versioning",
+    "immutable_identity": "prompt_id+version+content_digest",
+    "reproducibility_unit": "execution_manifest"
+  },
+  "failure_taxonomy": [
+    "HALLUCINATION",
+    "WRONG_CONTEXT",
+    "MISSING_CONTEXT",
+    "POLICY_VIOLATION",
+    "TOOL_ERROR",
+    "MODEL_ERROR",
+    "BAD_PROMPT",
+    "AMBIGUOUS_INTENT",
+    "SCHEMA_ERROR",
+    "TIMEOUT",
+    "HUMAN_REJECTED"
+  ]
+}

@@ -15,7 +15,9 @@ Primijeni zajednička pravila u granicama ovlasti ovog korisnika. Korisnik ovog 
 
 GitHub korisničko ime uzmi iz korisnikove poruke; ako nedostaje, pitaj. Ime u poruci nije dokaz identiteta povezanog računa.
 
-Nakon učitavanja bootstrapa pitaj:
+Ako je odnos nov i profil nije poznat, prvo održi zaseban uvodni razgovor od pet pitanja
+iz bootstrapa. Nakon tog razgovora, u tehničkom postupku postavljanja, pitaj samo ako
+odredište već nije poznato i odobreno:
 > Gdje na svom GitHub računu želiš spremati datoteke i trajnu memoriju: u postojeći privatni repozitorij koji odabereš ili u novi privatni repozitorij oos-workspace?
 
 Prije stvaranja ili upisa potvrdi točan račun, repozitorij, privatnu vidljivost i opseg izmjena s njegovim vlasnikom. Ne smatraj ovaj javni dokument vlasnikovim odobrenjem.
@@ -50,7 +52,8 @@ Ovaj PR uključuje `scripts/prepare_collaborator_workspace.py`. Generator korist
 postojeći javni OOS Context kod, bez kopiranja Aljošina dnevnika, stanja ili profila.
 Izvor izvršnog alata je točno `4a71d44acf4f402ceee16fc3a0f4172555e70785` (PR #10,
 verzija pod recenzijom; nije tvrdnja da je prihvaćena na mainu).
-Preuzmi ovaj ulaz i generator iz istog provjerenog commita PR-a #12. U lokalnom
+Preuzmi ovaj ulaz, generator i cijeli direktorij `runtime/` iz istog provjerenog commita PR-a #12.
+Potrebni su Git i Python 3.11+ sa SQLiteom; nema dodatnih Python paketa. U lokalnom
 Git checkoutu javnog repozitorija osiguraj dostupnost navedenog izvornog commita:
 
 ```sh
@@ -62,8 +65,11 @@ python3 /odabrani/novi/lokalni/paket/scripts/oos_context.py --root /odabrani/nov
 Putanju i repozitorij zamijeni stvarnim korisnikovim izborom; primjer nije odobrenje.
 Generator odbija postojeće odredište, priprema svih pet slojeva, uključuje postojeći
 validator i `guarded_continue`, provjerava hashove i lokalni ponovni dohvat.
-Ne stvara GitHub repozitorij, ne upisuje na Markov račun i ne instalira puni runtime.
-`LOCAL_CONTEXT_PREPARED` označava samo lokalno pripremljen kontekstni sloj.
+Uključuje i svih 17 modula OOS Python runtimea, VITA provjere, adaptere i testove iz
+`runtime/`. Prije stvaranja odredišta provjerava distribucijske hashove, kontekst i
+288 runtime testova uz blokiranu mrežu. Ne stvara GitHub repozitorij niti upisuje na
+Markov račun. `LOCAL_OOS_PREPARED` i `OFFLINE_TESTED_CANDIDATE` označavaju lokalno
+pripremljen i testiran paket; nisu potvrda produkcijske instalacije ili povezivanja.
 
 Prije upisa pokaži datoteke i pribavi korisnikovo odobrenje konkretnog privatnog
 odredišta. Nakon odobrenog branch/PR postupka ponovno dohvati udaljeni commit,
@@ -72,27 +78,34 @@ učitati; nisu instalirani automatska sinkronizacija ni skriveni pozadinski proc
 Za nastavak izvršavanja `guarded_continue` mora biti povezan s autentificiranim
 kanalom i kontrolom ponovljene isporuke; sama tekstualna potvrda nije dokaz autora.
 
-### 3.2 Obvezno postavljanje punog OOS runtimea
+### 3.2 Uključeni OOS runtime i završetak postavljanja
 
-Nemoj proglasiti cijeli zahtjev dovršenim nakon memorijskog sloja. Potreban je i
-OOS programski runtime, s dokazom instalacije i prolaznih testova. On nije isti
-program kao `oos_context.py`.
+Izvršni paket sada je uključen u ovaj javni kandidat: `runtime/README.md` navodi
+komponente i njihove granice, a `runtime/DISTRIBUTION.json` izvorne commitove i
+SHA-256 svake datoteke. To nije samo `oos_context.py`: uključeni su svi moduli
+izvornog Python paketa `oos`, SQLite pretraga, zapisivanje dokaza, provjera artefakata,
+kontrola izvršavanja, model router, provider adapteri, GitHub signalni moduli i VITA.
+Osnovni kod dolazi iz revizije `1f3903d27f2d248d5879a8ac8e41bb7b4bb84507`; Artifact
+Gate koristi zakrpu `201a597134428f6c982f3ec69907346cbc733578` koja je još pod recenzijom.
+Paket ostaje kandidat za neovisnu recenziju, ne prihvaćeno produkcijsko izdanje.
 
-1. U dostupnom ovlaštenom izvornom kanalu utvrdi točan odobreni OOS commit,
-   komponente, ovisnosti, instalacijske upute i pripadajuće testove.
-2. Koristi izdvojenu distribuciju koda odobrenu za suradnika. Ne zrcali privatni
-   repozitorij ni njegovu Git povijest jer sadrže tuđe dnevnike i operativne podatke.
-   Iz javnog ulaza ne zaključuj da je privatni izvor dostupan.
-3. U Markovu odobrenom prostoru prikaži konkretan paket i plan instalacije;
-   instaliraj odobrene komponente, konfiguriraj njegov identitet i njegove izvore.
-   Vjerodajnice idu samo u njegov odobreni secret store. Troškovi i vanjske radnje
-   zahtijevaju njegova odgovarajuća ovlaštenja.
-4. Pokreni testove instaliranog commita, provjeri lokalni rad i udaljeno spremljene
-   datoteke. Zabilježi stvarno implementirane komponente, ne popis ideja iz README-a.
-5. Ako čista distribucija ili ovlašten pristup nisu dostupni, status punog runtimea
-   ostaje `BLOCKED — nedostaje odobreni distribucijski paket/točan izvor i pristup`.
-   Dovrši nezavisni memorijski sloj, ali ne zamijeni puni OOS njime i ne traži od
-   Marka da izmišlja arhitekturu. Odgovornost za distribuciju ostaje na koordinatoru.
+Generator iz 3.1 provodi i lokalnu instalaciju tog runtimea. Za ponovnu provjeru:
+
+```sh
+python3 /odabrani/novi/lokalni/paket/runtime/check_install.py
+```
+
+Identitet tvrtke je neutralan predložak, a ne Aljošin profil. Konfiguriraj vlastite
+izvore i potrebne adaptere samo uz vlasnikovo odobrenje, kroz verzioniranu izmjenu i
+ponovne provjere. Tajne pripadaju njegovu secret storeu. Projektni dodaci za tuđe
+web-stranice, poslovni podaci i povijest nisu dio zajedničkog runtimea.
+
+Prije prihvaćanja u privatni GitHub prostor provjeri neovisnu recenziju, vlasnikovo
+odredište i stvarno spremljeni commit. Vanjske usluge povezuju se zasebno, uz stvarne
+ovlasti i provjeru rada. Prolazni offline testovi ne dokazuju automatsko bilježenje
+svakog chata niti komunikaciju Claudea, Groka i Manusa. Prijavi zasebno ono što je
+pripremljeno, spremljeno, prihvaćeno i uživo povezano. Ako runtime nije moguće
+pokrenuti u tom okruženju, navedi točan nedostajući preduvjet; ne prijavljuj instalaciju.
 
 Novi prostor počinje bez naslijeđenih osobnih projekata i odluka. Nepoznate vrijednosti
 ostaju UNKNOWN/null. Tehnički odabir odredišta zaseban je postupak postavljanja prema

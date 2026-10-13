@@ -1,0 +1,12 @@
+{
+  "query": "example negative-evidence query",
+  "provider": "test-provider",
+  "scope": "all-pages",
+  "claim_scope": "all-pages",
+  "searched_scopes": ["all-pages"],
+  "started_at": "2026-09-11T00:00:00Z",
+  "completed_at": "2026-09-11T00:00:01Z",
+  "result_count": 0,
+  "completeness": "complete",
+  "raw_response_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+}

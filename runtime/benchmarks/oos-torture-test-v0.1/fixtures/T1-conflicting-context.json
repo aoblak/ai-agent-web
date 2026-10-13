@@ -1,0 +1,14 @@
+{
+  "claims": [
+    {
+      "key": "target_branch",
+      "value": "main",
+      "source": "stale_prompt"
+    },
+    {
+      "key": "target_branch",
+      "value": "release",
+      "source": "verified_git"
+    }
+  ]
+}

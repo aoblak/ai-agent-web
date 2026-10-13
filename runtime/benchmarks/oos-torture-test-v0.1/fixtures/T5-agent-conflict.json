@@ -1,0 +1,14 @@
+{
+  "proposals": [
+    {
+      "agent": "A",
+      "patch_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "verified": false
+    },
+    {
+      "agent": "B",
+      "patch_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "verified": false
+    }
+  ]
+}

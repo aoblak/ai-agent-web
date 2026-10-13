@@ -1,0 +1,11 @@
+{
+  "claimed_success": true,
+  "required_postconditions": [
+    "artifact_exists",
+    "ci_green"
+  ],
+  "postconditions": {
+    "artifact_exists": true,
+    "ci_green": false
+  }
+}

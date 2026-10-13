@@ -1,0 +1,344 @@
+{
+  "schema_version": "0.1",
+  "company_id": "workspace-owner",
+  "name": "Independent OOS Workspace",
+  "architecture": {
+    "layer": "application_above_oos_core",
+    "core": "OOS",
+    "execution_model": "policy_and_routing_only",
+    "human_final_authority": true,
+    "fail_closed": true
+  },
+  "departments": [
+    {
+      "id": "executive",
+      "name": "Executive / Consigliere",
+      "skills": [
+        {
+          "id": "portfolio_prioritization",
+          "status": "planned",
+          "capabilities": [
+            "prioritize_portfolio",
+            "decision_support",
+            "risk_review"
+          ],
+          "allowed_actions": [
+            "read",
+            "analyze",
+            "draft"
+          ],
+          "tools": [],
+          "component_refs": []
+        }
+      ]
+    },
+    {
+      "id": "engineering",
+      "name": "Engineering",
+      "skills": [
+        {
+          "id": "model_provider_routing",
+          "status": "implemented",
+          "capabilities": [
+            "route_text_generation_provider",
+            "inspect_provider_contract"
+          ],
+          "allowed_actions": [
+            "read",
+            "analyze",
+            "test"
+          ],
+          "tools": [
+            "repository_files",
+            "python_unittest"
+          ],
+          "component_refs": [
+            "oos/providers.py",
+            "tests/test_providers.py"
+          ]
+        },
+        {
+          "id": "software_delivery",
+          "status": "planned",
+          "capabilities": [
+            "implement_code",
+            "run_tests",
+            "prepare_pull_request"
+          ],
+          "allowed_actions": [
+            "read",
+            "analyze",
+            "draft",
+            "test",
+            "write_repo_branch"
+          ],
+          "tools": [],
+          "component_refs": []
+        },
+        {
+          "id": "low_cost_prompting",
+          "status": "disabled",
+          "capabilities": [
+            "optimize_agent_prompt_cost",
+            "scope_agent_task",
+            "set_evidence_stop_conditions"
+          ],
+          "allowed_actions": [
+            "read",
+            "analyze",
+            "draft"
+          ],
+          "tools": [],
+          "component_refs": [],
+          "distribution_note": "Optional prompt/skill extension; not part of the Python runtime."
+        },
+        {
+          "id": "skill_factory",
+          "status": "disabled",
+          "capabilities": [
+            "promote_prompt_to_skill",
+            "package_skill_contract",
+            "register_skill_provenance"
+          ],
+          "allowed_actions": [
+            "read",
+            "analyze",
+            "draft",
+            "test"
+          ],
+          "tools": [
+            "repository_files",
+            "python_unittest"
+          ],
+          "component_refs": [],
+          "distribution_note": "Optional prompt/skill extension; not part of the Python runtime."
+        }
+      ]
+    },
+    {
+      "id": "product_rd",
+      "name": "Product / R&D",
+      "skills": [
+        {
+          "id": "product_research",
+          "status": "planned",
+          "capabilities": [
+            "research_problem",
+            "design_experiment",
+            "evaluate_prototype"
+          ],
+          "allowed_actions": [
+            "read",
+            "analyze",
+            "draft",
+            "test"
+          ],
+          "tools": [],
+          "component_refs": []
+        },
+        {
+          "id": "prompt_factory",
+          "status": "disabled",
+          "capabilities": [
+            "create_simple_prompt",
+            "register_prompt_provenance",
+            "prepare_shareable_lead_magnet"
+          ],
+          "allowed_actions": [
+            "read",
+            "analyze",
+            "draft"
+          ],
+          "tools": [],
+          "component_refs": [],
+          "distribution_note": "Optional prompt/skill extension; not part of the Python runtime."
+        }
+      ]
+    },
+    {
+      "id": "design_content",
+      "name": "Design / Content",
+      "skills": [
+        {
+          "id": "content_production",
+          "status": "planned",
+          "capabilities": [
+            "draft_content",
+            "design_asset_brief",
+            "localize_content"
+          ],
+          "allowed_actions": [
+            "read",
+            "analyze",
+            "draft"
+          ],
+          "tools": [],
+          "component_refs": []
+        }
+      ]
+    },
+    {
+      "id": "growth_sales",
+      "name": "Growth / Sales",
+      "skills": [
+        {
+          "id": "growth_operations",
+          "status": "planned",
+          "capabilities": [
+            "research_leads",
+            "draft_campaign",
+            "analyze_funnel"
+          ],
+          "allowed_actions": [
+            "read",
+            "analyze",
+            "draft"
+          ],
+          "tools": [],
+          "component_refs": []
+        }
+      ]
+    },
+    {
+      "id": "operations",
+      "name": "Operations",
+      "skills": [
+        {
+          "id": "business_operations",
+          "status": "planned",
+          "capabilities": [
+            "inspect_operations",
+            "draft_workflow",
+            "analyze_exceptions"
+          ],
+          "allowed_actions": [
+            "read",
+            "analyze",
+            "draft"
+          ],
+          "tools": [],
+          "component_refs": []
+        }
+      ]
+    },
+    {
+      "id": "finance_admin",
+      "name": "Finance / Admin",
+      "skills": [
+        {
+          "id": "finance_admin",
+          "status": "planned",
+          "capabilities": [
+            "reconcile_records",
+            "analyze_cash_flow",
+            "draft_invoice_data"
+          ],
+          "allowed_actions": [
+            "read",
+            "analyze",
+            "draft"
+          ],
+          "tools": [],
+          "component_refs": []
+        }
+      ]
+    },
+    {
+      "id": "legal_compliance",
+      "name": "Legal / Compliance",
+      "skills": [
+        {
+          "id": "legal_compliance",
+          "status": "planned",
+          "capabilities": [
+            "inspect_contract",
+            "draft_clause",
+            "compliance_check"
+          ],
+          "allowed_actions": [
+            "read",
+            "analyze",
+            "draft"
+          ],
+          "tools": [],
+          "component_refs": []
+        }
+      ]
+    },
+    {
+      "id": "knowledge_memory",
+      "name": "Knowledge / Memory",
+      "skills": [
+        {
+          "id": "repository_continuity",
+          "status": "implemented",
+          "capabilities": [
+            "reconstruct_context",
+            "retrieve_evidence"
+          ],
+          "allowed_actions": [
+            "read",
+            "analyze"
+          ],
+          "tools": [
+            "repository_files"
+          ],
+          "component_refs": [
+            "../AGENTS.md",
+            "../docs/PROJECT_STATE.md",
+            "oos/retrieval.py"
+          ]
+        },
+        {
+          "id": "conversation_project_consolidation",
+          "status": "disabled",
+          "capabilities": [
+            "inventory_conversations",
+            "normalize_conversation_titles",
+            "classify_conversations_to_projects",
+            "identify_orphan_and_misplaced_chats",
+            "produce_dry_run_migration_plan"
+          ],
+          "allowed_actions": [
+            "read",
+            "analyze",
+            "draft"
+          ],
+          "tools": [],
+          "component_refs": [],
+          "distribution_note": "Optional prompt/skill extension; not part of the Python runtime."
+        }
+      ]
+    },
+    {
+      "id": "verification",
+      "name": "Verification",
+      "skills": [
+        {
+          "id": "verification_gates",
+          "status": "implemented",
+          "capabilities": [
+            "evaluate_claims",
+            "run_policy_checks",
+            "adversarial_test"
+          ],
+          "allowed_actions": [
+            "read",
+            "analyze",
+            "test",
+            "verify"
+          ],
+          "tools": [
+            "repository_files",
+            "python_unittest"
+          ],
+          "component_refs": [
+            "oos/prompt_reliability.py",
+            "oos/torture.py",
+            "tests/test_prompt_reliability.py"
+          ]
+        }
+      ]
+    }
+  ]
+}
