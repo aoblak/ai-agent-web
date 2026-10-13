@@ -48,12 +48,12 @@
     {
       "path": "docs/PROJECT_STATE.md",
       "visibility": "PUBLIC",
-      "sha256": "a0c6e836185997d9eb32b950e2ac2d8447da0aafb0f7c69374e3052fd706d329"
+      "sha256": "9630905dd4e1ac4d6627431cde785dab209d903f5a71af7451078a14416d5d3e"
     },
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "b24161630a2c2f7675cc46c7febe9df1af105969f46d07b46726f1751813ba5a"
+      "sha256": "81e37d58201951c9f47f0cd8126a7c68c6b893cc743c7535fd5f8b3829748c79"
     },
     {
       "path": "scripts/oos_context.py",
@@ -210,6 +210,19 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "a677bc11ff5ac8c47b7ca54bebb1136fb326d9e3ff430edb562c8b638c352362"
+    },
+    {
+      "id": "CTX-20261013-004",
+      "title": "CTX-20261013-004 — Task start/end attribution",
+      "topics": [
+        "bootstrap",
+        "attribution"
+      ],
+      "recorded_at": "2026-10-13T02:42:13.804422+00:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "60c9b2d3aa148d017162de5879c14502002cde8143c3df35a73105b83ddcc90c"
     }
   ]
 }

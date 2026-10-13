@@ -26,3 +26,5 @@ Bootstrap update 2026-10-13: v1.2.0 prepared for review; merge/publication must 
 Contract v1.2.1 correction: Claude handles systems engineering; Grok handles senior full-stack development. Continuation sessions do not repeat onboarding. Loaded bootstrap and task BLOCKED are independent state fields. Verify adoption from the current Git revision.
 
 Latest role correction (supersedes preceding role note): Claude handles systems engineering and full-stack development; Grok handles independent audit/review. The superseded branch interpretation was corrected before merge.
+
+Contract v1.2.2 adds START/END chat/model attribution. It defines recording requirements; it does not install automatic interception of all providers or disclose hidden model IDs.

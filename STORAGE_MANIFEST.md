@@ -30,7 +30,7 @@ This file is a storage-entry map, not a second source of truth for project conte
 ## Canonical bootstrap
 
 - Public bootstrap URL: `https://raw.githubusercontent.com/aoblak/ai-agent-web/main/MASTER_PROMPT.md`
-- Local bootstrap version: `1.2.1`
+- Local bootstrap version: `1.2.2`
 - Prompt file: `MASTER_PROMPT.md`
 
 ## Index
