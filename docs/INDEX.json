@@ -48,12 +48,12 @@
     {
       "path": "docs/PROJECT_STATE.md",
       "visibility": "PUBLIC",
-      "sha256": "9630905dd4e1ac4d6627431cde785dab209d903f5a71af7451078a14416d5d3e"
+      "sha256": "f8053b9edf0b7ede37ae99a064d357958de8423dfd11734fc1e9f54432483514"
     },
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "81e37d58201951c9f47f0cd8126a7c68c6b893cc743c7535fd5f8b3829748c79"
+      "sha256": "13bbecbd9acf4980a8b9fe2fa3fdf98376fcc25b5d8e7855e5ff2625cd42347f"
     },
     {
       "path": "scripts/oos_context.py",
@@ -223,6 +223,21 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "60c9b2d3aa148d017162de5879c14502002cde8143c3df35a73105b83ddcc90c"
+    },
+    {
+      "id": "CTX-20261013-005",
+      "title": "CTX-20261013-005 — Retrieve-first clarification and shared refresh",
+      "topics": [
+        "bootstrap",
+        "clarification",
+        "retrieval",
+        "handoff"
+      ],
+      "recorded_at": "2026-10-13T02:51:22.168132+00:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "960b3a581726771afea2d56e3573a2b005ed2805a5fce1cea35ebcc404ab339d"
     }
   ]
 }

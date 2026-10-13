@@ -21,10 +21,8 @@ Canonical shorthand: the accepted glossary defines MJ, PJ, XJ, UM, FMU, GS and S
 Next action: inspect the current Git state and relevant source/journal records before the next product change; record substantive work and refresh/validate the context index before completion.
 
 
-Bootstrap update 2026-10-13: v1.2.0 prepared for review; merge/publication must be verified from GitHub. Context journal CTX-20261013-001 records scope and limitations. Cross-provider automation is NOT INSTALLED by this change.
+Current contract: v1.2.3. Latest assignments: ChatGPT/Codex coordinates architecture and acceptance; Claude performs systems engineering and full-stack development; Grok independently reviews; Manus publishes reviewed previews and returns GitHub source evidence. Superseded role interpretations remain only in the append-only journal.
 
-Contract v1.2.1 correction: Claude handles systems engineering; Grok handles senior full-stack development. Continuation sessions do not repeat onboarding. Loaded bootstrap and task BLOCKED are independent state fields. Verify adoption from the current Git revision.
+Clarification is an internal gate with retrieval first. Resume/handoff refreshes the same bootstrap URL, tracks unanswered questions, and links source fragments to context in existing stores. START/END attribution remains required. These are published contract requirements, not an installed cross-provider notification service or a completed historical ingestion. Verify merge/adoption from GitHub.
 
-Latest role correction (supersedes preceding role note): Claude handles systems engineering and full-stack development; Grok handles independent audit/review. The superseded branch interpretation was corrected before merge.
-
-Contract v1.2.2 adds START/END chat/model attribution. It defines recording requirements; it does not install automatic interception of all providers or disclose hidden model IDs.
+Historical reconciliation remains incomplete: retrieved prior decisions are discovery evidence, not an enumerated audit of all chats or archives. Full export/log coverage remains unverified. Portfolio delta synchronization: PENDING-MJ-SYNC until the existing canonical private journal is updated.

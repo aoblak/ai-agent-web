@@ -59,3 +59,14 @@ Adverse: UNKNOWN identity, model changes, interrupted sessions, retrospective en
 Rollback: Revert this adoption commit while retaining event history.
 Next: Verify the published contract and use the start/end fields in the existing task journal.
 <!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261013-005", "recorded_at": "2026-10-13T02:51:22.168132+00:00", "occurred_at": null, "actor": "Codex", "topics": ["bootstrap", "clarification", "retrieval", "handoff"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261013-005 — Retrieve-first clarification and shared refresh
+Summary: Add internal clarity gate, source retrieval before user questions, same-URL refresh on resume/handoff, unanswered-question ownership and fragment-to-context links in existing stores. Reconcile current role projection without deleting historical events.
+Sources: Explicit current user directions; MASTER_PROMPT.md sections 14.7–14.9; base 5e2495a3f1d3d553f8984256bfca7ecc48207f5c. Private historical sources remain private.
+Integrity: Run contract, regression and derived-index checks before integration.
+Independent: Reconcile with current user directions and prior retrieved canonical-identity constraints; retrieval is not evidence of exhaustive archive coverage.
+Adverse: Missing attachments retain commands; UNKNOWN differs from nonexistence; unanswered user-only decisions are not guessed; refresh failure and unavailable delivery remain explicit.
+Rollback: Revert the adoption commit while retaining historical event records.
+Next: Verify publication; synchronize existing portfolio journal; full historical reconciliation remains open.
+<!-- /oos:event -->
