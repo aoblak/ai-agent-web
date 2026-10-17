@@ -26,8 +26,9 @@ def event(action, actor, object_type, object_id, when, payload=None):
         event_type, source_action = "fork", "created"
     elif action == "FOLLOW":
         event_type, source_action = "follow", "added"
-    elif action == "UNSTAR":
-        event_type, source_action = "star", "removed"
+    elif action in {"UNSTAR", "UNWATCH", "UNFOLLOW"}:
+        event_type = {"UNSTAR": "star", "UNWATCH": "watch", "UNFOLLOW": "follow"}[action]
+        source_action = "removed"
         transport = "poller"
     else:
         raise AssertionError(action)
@@ -149,6 +150,46 @@ class PatternTests(unittest.TestCase):
             "WATCH", "me", "repository", "owner/a", "2026-09-25T01:01:00Z"
         )
         self.assertEqual(detect_evidence_patterns(self.store), [])
+
+    def test_removals_retract_active_patterns_in_event_time_order(self):
+        for action, object_type, object_id in (
+            ("STAR", "repository", "owner/a"),
+            ("WATCH", "repository", "owner/a"),
+            ("FOLLOW", "user", "owner"),
+        ):
+            with self.subTest(action=action):
+                actor = "actor-" + action
+                self.ingest("STAR", actor, "repository", "owner/a", "2026-09-25T01:00:00Z")
+                self.ingest("WATCH", actor, "repository", "owner/a", "2026-09-25T01:00:01Z")
+                self.ingest("FOLLOW", actor, "user", "owner", "2026-09-25T01:00:02Z")
+                # A later-arriving old positive must not undo the newer removal.
+                self.ingest("UN" + action, actor, object_type, object_id,
+                            "2026-09-25T01:02:00Z")
+                self.ingest(action, actor, object_type, object_id, "2026-09-25T01:01:00Z")
+                types = {p.pattern_type for p in detect_evidence_patterns(self.store)
+                         if p.actor == actor}
+                if action in {"STAR", "WATCH"}:
+                    self.assertNotIn("SUSTAINED_ATTENTION", types)
+                if action in {"STAR", "FOLLOW"}:
+                    self.assertNotIn("PERSON_PROJECT_LINK", types)
+
+    def test_reactivated_star_uses_new_evidence_not_removed_star(self):
+        old = self.ingest("STAR", "me", "repository", "owner/a", "2026-09-25T01:00:00Z")
+        self.ingest("UNSTAR", "me", "repository", "owner/a", "2026-09-25T01:01:00Z")
+        watch = self.ingest("WATCH", "me", "repository", "owner/a", "2026-09-25T01:02:00Z")
+        self.assertEqual(detect_evidence_patterns(self.store), [])
+        new = self.ingest("STAR", "me", "repository", "owner/a", "2026-09-25T01:03:00Z")
+        pattern = detect_evidence_patterns(self.store)[0]
+        self.assertEqual(set(pattern.evidence_signal_ids), {new.signal_id, watch.signal_id})
+        self.assertNotIn(old.signal_id, pattern.evidence_signal_ids)
+
+    def test_unstar_removes_owner_cluster_interest(self):
+        self.ingest("STAR", "me", "repository", "owner/a", "2026-09-25T01:00:00Z")
+        self.ingest("STAR", "me", "repository", "owner/b", "2026-09-25T01:01:00Z")
+        self.assertIn("OWNER_CLUSTER_INTEREST", {p.pattern_type for p in detect_evidence_patterns(self.store)})
+        self.ingest("UNSTAR", "me", "repository", "owner/b", "2026-09-25T01:02:00Z")
+        self.assertEqual(detect_evidence_patterns(self.store), [])
+        self.assertEqual(len(self.store.signal_rows()), 3)
 
     def test_patterns_have_no_numeric_score(self):
         self.ingest(

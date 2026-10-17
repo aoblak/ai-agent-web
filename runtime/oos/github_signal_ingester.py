@@ -287,13 +287,28 @@ class GitHubSignalStore:
         payload_json = event.canonical_payload_json()
         payload_sha256 = hashlib.sha256(payload_json.encode("utf-8")).hexdigest()
         fingerprint = event.fingerprint()
-        existing = self.conn.execute(
-            "SELECT id FROM github_raw_events WHERE fingerprint = ?",
-            (fingerprint,),
-        ).fetchone()
-        duplicate = existing is not None
-
         with self.conn:
+            # Serialize the lookup and insert across connections. Delivery IDs
+            # survive redelivery even when the fallback receipt time changes.
+            self.conn.execute("BEGIN IMMEDIATE")
+            if event.transport == "webhook" and event.source_event_id is not None:
+                existing = self.conn.execute(
+                    "SELECT * FROM github_raw_events WHERE transport = 'webhook' "
+                    "AND source_event_id = ? ORDER BY id LIMIT 1",
+                    (event.source_event_id,),
+                ).fetchone()
+                if existing is not None and (
+                    existing["payload_sha256"] != payload_sha256
+                    or any(existing[field] != getattr(event, field) for field in
+                           ("event_type", "action", "actor", "object_type", "object_id"))
+                ):
+                    raise GitHubSignalError("Webhook delivery ID reused with different evidence")
+            else:
+                existing = self.conn.execute(
+                    "SELECT * FROM github_raw_events WHERE fingerprint = ?",
+                    (fingerprint,),
+                ).fetchone()
+            duplicate = existing is not None
             if existing is None:
                 cursor = self.conn.execute(
                     """
@@ -320,6 +335,7 @@ class GitHubSignalStore:
                 raw_event_id = int(cursor.lastrowid)
             else:
                 raw_event_id = int(existing["id"])
+                fingerprint = str(existing["fingerprint"])
 
         return StoredRawEvent(
             raw_event_id=raw_event_id,

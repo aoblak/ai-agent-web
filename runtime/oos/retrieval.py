@@ -260,6 +260,21 @@ class LocalRetrievalIndex:
         unchanged = 0
         chunks_written = 0
         with self.conn:
+            if not explicit:
+                # A successful directory snapshot replaces only this root's
+                # namespace in this corpus, including withdrawn/disallowed files.
+                prefix = hashlib.sha256(str(root).encode("utf-8")).hexdigest()[:12] + "/"
+                retained = {item[0] for item in prepared}
+                indexed = self.conn.execute(
+                    "SELECT source_id FROM retrieval_sources "
+                    "WHERE corpus_id = ? AND source_id LIKE ?",
+                    (corpus_id, prefix + "%"),
+                ).fetchall()
+                self.conn.executemany(
+                    "DELETE FROM retrieval_sources WHERE corpus_id = ? AND source_id = ?",
+                    [(corpus_id, row["source_id"]) for row in indexed
+                     if row["source_id"] not in retained],
+                )
             current_total = self.conn.execute(
                 "SELECT COUNT(*) FROM retrieval_chunks WHERE corpus_id = ?",
                 (corpus_id,),

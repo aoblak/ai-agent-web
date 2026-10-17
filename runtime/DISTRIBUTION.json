@@ -31,7 +31,7 @@
     {
       "path": "README.md",
       "origin": "distribution-packaging",
-      "sha256": "f7598a6c5a7c7ed19b1681ed61cdd871043ae348dd0ed93fd28536b77a9288bc"
+      "sha256": "c8f0b874666b5d54c5c7cf64eb08c64286909990e8aca4d3ff9d8f9e9886c9e9"
     },
     {
       "path": "benchmarks/oos-torture-test-v0.1/fixtures/SEARCHED-complete.json",
@@ -150,17 +150,19 @@
     },
     {
       "path": "oos/github_signal_analysis.py",
-      "sha256": "8e7af6ad49249bd74cbe459b866287bf5cea24c49ca516484547e14854ed08cc",
+      "sha256": "6d608b3f0b5bd2002f8e7ad6a7b4f154320d1e0ba57fcda248b8192fb0d09c51",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "8e7af6ad49249bd74cbe459b866287bf5cea24c49ca516484547e14854ed08cc",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "oos/github_signal_ingester.py",
-      "sha256": "cde34ebf50001f3bbaa4649b35547c7fee0ee82853ef65e5483f7bcc4eb40eef",
+      "sha256": "480370ca04cc2f623f8ec462db16965b2d63d8219ef7e322bbe9be931c76aae0",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "cde34ebf50001f3bbaa4649b35547c7fee0ee82853ef65e5483f7bcc4eb40eef",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "oos/model_router.py",
@@ -192,10 +194,11 @@
     },
     {
       "path": "oos/retrieval.py",
-      "sha256": "0bf00893112543c2d111a2210481af52fc62b9686b9ccdeafc6b11a5b053f5d7",
+      "sha256": "976524a0e8d89d614e1036cd3e989af049919ac367f615592804e830058030e5",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "0bf00893112543c2d111a2210481af52fc62b9686b9ccdeafc6b11a5b053f5d7",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "oos/signals.py",
@@ -365,17 +368,19 @@
     },
     {
       "path": "tests/test_github_signal_analysis.py",
-      "sha256": "225c68b5beeb7683c5d036ca7e8ede82669d1d286c0bed303d8688f1cda43d94",
+      "sha256": "2ac2fc79caa6b66fda657201a6e81c060eecd6cb1a1fb4dbfeb7bf94131ef87b",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "225c68b5beeb7683c5d036ca7e8ede82669d1d286c0bed303d8688f1cda43d94",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "tests/test_github_signal_ingester.py",
-      "sha256": "282bf06c96890c9e855f909c5039cf4603bf292f8bffbbf7c2efa3e33d0154d7",
+      "sha256": "5d2f7a3e8dbe5a68282176e261db523f9d9adc4d689b2591190b793e1041ee01",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "17f97fe1a2d0525e19725283f57d7b20ffd5131218139fa87f8656d8ede64e9e",
-      "modified": true
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "tests/test_model_router.py",
@@ -414,10 +419,11 @@
     },
     {
       "path": "tests/test_retrieval.py",
-      "sha256": "81ae9e9bc25ebed9bafd8077d5c25a0c82c08bf8da4c3130653551f2599aea7a",
+      "sha256": "c51bfd29d20569fc2c7571730ab5d3a6ad0623e7324a65a78427e6c48c359868",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "81ae9e9bc25ebed9bafd8077d5c25a0c82c08bf8da4c3130653551f2599aea7a",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "tests/test_signals.py",
@@ -475,5 +481,14 @@
       "source_sha256": "717f5252d529f054eb043e55e948a544645d5982914494adeab2420417a390ee",
       "modified": false
     }
-  ]
+  ],
+  "review_corrections": {
+    "source_candidate": "132984baa8d825c7652a2c2bea21468144570f76",
+    "review_comments": [
+      4300835900,
+      4300835903,
+      4300835905
+    ],
+    "scope": "Directory reconciliation; webhook delivery deduplication; effective interest-state replay; regression tests. Original upstream source provenance retained."
+  }
 }

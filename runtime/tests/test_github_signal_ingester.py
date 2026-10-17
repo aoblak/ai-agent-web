@@ -1,3 +1,4 @@
+from dataclasses import replace
 import tempfile
 import unittest
 from pathlib import Path
@@ -32,6 +33,50 @@ class GitHubSignalIngesterTests(unittest.TestCase):
             occurred_at="2026-09-25T00:00:00Z",
             payload=payload or {},
         )
+
+    def test_webhook_redelivery_reuses_signal_despite_receipt_time_change(self):
+        with tempfile.TemporaryDirectory() as temp:
+            with GitHubSignalStore(Path(temp) / "signals.sqlite") as store:
+                for i, (kind, action) in enumerate((("watch", "started"),
+                                                    ("fork", "created"),
+                                                    ("star", "deleted"))):
+                    original = replace(self.event(event_type=kind, action=action),
+                                       source_event_id=f"delivery-{i}")
+                    first = store.ingest(original)
+                    replay = store.ingest(replace(original, occurred_at="2026-09-26T00:00:00Z"))
+                    self.assertTrue(replay.duplicate)
+                    self.assertEqual(replay.signal_id, first.signal_id)
+                    self.assertEqual(replay.raw_event_id, first.raw_event_id)
+                    self.assertEqual(replay.fingerprint, first.fingerprint)
+                self.assertEqual(store.conn.execute(
+                    "SELECT COUNT(*) FROM github_raw_events").fetchone()[0], 3)
+
+    def test_delivery_id_reuse_with_different_evidence_is_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            with GitHubSignalStore(Path(temp) / "signals.sqlite") as store:
+                original = replace(self.event(), source_event_id="delivery-1")
+                first = store.ingest(original)
+                for changed in (replace(original, payload={"changed": True}),
+                                replace(original, actor="other")):
+                    with self.assertRaisesRegex(GitHubSignalError, "different evidence"):
+                        store.ingest(changed)
+                self.assertEqual(store.ingest(original).signal_id, first.signal_id)
+                self.assertEqual(store.conn.execute(
+                    "SELECT COUNT(*) FROM github_raw_events").fetchone()[0], 1)
+
+    def test_distinct_deliveries_and_missing_ids_keep_fingerprint_fallback(self):
+        with tempfile.TemporaryDirectory() as temp:
+            with GitHubSignalStore(Path(temp) / "signals.sqlite") as store:
+                first = replace(self.event(), source_event_id="first")
+                second = replace(first, source_event_id="second")
+                self.assertNotEqual(store.ingest(first).raw_event_id,
+                                    store.ingest(second).raw_event_id)
+                without_id = self.event()
+                row = store.ingest(without_id)
+                self.assertEqual(store.ingest(without_id).raw_event_id, row.raw_event_id)
+                self.assertNotEqual(store.ingest(replace(
+                    without_id, occurred_at="2026-09-26T00:00:00Z"
+                )).raw_event_id, row.raw_event_id)
 
     def test_events_api_watchevent_is_star_not_watch(self):
         signal = normalize_github_event(

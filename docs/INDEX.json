@@ -48,12 +48,12 @@
     {
       "path": "docs/PROJECT_STATE.md",
       "visibility": "PUBLIC",
-      "sha256": "0673bbf4fdad17904a5d80d149c6206c25d15771c7db18d343d4fdc4be649c74"
+      "sha256": "70a0af371cd37a8177610cd292e43800076bd771889ffaf5e110e6e3994d2ed6"
     },
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "6ba19893b4d3696bf6022a3e88058b0d9178a2178b73430e6071313210b4829a"
+      "sha256": "1a08e00239d2cc9d664ddc4394b85e5b692e6b55ecdc1ac7f46c284556962e68"
     },
     {
       "path": "scripts/oos_context.py",
@@ -69,6 +69,11 @@
       "path": "docs/OOS_CONTEXT_PROTOCOL.md",
       "visibility": "PUBLIC",
       "sha256": "a8f9d55fb7121070abd709f8ed23ad1cd3df4c987263989602b730cf475c545e"
+    },
+    {
+      "path": "MARKO-START-HERE.md",
+      "visibility": "PUBLIC",
+      "sha256": "c4807273d803f672821a896c69c80d7b92ac1cf4e99b458b99e187ba0c94b0f3"
     }
   ],
   "glossary": {
@@ -277,6 +282,62 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "5e09089b9d92dd4f49da8d2a0f97895449ff2abfd0adb716aff66760e3221154"
+    },
+    {
+      "id": "CTX-20261017-MARKO-GIT-START",
+      "title": "CTX-20261017-MARKO-GIT-START — Clarify existing collaborator Git entry",
+      "topics": [
+        "bootstrap",
+        "handoff",
+        "collaborator"
+      ],
+      "recorded_at": "2026-10-17T03:13:59.404394+02:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "b0851f516291f98f463f0edf458bf320488663c63ec040c5a891630a1ad7848e"
+    },
+    {
+      "id": "CTX-20261017-MARKO-GIT-END",
+      "title": "CTX-20261017-MARKO-GIT-END — Git collaboration procedure prepared and checked",
+      "topics": [
+        "bootstrap",
+        "handoff",
+        "collaborator"
+      ],
+      "recorded_at": "2026-10-17T03:14:18.203994+02:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "54e5e9c2253358e65faa7a0e87c2c509058cd5ac7a238dfc866bf49741e75f2b"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-REVIEW-START",
+      "title": "CTX-20261017-RUNTIME-REVIEW-START — Runtime review correction start",
+      "topics": [
+        "runtime",
+        "review",
+        "collaborator"
+      ],
+      "recorded_at": "2026-10-17T04:07:41.603599+02:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "9a46a0dd7f6d006cc0ca5830dba8e37c95e573f374ccc3c2a497bfee2b82e4b8"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-REVIEW-END",
+      "title": "CTX-20261017-RUNTIME-REVIEW-END — Runtime findings corrected with regression evidence",
+      "topics": [
+        "runtime",
+        "review",
+        "collaborator"
+      ],
+      "recorded_at": "2026-10-17T04:15:14.302809+02:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "c016edf641e81143b62fd4b0a3db5db1cd83ce2665f3a4eb999a5a726866da84"
     }
   ]
 }

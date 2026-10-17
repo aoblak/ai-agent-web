@@ -4,6 +4,7 @@ import hashlib
 import json
 from collections import defaultdict
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Any, Iterable
 
 from oos.github_signal_adapter import GitHubRestClient
@@ -176,6 +177,26 @@ def _first_signal_id(rows: Iterable[dict[str, Any]], action: str) -> int | None:
 
 def detect_evidence_patterns(store: GitHubSignalStore) -> list[EvidencePattern]:
     rows = store.signal_rows()
+    # Reconstruct active reversible interests by event time, not insertion order.
+    # Raw observations and earlier persisted inferences remain historical evidence.
+    positive = {"STAR", "WATCH", "FOLLOW"}
+    removals = {"UNSTAR": "STAR", "UNWATCH": "WATCH", "UNFOLLOW": "FOLLOW"}
+    active: dict[tuple[str, str, str, str], dict[str, Any]] = {}
+    historical: list[dict[str, Any]] = []
+    for row in sorted(rows, key=lambda item: (
+        datetime.fromisoformat(str(item["occurred_at"]).replace("Z", "+00:00")),
+        int(item["signal_id"]),
+    )):
+        action = str(row["canonical_action"])
+        key = (str(row["actor"]), str(row["object_type"]), str(row["object_id"]),
+               removals.get(action, action))
+        if action in removals:
+            active.pop(key, None)
+        elif action in positive:
+            active.setdefault(key, row)
+        else:
+            historical.append(row)
+    rows = historical + list(active.values())
     by_actor_repo: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
     follows: dict[tuple[str, str], list[int]] = defaultdict(list)
     stars_by_actor_owner: dict[tuple[str, str], dict[str, list[int]]] = defaultdict(

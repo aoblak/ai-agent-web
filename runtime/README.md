@@ -75,3 +75,26 @@ sources. Keep evidence-level chat journals separate from accepted decision autho
 
 To roll back a proposed installation, discard its unmerged branch. To undo an accepted
 installation, revert its installation commit while preserving subsequent owner data.
+
+
+## Reviewed-candidate corrections (2026-10-17)
+
+This distribution contains local corrections to the pinned upstream sources, not a
+claim that the upstream repositories have adopted them. Original source hashes remain
+in DISTRIBUTION.json; distributed hashes identify the corrected bytes.
+
+- Successful directory ingestion transactionally reconciles that root's source namespace
+  in the selected corpus. Deleted or newly disallowed files and their chunks are removed;
+  unrelated roots/corpora and explicit single-file ingestions are preserved. Failed
+  replacements roll back pruning.
+- Webhook deliveries with non-null source_event_id reuse the first stored raw event and
+  signal even when receipt-derived timestamps change. Conflicting evidence under an
+  existing delivery ID is rejected. Sources without delivery IDs retain fingerprint
+  deduplication. Database serialization covers the delivery lookup and raw insert.
+- Pattern detection reconstructs reversible STAR/WATCH/FOLLOW state by occurrence time
+  and applies UNSTAR/UNWATCH/UNFOLLOW before deriving current interest patterns. Raw
+  observations and previously persisted inferences remain historical evidence.
+
+The corrected Context gate is pinned to PR #10 commit
+`c9d6a6f4d6186585cb8d20b0b53d7433f3077505`. Both candidates still require current-head
+review and acceptance. No live provider transport or production deployment is implied.

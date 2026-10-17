@@ -133,6 +133,63 @@ class RetrievalTests(unittest.TestCase):
         self.assertEqual(self.index.search("first", corpus_id="c"), [])
         self.assertTrue(self.index.search("replacement", corpus_id="c"))
 
+    def test_directory_reingest_removes_deleted_sources_and_preserves_other_scopes(self):
+        docs = self.root / "docs"
+        docs.mkdir()
+        gone = docs / "gone.txt"
+        gone.write_text("withdrawn unique record")
+        other = self.root / "other"
+        other.mkdir()
+        (other / "keep.txt").write_text("retained unique record")
+        self.index.ingest_path(docs, corpus_id="A")
+        self.index.ingest_path(docs, corpus_id="B")
+        self.index.ingest_path(other, corpus_id="A")
+        gone.unlink()
+        self.index.ingest_path(docs, corpus_id="A")
+        self.assertEqual(self.index.search("withdrawn", corpus_id="A"), [])
+        self.assertTrue(self.index.search("withdrawn", corpus_id="B"))
+        self.assertTrue(self.index.search("retained", corpus_id="A"))
+        self.assertEqual(self.index.conn.execute(
+            "SELECT COUNT(*) FROM retrieval_chunks WHERE corpus_id = 'A' "
+            "AND text LIKE '%withdrawn%'"
+        ).fetchone()[0], 0)
+
+    def test_directory_reingest_removes_newly_disallowed_content(self):
+        docs = self.root / "docs"
+        docs.mkdir()
+        (docs / "private.txt").write_text("withdrawn private material")
+        (docs / "keep.md").write_text("retained public material")
+        self.index.ingest_path(docs, corpus_id="A")
+        self.index.policy = RetrievalPolicy(allowed_extensions=(".md",))
+        result = self.index.ingest_path(docs, corpus_id="A")
+        self.assertEqual(result.skipped_files, 1)
+        self.assertEqual(self.index.search("withdrawn", corpus_id="A"), [])
+        self.assertTrue(self.index.search("retained", corpus_id="A"))
+
+    def test_single_file_update_does_not_prune_siblings(self):
+        first = self.root / "first.txt"
+        second = self.root / "second.txt"
+        first.write_text("first record")
+        second.write_text("second record")
+        self.index.ingest_path(first, corpus_id="A")
+        self.index.ingest_path(second, corpus_id="A")
+        self.assertTrue(self.index.search("first", corpus_id="A"))
+
+    def test_failed_directory_replacement_rolls_back_pruning(self):
+        docs = self.root / "docs"
+        docs.mkdir()
+        source = docs / "old.txt"
+        source.write_text("original")
+        self.index.ingest_path(docs, corpus_id="A")
+        source.unlink()
+        (docs / "replacement.txt").write_text("too many replacement chunks")
+        self.index.policy = RetrievalPolicy(chunk_size=4, chunk_overlap=0,
+                                            max_chunks_per_corpus=1)
+        with self.assertRaises(RetrievalPolicyError):
+            self.index.ingest_path(docs, corpus_id="A")
+        self.assertTrue(self.index.search("original", corpus_id="A"))
+        self.assertEqual(self.index.search("replacement", corpus_id="A"), [])
+
     def test_chunk_overlap_is_deterministic(self):
         chunks = chunk_text("abcdefghij", size=6, overlap=2)
         self.assertEqual(chunks, ["abcdef", "efghij", "ij"])

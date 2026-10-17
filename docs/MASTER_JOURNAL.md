@@ -92,3 +92,47 @@ Adverse: Prior journal remains a byte-for-byte prefix; no private destination or
 Rollback: Revert the eventual change commit; preserve earlier journal history.
 Next: Publish draft PR, verify remote bytes, obtain independent review and merge approval, then validate main. Portfolio synchronization remains PENDING-MJ-SYNC; no external-agent receipt is claimed.
 <!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-MARKO-GIT-START", "recorded_at": "2026-10-17T03:13:59.404394+02:00", "occurred_at": "2026-10-17T03:13:59.404394+02:00", "actor": "OpenAI Codex", "topics": ["bootstrap", "handoff", "collaborator"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261017-MARKO-GIT-START — Clarify existing collaborator Git entry
+Summary: Task MARKO-GIT-20261017; prepare a documentation-only continuation under the user request to continue Git cooperation. Role coordinator. Runtime reports GPT-6; exact build, mode, subscription and measured active time UNKNOWN. No message to the collaborator is sent by this change.
+Sources: Base 162a4ceeb0eba22e6eacf4e9fa7b247d8707b8ed; existing MARKO-START-HERE.md; PR #10 head 4a71d44acf4f402ceee16fc3a0f4172555e70785; PR #12 head 132984baa8d825c7652a2c2bea21468144570f76.
+Integrity: Pending index refresh and validation after the documentation edit.
+Independent: GitHub confirms both candidate PRs are open/mergeable with successful current-head CI; independent current-head review/recipient receipt not observed.
+Adverse: Reuse existing entry/journal; public task data only; no permissions or private memory export.
+Rollback: Revert this documentation commit.
+Next: Add explicit source versions, Git return/receipt fields and direct-chat limitations to the existing Marko entry.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-MARKO-GIT-END", "recorded_at": "2026-10-17T03:14:18.203994+02:00", "occurred_at": "2026-10-17T03:14:18.203994+02:00", "actor": "OpenAI Codex", "topics": ["bootstrap", "handoff", "collaborator"], "status": "VERIFIED", "visibility": "PUBLIC"} -->
+## CTX-20261017-MARKO-GIT-END — Git collaboration procedure prepared and checked
+Summary: Task MARKO-GIT-20261017 END for local preparation. Added a Git cooperation section to the existing Marko entry and linked the verified public portfolio synchronization in project state. Same actor as START; precise model build/mode/plan and measured active time UNKNOWN. Output is a documentation procedure, not a live bridge or collaborator receipt.
+Sources: MARKO-START-HERE.md section 8; public portfolio PR #13 merge 12df0e9688fa4e61d257659f6749c8a7ae803f80; candidate PR #10 and #12 immutable sources recorded in START.
+Integrity: PASS — context validator VALID, new Marko entry included in existing hash index, whitespace diff clean and existing journal bytes preserved.
+Independent: PASS — candidate SHAs, open/draft states and current-head CI checked through GitHub; portfolio main bytes previously matched the tested four-file change. Independent implementation approval remains absent.
+Adverse: PASS — prepared/publication/acceptance/result/verification distinguished; wrong or stale sources, duplicate delivery, unverified author identity, unavailable tools and private data boundaries are explicit. No new master, account permissions, remote installation or direct-chat access claim.
+Rollback: Revert this documentation commit; retain earlier journal history.
+Next: Publish and verify this documentation through PR; obtain authorized current-head review and actual collaborator acknowledgement before claiming live cooperation.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-RUNTIME-REVIEW-START", "recorded_at": "2026-10-17T04:07:41.603599+02:00", "occurred_at": "2026-10-17T04:07:41.603599+02:00", "actor": "OpenAI Codex", "topics": ["runtime", "review", "collaborator"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261017-RUNTIME-REVIEW-START — Runtime review correction start
+Summary: RUNTIME-REVIEW-20261017 accepted by current coordinator after authorized external review. Scope: directory re-ingestion reconciliation, webhook delivery deduplication, effective interest state, regression tests and distribution provenance. Current main merged locally; source histories retained. Runtime reports GPT-6; precise build/mode/plan and active duration UNKNOWN.
+Sources: PR #12 head 132984baa8d825c7652a2c2bea21468144570f76; review comments 4300835900, 4300835903, 4300835905; corrected Context source 67eb18fbabe53403e20a3b2b6d442dca48912a89 in PR #10.
+Integrity: Pending meaningful regression and complete packaged runtime verification.
+Independent: External review returned all three findings; new changes are not yet independently accepted.
+Adverse: Keep unrelated corpus/root data and historical raw events; no live network or owner data.
+Rollback: Revert the correction commit; no account or production changes.
+Next: Reproduce/fix the failures, refresh modified-file hashes while retaining original provenance, test and publish on existing PR #12.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-RUNTIME-REVIEW-END", "recorded_at": "2026-10-17T04:15:14.302809+02:00", "occurred_at": "2026-10-17T04:15:14.302809+02:00", "actor": "OpenAI Codex", "topics": ["runtime", "review", "collaborator"], "status": "VERIFIED", "visibility": "PUBLIC"} -->
+## CTX-20261017-RUNTIME-REVIEW-END — Runtime findings corrected with regression evidence
+Summary: RUNTIME-REVIEW-20261017 local correction complete. Directory snapshots prune withdrawn/disallowed sources only in their corpus/root namespace and roll back on replacement failure. Webhook receipt IDs deduplicate changed fallback timestamps and reject conflicting evidence. Interest patterns replay reversible actions by occurrence time. Corrected Context source pin c9d6a6f4d6186585cb8d20b0b53d7433f3077505 includes both PR #10 fixes. Onboarding keeps username/destination questions outside the five-question interview. Actor unchanged; exact build/mode/plan and active duration UNKNOWN.
+Sources: Review findings 4300835900, 4300835903, 4300835905 and earlier onboarding finding 4257678736; runtime/DISTRIBUTION.json retains original upstream hashes and identifies changed bytes.
+Integrity: PASS — 298 packaged runtime tests; 20 repository tests after final Context pin update; 440 separate synthetic checks on the unchanged contract; context VALID; all distribution hashes and provenance flags checked. Initial repository check failed because the newly appended START event had not been reindexed; derived index refreshed, both previously failing checks pass in the complete 20-test rerun.
+Independent: PASS — changes address external review reproductions; current new-head independent acceptance and CI remain pending, not inferred from these local checks.
+Adverse: PASS — deleted/disallowed source withdrawal, unrelated roots/corpora, explicit-file preservation, pruning rollback, redelivery/changed receipt times, conflicting evidence, fallback IDs, removal/out-of-order signals, reactivation and retained raw history covered. Main and existing journal event bodies retained. No credentials or live provider access.
+Rollback: Revert correction commit without resetting source history. Existing runtime databases are not modified by packaging tests.
+Next: Publish existing PR #12, verify remote bytes and CI, obtain current-head review; destination installation and real collaborator receipt remain separate gates.
+<!-- /oos:event -->
