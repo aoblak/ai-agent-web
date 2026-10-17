@@ -257,3 +257,25 @@ Adverse: PASS — interrupted snapshot replacement rolls back raw events/signals
 Rollback: Revert this correction commit; legacy journal data is not migrated or rewritten by packaging.
 Next: Publish existing PR #12, verify remote content and CI, request final current-head review. Private destination installation, private journal sync and live recipient acceptance remain separate gates.
 <!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-RUNTIME-AUTHORITY-START", "recorded_at": "2026-10-17T04:44:09.702003+02:00", "occurred_at": null, "actor": "OpenAI Codex", "topics": ["runtime", "review", "authority"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261017-RUNTIME-AUTHORITY-START — Operation authority and active-content boundaries
+Summary: Recovery START: coordinator accepts RUNTIME-AUTHORITY-20261017 for findings 4300940423–4300940426; earlier local edits preceded this record, actual start UNKNOWN. Same OpenAI Codex actor; exact model build/mode/plan and active duration UNKNOWN.
+Sources: PR #12 findings 4300940423, 4300940424, 4300940425, 4300940426 on fa8cbbd2ee89a3165a2248f54a756c20bb12e750; runtime/DISTRIBUTION.json.
+Integrity: PASS — 315 packaged runtime tests; 55 combined repository tests; context VALID. Updated examples require explicit approved postconditions, and prior authorizations/receipts are not silently migrated.
+Independent: PASS — external P1/P2 reproduction cases addressed; corrected current-head review and CI remain pending. 2600 deterministic execution simulations reported zero false executed/verified, unsafe retry or accepted illegal transitions; this is not live provider testing.
+Adverse: PASS — invented matching states rejected, changed/missing expected result blocked, post-execution input mutation blocked, foreign executor rejected for all outcomes and reconciliation, comment/BOM/XML/meta-prefixed HTML/SVG quarantined even with positive text verifier, non-verifiable contradiction population excluded from factual rate.
+Rollback: Revert correction commit; obtain fresh operation authorization after restoring any older execution API. No production data or live effects were changed.
+Next: Publish existing PR #12, verify remote bytes/CI and request current-head review. Production adapters must authenticate actual authorities/receipts; these offline field-binding tests do not establish live identity or deployment.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-RUNTIME-AUTHORITY-END", "recorded_at": "2026-10-17T04:44:09.702003+02:00", "occurred_at": "2026-10-17T04:44:09.702003+02:00", "actor": "OpenAI Codex", "topics": ["runtime", "review", "authority"], "status": "VERIFIED", "visibility": "PUBLIC"} -->
+## CTX-20261017-RUNTIME-AUTHORITY-END — Operation authority and active-content boundaries
+Summary: END local correction: approved Operation.expected_state is part of the authorization/input digest, missing expectations block authorization and verifiers cannot substitute them. Receipts require the admitted execution authority for every outcome and reconciliation. Active tag-like markup is conservatively quarantined beyond leading nodes. Factual-rate numerator excludes non-verifiable contradictions without hiding their raw count. Same OpenAI Codex actor; exact model build/mode/plan and active duration UNKNOWN.
+Sources: PR #12 findings 4300940423, 4300940424, 4300940425, 4300940426 on fa8cbbd2ee89a3165a2248f54a756c20bb12e750; runtime/DISTRIBUTION.json.
+Integrity: PASS — 315 packaged runtime tests; 55 combined repository tests; context VALID. Updated examples require explicit approved postconditions, and prior authorizations/receipts are not silently migrated.
+Independent: PASS — external P1/P2 reproduction cases addressed; corrected current-head review and CI remain pending. 2600 deterministic execution simulations reported zero false executed/verified, unsafe retry or accepted illegal transitions; this is not live provider testing.
+Adverse: PASS — invented matching states rejected, changed/missing expected result blocked, post-execution input mutation blocked, foreign executor rejected for all outcomes and reconciliation, comment/BOM/XML/meta-prefixed HTML/SVG quarantined even with positive text verifier, non-verifiable contradiction population excluded from factual rate.
+Rollback: Revert correction commit; obtain fresh operation authorization after restoring any older execution API. No production data or live effects were changed.
+Next: Publish existing PR #12, verify remote bytes/CI and request current-head review. Production adapters must authenticate actual authorities/receipts; these offline field-binding tests do not establish live identity or deployment.
+<!-- /oos:event -->

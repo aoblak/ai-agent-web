@@ -138,6 +138,7 @@ def summarize_claims(claims: Iterable[Mapping[str, Any]]) -> ReliabilitySummary:
     items = list(claims)
     counts = {status: 0 for status in CLAIM_STATUSES}
     verifiable = 0
+    verifiable_contradicted = 0
     evidence_covered = 0
     expected_unknown = 0
     correct_unknown = 0
@@ -159,6 +160,8 @@ def summarize_claims(claims: Iterable[Mapping[str, Any]]) -> ReliabilitySummary:
 
         if is_verifiable:
             verifiable += 1
+            if status == "CONTRADICTED":
+                verifiable_contradicted += 1
             if status in EVIDENCE_STATUSES and _has_usable_reference(claim.get("evidence_refs")):
                 evidence_covered += 1
         if expected_unknown_flag:
@@ -176,7 +179,7 @@ def summarize_claims(claims: Iterable[Mapping[str, Any]]) -> ReliabilitySummary:
         unsupported_claims=counts["UNSUPPORTED"],
         contradicted_claims=counts["CONTRADICTED"],
         unknown_claims=counts["UNKNOWN"],
-        factual_hallucination_rate=counts["CONTRADICTED"] / verifiable if verifiable else 0.0,
+        factual_hallucination_rate=verifiable_contradicted / verifiable if verifiable else 0.0,
         unsupported_claim_rate=counts["UNSUPPORTED"] / total if total else 0.0,
         verified_claim_rate=counts["VERIFIED"] / total if total else 0.0,
         evidence_coverage=evidence_covered / verifiable if verifiable else 0.0,

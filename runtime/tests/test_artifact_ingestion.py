@@ -257,6 +257,25 @@ class ArtifactIngestionGateTest(unittest.TestCase):
         self.assertFalse(record.trust_ready)
         self.assertEqual(len(archive.seen), 1)
 
+    def test_active_markup_is_quarantined_beyond_leading_nodes(self):
+        for text in ("<!--header--><script>alert(1)</script>",
+                     "\ufeff<script>alert(1)</script>",
+                     '<?xml version="1.0"?><svg onload="alert(1)"/>',
+                     '<meta charset="utf-8"><script>alert(1)</script>',
+                     'ordinary note\n<img src="x" onerror="alert(1)">',
+                     '<!--header--><script/src="x"></script>'):
+            with self.subTest(text=text):
+                archive = FakeArchive()
+                def approve(payload, metadata):
+                    return SpecializedVerification("VERIFIED", checks=({"check": "text", "ok": True},))
+                gate = ArtifactIngestionGate(archive_sink=archive, index_sink=FakeIndex(),
+                                             verifiers={"text": approve, "image": approve})
+                record = gate.ingest(ArtifactInput(text.encode("utf-8"), "note.txt", "fixture://active"))
+                self.assertIn(record.detected_media_type, {"text/html", "image/svg+xml"})
+                self.assertTrue(record.quarantined)
+                self.assertFalse(record.trust_ready)
+                self.assertTrue(archive.seen[0]["quarantine"])
+
     def test_registered_semantic_verifier_can_make_artifact_trust_ready(self):
         archive = FakeArchive()
 

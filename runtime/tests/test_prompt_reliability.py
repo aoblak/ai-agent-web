@@ -18,6 +18,18 @@ BACKFILL = ROOT / "benchmarks" / "prompt-reliability-v0.1" / "synthetic-backfill
 
 
 class PromptReliabilityTest(unittest.TestCase):
+    def test_non_verifiable_contradictions_do_not_inflate_factual_rate(self) -> None:
+        claims = [{"status": "CONTRADICTED", "verifiable": False},
+                  {"status": "SUPPORTED", "verifiable": True}]
+        summary = summarize_claims(claims)
+        self.assertEqual(summary.contradicted_claims, 1)
+        self.assertEqual(summary.factual_hallucination_rate, 0)
+        claims += [{"status": "CONTRADICTED", "verifiable": True},
+                   {"status": "CONTRADICTED", "verifiable": False}]
+        summary = summarize_claims(claims)
+        self.assertEqual(summary.factual_hallucination_rate, 0.5)
+        self.assertLessEqual(summary.factual_hallucination_rate, 1)
+
     def test_source_is_required_for_provenance_but_not_scoring(self) -> None:
         run = json.loads(FIXTURE.read_text(encoding="utf-8"))
         self.assertEqual(validate_run_metadata(run), [])

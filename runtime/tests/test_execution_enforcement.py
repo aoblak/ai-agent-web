@@ -1,4 +1,5 @@
 import unittest
+from dataclasses import replace
 
 from oos.execution import (
     AuthorizationEvidence, CapabilityEvidence, ExecutionReceipt, ExecutionRecord,
@@ -7,7 +8,7 @@ from oos.execution import (
 
 
 def op():
-    return Operation("req-1", "op-1", "worker", "repo:x", "write", {"v": 1}, "session-current")
+    return Operation("req-1", "op-1", "worker", "repo:x", "write", {"v": 1}, "session-current", expected_state="written")
 
 
 def capability(operation):
@@ -37,12 +38,63 @@ class ExecutionEnforcementTests(unittest.TestCase):
         record.verify_capability(capability(operation))
         record.authorize(authorization(operation))
         record.admit_execution(
-            "worker-lease-1",
+            "worker",
             current_session_id=operation.session_id,
             current_capability=capability(operation),
             admission_store=InMemoryAdmissionStore(),
         )
         return operation, record
+
+    def test_forged_matching_states_do_not_override_authorized_postcondition(self):
+        operation, record = self.ready()
+        er = exec_receipt(operation)
+        record.accept_execution_receipt(er)
+        forged = replace(verify_receipt(operation, er), expected_state="nothing happened",
+                         observed_state="nothing happened")
+        with self.assertRaises(TransitionError):
+            record.verify(forged)
+        self.assertEqual(record.state, ExecutionState.EXECUTED)
+        self.assertFalse(record.permits_success_claim())
+
+    def test_postcondition_changes_require_fresh_authorization(self):
+        original = op()
+        changed = replace(original, expected_state="other result")
+        self.assertNotEqual(original.input_digest, changed.input_digest)
+        record = ExecutionRecord(changed)
+        record.verify_capability(capability(changed))
+        record.authorize(authorization(original))
+        self.assertEqual(record.state, ExecutionState.BLOCKED)
+        missing = replace(original, expected_state="")
+        record = ExecutionRecord(missing)
+        record.verify_capability(capability(missing))
+        record.authorize(authorization(missing))
+        self.assertEqual(record.state, ExecutionState.BLOCKED)
+
+    def test_operation_mutation_after_execution_cannot_be_verified(self):
+        operation, record = self.ready()
+        er = exec_receipt(operation)
+        record.accept_execution_receipt(er)
+        operation.parameters["v"] = 999
+        with self.assertRaises(TransitionError):
+            record.verify(verify_receipt(operation, er))
+        self.assertFalse(record.permits_success_claim())
+
+    def test_unadmitted_executor_cannot_report_any_result(self):
+        for result in ("EXECUTED", "PARTIAL", "FAILED", "UNKNOWN"):
+            for reconciliation in (False, True):
+                with self.subTest(result=result, reconciliation=reconciliation):
+                    operation, record = self.ready()
+                    if reconciliation:
+                        record.mark_indeterminate()
+                        record.reconcile()
+                    previous = record.state
+                    wrong = replace(exec_receipt(operation, result), executor_id="unrelated-worker")
+                    with self.assertRaises(TransitionError):
+                        record.accept_execution_receipt(wrong)
+                    self.assertEqual(record.state, previous)
+                    self.assertIsNone(record.execution_receipt)
+                    record.accept_execution_receipt(exec_receipt(operation, result))
+                    self.assertEqual(record.execution_receipt.executor_id, record.execution_authority)
 
     def test_happy_path_requires_both_receipts(self):
         operation, record = self.ready()
@@ -215,6 +267,7 @@ class ExecutionEnforcementTests(unittest.TestCase):
             "write",
             {"v": 0},
             "session-current",
+            expected_state="written",
         )
         operation = op()
         record = ExecutionRecord(operation)
@@ -347,7 +400,7 @@ class ExecutionEnforcementTests(unittest.TestCase):
 
     def test_cross_operation_receipt_substitution_is_rejected(self):
         op_a, record = self.ready()
-        op_b = Operation("req-b", "op-b", op_a.principal, op_a.target, op_a.action, {"v": 1}, op_a.session_id)
+        op_b = Operation("req-b", "op-b", op_a.principal, op_a.target, op_a.action, {"v": 1}, op_a.session_id, expected_state="written")
         foreign = exec_receipt(op_b)
         with self.assertRaises(TransitionError):
             record.accept_execution_receipt(foreign)
@@ -362,7 +415,7 @@ class ExecutionEnforcementTests(unittest.TestCase):
         self.assertEqual(record.state, ExecutionState.EXECUTED)
 
     def test_old_receipt_with_same_ids_but_changed_parameters_is_rejected(self):
-        old = Operation("req-1", "op-1", "worker", "repo:x", "write", {"v": 0}, "session-current")
+        old = Operation("req-1", "op-1", "worker", "repo:x", "write", {"v": 0}, "session-current", expected_state="written")
         operation, record = self.ready()
         stale = exec_receipt(old)
         with self.assertRaises(TransitionError):
@@ -395,7 +448,7 @@ class ExecutionEnforcementTests(unittest.TestCase):
     def test_duplicate_operation_id_is_blocked_even_with_different_request_object(self):
         store = InMemoryAdmissionStore()
         a_op = op()
-        b_op = Operation("req-other", a_op.operation_id, a_op.principal, a_op.target, a_op.action, {"v": 999}, a_op.session_id)
+        b_op = Operation("req-other", a_op.operation_id, a_op.principal, a_op.target, a_op.action, {"v": 999}, a_op.session_id, expected_state="written")
         a = ExecutionRecord(a_op); b = ExecutionRecord(b_op)
         for record, operation in ((a, a_op), (b, b_op)):
             record.verify_capability(capability(operation))

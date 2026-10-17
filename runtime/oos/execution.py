@@ -81,6 +81,7 @@ class Operation:
     action: str
     parameters: Mapping[str, Any] = field(default_factory=dict)
     session_id: str = ""
+    expected_state: str = ""
 
     @property
     def input_digest(self) -> str:
@@ -92,6 +93,7 @@ class Operation:
             "action": self.action,
             "parameters": dict(self.parameters),
             "session_id": self.session_id,
+            "expected_state": self.expected_state,
         })
 
 
@@ -173,6 +175,9 @@ class ExecutionRecord:
 
     def authorize(self, evidence: AuthorizationEvidence) -> None:
         self._require(ExecutionState.CAPABILITY_VERIFIED)
+        if not isinstance(self.operation.expected_state, str) or not self.operation.expected_state.strip():
+            self._advance(ExecutionState.BLOCKED, "missing_authorized_postcondition")
+            return
         if not self.operation.session_id or evidence.session_id != self.operation.session_id:
             self._advance(ExecutionState.BLOCKED, "session_authority_mismatch")
             return
@@ -276,18 +281,23 @@ class ExecutionRecord:
         er = self.execution_receipt
         if er is None or er.result != "EXECUTED":
             raise TransitionError("verification requires an EXECUTED receipt")
+        if (self.authorization is None
+                or self.authorization.input_digest != self.operation.input_digest
+                or er.input_digest != self.authorization.input_digest):
+            raise TransitionError("verification requires the authorized operation binding")
         if (
             not receipt.receipt_id
             or receipt.execution_receipt_id != er.receipt_id
             or receipt.operation_id != self.operation.operation_id
-            or not receipt.expected_state
+            or not self.operation.expected_state
+            or receipt.expected_state != self.operation.expected_state
             or not receipt.observed_state
             or not receipt.verification_method
             or not receipt.timestamp
             or not receipt.evidence_reference
         ):
             raise TransitionError("verification receipt mismatch")
-        if receipt.result == "PASS" and receipt.observed_state != receipt.expected_state:
+        if receipt.result == "PASS" and receipt.observed_state != self.operation.expected_state:
             raise TransitionError("PASS requires observed state to match expected state")
         self.verification_receipt = receipt
         if receipt.result == "PASS":
@@ -386,12 +396,15 @@ class ExecutionRecord:
         op = self.operation
         return bool(
             r.receipt_id
-            and r.executor_id
+            and self.execution_authority
+            and r.executor_id == self.execution_authority
             and r.timestamp
             and r.evidence_reference
             and r.result in {"EXECUTED", "PARTIAL", "FAILED", "UNKNOWN"}
         ) and (
-            r.request_id == op.request_id
+            self.authorization is not None
+            and self.authorization.input_digest == op.input_digest
+            and r.request_id == op.request_id
             and r.operation_id == op.operation_id
             and r.target == op.target
             and r.action == op.action

@@ -48,12 +48,12 @@
     {
       "path": "docs/PROJECT_STATE.md",
       "visibility": "PUBLIC",
-      "sha256": "f7e0cb6de731cb1d9fc5540f65f0bd120aecc5888e0d17ac08c7a15b5594a4b5"
+      "sha256": "ef0a03adb64c7e7dd5d4bb32bbba6396f065a01dda520fbc3f3a6213e8ac1e8c"
     },
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "3c61b6eac2d2ff16ce3d9b84c66d3f04f8b6c70cfda58397a56bf7457a85ab99"
+      "sha256": "444ad7d553900f5ea400a8be99d4070c569166b5dcb706f971bf968269596e45"
     },
     {
       "path": "scripts/oos_context.py",
@@ -491,6 +491,34 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "f550122ab668ec1d5934af30f145f97a46feffd9a4afd9b6b08670a7ff78d0a6"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-AUTHORITY-START",
+      "title": "CTX-20261017-RUNTIME-AUTHORITY-START — Operation authority and active-content boundaries",
+      "topics": [
+        "runtime",
+        "review",
+        "authority"
+      ],
+      "recorded_at": "2026-10-17T04:44:09.702003+02:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "990bf05c4950953880d72de1fcf28fa7803c5de22216c898e32e32c645ef7429"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-AUTHORITY-END",
+      "title": "CTX-20261017-RUNTIME-AUTHORITY-END — Operation authority and active-content boundaries",
+      "topics": [
+        "runtime",
+        "review",
+        "authority"
+      ],
+      "recorded_at": "2026-10-17T04:44:09.702003+02:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "7fc7c4c14dddda017c96861fd0443d4063082c39faa2767b9e27f246cbe59c80"
     }
   ]
 }

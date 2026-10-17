@@ -293,15 +293,13 @@ def _sniff(payload: bytes) -> tuple[str, tuple[str, ...], tuple[dict[str, Any], 
         text = payload.decode("utf-8")
         if not text:
             return "text/plain", (), ()
-        stripped = text.lstrip().lower()
-        if (
-            stripped.startswith("<!doctype html")
-            or stripped.startswith("<html")
-            or stripped.startswith("<script")
-        ):
-            return "text/html", (), ()
-        if stripped.startswith("<svg"):
+        # Active markup may follow comments, BOM/XML declarations, leading
+        # nodes or ordinary text. Ambiguous tags are quarantined conservatively.
+        if re.search(r"<\s*svg\b", text, re.IGNORECASE):
             return "image/svg+xml", (), ()
+        if (re.search(r"<\s*[a-z][a-z0-9:_-]*(?:\s|/|>)", text, re.IGNORECASE)
+                or re.search(r"<!doctype\b", text, re.IGNORECASE)):
+            return "text/html", (), ()
         printable = sum(ch.isprintable() or ch in "\r\n\t" for ch in text)
         if printable / max(len(text), 1) >= 0.95:
             return "text/plain", (), ()

@@ -31,7 +31,7 @@
     {
       "path": "README.md",
       "origin": "distribution-packaging",
-      "sha256": "65c783e197f6006875b500486a35986527d0b505d3df5c8480aeb78b876bbc9c"
+      "sha256": "d7c741cdd5f47fab358953d232af7ca776ef9158db9133f5022476978ba2a45a"
     },
     {
       "path": "benchmarks/oos-torture-test-v0.1/fixtures/SEARCHED-complete.json",
@@ -115,10 +115,11 @@
     },
     {
       "path": "oos/artifact_ingestion.py",
-      "sha256": "a60566e1faed930a4539f85f2304170b7657aca37ab39e4c81449151cb1323e6",
+      "sha256": "19535f0653a903b97681a5710d76f4da61e0d4997b5a99a6f275af6784bac744",
       "source_commit": "201a597134428f6c982f3ec69907346cbc733578",
       "source_sha256": "a60566e1faed930a4539f85f2304170b7657aca37ab39e4c81449151cb1323e6",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "oos/chat_journal.py",
@@ -137,10 +138,11 @@
     },
     {
       "path": "oos/execution.py",
-      "sha256": "fc82a55da6625cdcce6bfd94042f1b613a67761b431a11d8b4673d4b11e6c630",
+      "sha256": "cf228f119877a1cdcd25b812f55f047df1deb294dc41fda52d20532054046daf",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "fc82a55da6625cdcce6bfd94042f1b613a67761b431a11d8b4673d4b11e6c630",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "oos/github_signal_adapter.py",
@@ -183,10 +185,11 @@
     },
     {
       "path": "oos/prompt_reliability.py",
-      "sha256": "d11eda6e0f23cf236d27666de1bd011bc50675f5c44b88ed4125b307732bb996",
+      "sha256": "3d9dd960c3f2d0d54566978d44566f10444033fd1bc335c340471944c4b2d761",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "d11eda6e0f23cf236d27666de1bd011bc50675f5c44b88ed4125b307732bb996",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "oos/providers.py",
@@ -280,10 +283,11 @@
     },
     {
       "path": "scripts/execution_enforcement_sim.py",
-      "sha256": "2552488b89e09de2b7a9805ef35c22624a2704e77a1e961bc8e1611403493804",
+      "sha256": "607ba431f6d66f7c74b0cfa50ae02ede8909dc172433531ae4f60e6334a94549",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "2552488b89e09de2b7a9805ef35c22624a2704e77a1e961bc8e1611403493804",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "scripts/github_signal_analyze.py",
@@ -324,17 +328,19 @@
     },
     {
       "path": "tests/test_artifact_ingestion.py",
-      "sha256": "89a65dcadba60cc6fae2e7221af010bd59dfdf0064624fc3a27960d7c8c188da",
+      "sha256": "9dbea08b30e40cd8b108935a86f2fe39b6184a6f330b6d81e2619483df90e486",
       "source_commit": "201a597134428f6c982f3ec69907346cbc733578",
       "source_sha256": "89a65dcadba60cc6fae2e7221af010bd59dfdf0064624fc3a27960d7c8c188da",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "tests/test_bnt_0001_principal_binding.py",
-      "sha256": "33d83bc70ac35e51cfc4102c70a9c0f41a517da468f4286262880c8aa7144134",
+      "sha256": "449965fefd715876fc4023e95d1f6e1dd1a09439436471df03cd0ea99e10f599",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "33d83bc70ac35e51cfc4102c70a9c0f41a517da468f4286262880c8aa7144134",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "tests/test_chat_journal.py",
@@ -360,10 +366,11 @@
     },
     {
       "path": "tests/test_execution_enforcement.py",
-      "sha256": "afdc9d8fa2f56e5a7fb462b20576802a82143e20d8b0b73447f535dbc2669110",
+      "sha256": "ce29710d71c9fb79858a904833a229f6fbba27a902c584421478589650c920f8",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "afdc9d8fa2f56e5a7fb462b20576802a82143e20d8b0b73447f535dbc2669110",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "tests/test_github_signal_adapter.py",
@@ -418,10 +425,11 @@
     },
     {
       "path": "tests/test_prompt_reliability.py",
-      "sha256": "61364097d410c8837db0df6d2d2065813c30c5292552c9f088fd38272643c7e7",
+      "sha256": "b3777b9df002d0981a794e1b34d69ea4e2071651ad9c6571f3183c35d0fa8b07",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "6410eed42b82981895390e95adbe0cf98d7a139e91c052deb9f77c06b21d6e41",
-      "modified": true
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "tests/test_providers.py",
@@ -506,7 +514,11 @@
       4300886367,
       4300916367,
       4300916372,
-      4300916376
+      4300916376,
+      4300940423,
+      4300940424,
+      4300940425,
+      4300940426
     ],
     "scope": "Directory reconciliation; webhook delivery deduplication; effective interest-state replay; regression tests. Original upstream source provenance retained."
   }

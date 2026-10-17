@@ -113,3 +113,15 @@ a bounded readable label plus SHA-256 of the complete chat ID. Existing legacy
 journals are reused only by their recorded identity, preserving bytes and continuity;
 colliding IDs get separate journals. NaN, infinities and overflowing numeric telemetry
 are rejected before averaging or serialization.
+
+Execution verification now binds Operation.expected_state into the authorization/input
+digest. Existing callers must supply an explicit expected postcondition and obtain
+fresh authorization; older approvals/receipts are not silently migrated. Every receipt
+executor_id must equal the admitted execution_authority, including reconciliation and
+failed/unknown outcomes. A verifier cannot replace the authorized expectation with a
+matching invented pair, and a mutated authorized operation cannot be verified.
+
+Artifact sniffing conservatively quarantines tag-like markup anywhere in UTF-8 content,
+including after comments, BOM/XML declarations and leading HTML nodes, regardless of
+a .txt filename. Reliability rates use contradicted verifiable claims as numerator
+over the same verifiable population; raw non-verifiable contradiction counts remain visible.

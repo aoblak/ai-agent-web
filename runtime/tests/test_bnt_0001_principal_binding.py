@@ -20,6 +20,7 @@ class BNT0001PrincipalBindingTests(unittest.TestCase):
             "write",
             {"marker": "safe-test-only"},
             "session-bnt-0001",
+            expected_state="written",
         )
 
     def test_foreign_principal_capability_cannot_authorize_operation(self):
