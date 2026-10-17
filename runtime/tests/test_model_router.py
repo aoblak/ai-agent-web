@@ -108,6 +108,30 @@ class RouterTest(unittest.TestCase):
         self.assertTrue(result.requires_human_authority)
         self.assertEqual([call[0] for call in executor.calls], ["cheap", "strong"])
 
+    def test_consequential_fast_type_is_never_executed_by_fast_model(self):
+        for task_type in ("discovery", "documentation", "routine_test", "mechanical_refactor"):
+            with self.subTest(task_type=task_type):
+                evidence = dict(FakeExecutor().evidence)
+                evidence.update(branch="feature/safe", head="abc", conflicting_evidence=[],
+                                unresolved_question="", confidence=1.0)
+                executor = FakeExecutor(evidence)
+                result = ModelRouter(self.catalog, executor).run(
+                    TaskProfile("Consequence-bearing change", task_type, consequential=True),
+                    branch="feature/safe", head="abc",
+                )
+                self.assertEqual(result.capability, Capability.HIGH)
+                self.assertTrue(result.requires_human_authority)
+                self.assertEqual([call[0] for call in executor.calls], ["cheap", "strong"])
+
+    def test_consequential_fast_type_invalid_evidence_fails_closed(self):
+        executor = FakeExecutor({"problem": "incomplete"})
+        with self.assertRaises(RoutingError):
+            ModelRouter(self.catalog, executor).run(
+                TaskProfile("Consequence-bearing audit", "documentation", consequential=True),
+                branch="feature/safe", head="abc",
+            )
+        self.assertEqual([call[0] for call in executor.calls], ["cheap"])
+
     def test_repeated_failure_escalates_after_evidence(self):
         evidence = dict(FakeExecutor().evidence)
         evidence.update(

@@ -1,6 +1,9 @@
 import argparse
+import hashlib
+import hmac
 import importlib.util
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -17,6 +20,89 @@ spec.loader.exec_module(sync_cli)
 
 
 class SignalCliTests(unittest.TestCase):
+    def _run_webhook(self, db, body, *, secret=None, signature=None, payload_path=None):
+        cmd = [sys.executable, str(ROOT / "scripts/github_signal_ingest_webhook.py"),
+               "--db", str(db), "--event", "star", "--delivery", "signed-delivery-1"]
+        if signature is not None:
+            cmd.extend(["--signature", signature])
+        if payload_path is not None:
+            payload_path.write_bytes(body)
+            cmd.extend(["--payload", str(payload_path)])
+        env = os.environ.copy()
+        env.pop("GITHUB_WEBHOOK_SECRET", None)
+        if secret is not None:
+            env["GITHUB_WEBHOOK_SECRET"] = secret
+        return subprocess.run(cmd, input=None if payload_path is not None else body,
+                              capture_output=True, env=env)
+
+    def test_webhook_rejects_missing_secret_signature_or_tampered_bytes_before_write(self):
+        body = (b'{  "action":"created", "sender":{"login":"visitor"}, '
+                b'"repository":{"full_name":"owner/repo"},'
+                b'"starred_at":"2026-09-01T00:00:00Z" }\n')
+        signature = "sha256=" + hmac.new(b"correct-secret", body, hashlib.sha256).hexdigest()
+        with tempfile.TemporaryDirectory() as tmp:
+            db = Path(tmp) / "signals.sqlite"
+            for kwargs in (
+                {"secret": None, "signature": signature},
+                {"secret": "correct-secret", "signature": None},
+                {"secret": "wrong-secret", "signature": signature},
+                {"secret": "correct-secret", "signature": "sha256=not-a-digest"},
+            ):
+                result = self._run_webhook(db, body, **kwargs)
+                self.assertEqual(result.returncode, 2, result.stdout)
+                self.assertFalse(db.exists())
+            changed = body.replace(b'"created"', b'"deleted"')
+            result = self._run_webhook(db, changed, secret="correct-secret", signature=signature)
+            self.assertEqual(result.returncode, 2)
+            self.assertFalse(db.exists())
+            self.assertNotIn(b"correct-secret", result.stderr)
+
+    def test_webhook_accepts_exact_raw_signed_bytes_and_deduplicates_delivery(self):
+        body = (b'{  "action":"created", "sender":{"login":"visitor"}, '
+                b'"repository":{"full_name":"owner/repo"},'
+                b'"starred_at":"2026-09-01T00:00:00Z" }\n')
+        signature = "sha256=" + hmac.new(b"correct-secret", body, hashlib.sha256).hexdigest()
+        with tempfile.TemporaryDirectory() as tmp:
+            db = Path(tmp) / "signals.sqlite"
+            path = Path(tmp) / "payload.json"
+            for _ in range(2):
+                result = self._run_webhook(db, body, secret="correct-secret",
+                                           signature=signature, payload_path=path)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(json.loads(result.stdout)["status"], "PASS")
+            with GitHubSignalStore(db) as store:
+                self.assertEqual(store.conn.execute(
+                    "SELECT COUNT(*) FROM github_raw_events").fetchone()[0], 1)
+
+    def test_oversized_file_and_stdin_fail_without_creating_database(self):
+        body = b"x" * (4 * 1024 * 1024 + 1)
+        with tempfile.TemporaryDirectory() as tmp:
+            db = Path(tmp) / "signals.sqlite"
+            path = Path(tmp) / "large-event.json"
+            for payload_path in (path, None):
+                with self.subTest(source="file" if payload_path else "stdin"):
+                    result = self._run_webhook(
+                        db, body, secret="correct-secret",
+                        signature="sha256=" + "0" * 64, payload_path=payload_path,
+                    )
+                    self.assertEqual(result.returncode, 2)
+                    self.assertIn(b"payload exceeds size limit", result.stderr)
+                    self.assertFalse(db.exists())
+
+    def test_documented_webhook_invocation_is_one_complete_shell_command(self):
+        import shlex
+
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        section = readme.split("## Authenticated webhook ingestion", 1)[1]
+        example = section.split("```sh\n", 1)[1].split("\n```", 1)[0]
+        commands = [line.strip() for line in example.splitlines() if line.strip()]
+        self.assertEqual(len(commands), 1, "webhook example must be one copyable command")
+        tokens = shlex.split(commands[0])
+        self.assertTrue(tokens[0].startswith("GITHUB_WEBHOOK_SECRET="))
+        self.assertIn("runtime/scripts/github_signal_ingest_webhook.py", tokens)
+        for required in ("--db", "--event", "--delivery", "--signature", "--payload"):
+            self.assertIn(required, tokens)
+
     def test_wrong_actor_blocks_before_creating_database(self):
         with tempfile.TemporaryDirectory() as tmp:
             args = argparse.Namespace(db=Path(tmp) / "signals.sqlite", actor="WrongOwner",

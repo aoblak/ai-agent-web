@@ -31,7 +31,7 @@
     {
       "path": "README.md",
       "origin": "distribution-packaging",
-      "sha256": "1794d88f9097653302076c0055ccbe27e097393cd07e40d9f68698e47f28a219"
+      "sha256": "b4850639c1c17894e1a1838cc7a163d0c84eaff4ee7a0008df4b9099e79a1ecb"
     },
     {
       "path": "benchmarks/oos-torture-test-v0.1/fixtures/SEARCHED-complete.json",
@@ -170,10 +170,11 @@
     },
     {
       "path": "oos/model_router.py",
-      "sha256": "0b453bb1fa20e2ec2c3991a28f8bba1f561b8911c3359320674512582e6a10bd",
+      "sha256": "d3846121dac3a9d742fa58374c77771e995fc3fdc9f715edb521bc26322e0acb",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "0b453bb1fa20e2ec2c3991a28f8bba1f561b8911c3359320674512582e6a10bd",
-      "modified": false
+      "modified": true,
+      "modification_note": "PR #12 follow-up: fail-closed consequence routing or raw webhook signature verification / regression coverage"
     },
     {
       "path": "oos/prompt_registry.py",
@@ -299,10 +300,11 @@
     },
     {
       "path": "scripts/github_signal_ingest_webhook.py",
-      "sha256": "02b74cdc9c82d6b1d67370251bb717683a9f6dc1c1a7d2a540c40c8646e1d721",
+      "sha256": "105e05b40982a147e36349bf92a2402dca4a97de465ea690b897b4eb145a9962",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "02b74cdc9c82d6b1d67370251bb717683a9f6dc1c1a7d2a540c40c8646e1d721",
-      "modified": false
+      "modified": true,
+      "modification_note": "PR #12 follow-up: fail-closed consequence routing or raw webhook signature verification / regression coverage"
     },
     {
       "path": "scripts/github_signal_sync.py",
@@ -391,7 +393,7 @@
     {
       "path": "tests/test_github_signal_cli.py",
       "origin": "review-regression-tests",
-      "sha256": "3ee3cda25e75f70238db13355484278bcad33e57bd6c2bda3253dddf1488a43e"
+      "sha256": "a3f2c9d7b669d97ead7d7696b541ef675af3585f03dc9459ffeccd0b93f8921c"
     },
     {
       "path": "tests/test_github_signal_ingester.py",
@@ -403,10 +405,11 @@
     },
     {
       "path": "tests/test_model_router.py",
-      "sha256": "f00e266639c5a1e8af0961d38c893ed9a9506faa3c3f600ca65ecc3eb609dfd5",
+      "sha256": "2fca63002187fab9c5c35438aa57fde76ae78b05296cbdb642012bc655cdcdb7",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "f00e266639c5a1e8af0961d38c893ed9a9506faa3c3f600ca65ecc3eb609dfd5",
-      "modified": false
+      "modified": true,
+      "modification_note": "PR #12 follow-up: fail-closed consequence routing or raw webhook signature verification / regression coverage"
     },
     {
       "path": "tests/test_oos_torture_harness.py",
