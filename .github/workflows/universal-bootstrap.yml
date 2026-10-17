@@ -17,6 +17,10 @@ on:
       - 'COLLABORATOR_START_HERE.md'
       - 'runtime/**'
       - 'tests/test_master_prompt_contract.py'
+      - 'tests/test_handoff_gate.py'
+      - 'tests/test_oos_context.py'
+      - 'scripts/oos_context.py'
+      - 'docs/**'
       - '.github/workflows/universal-bootstrap.yml'
   push:
     branches: [main]
@@ -35,6 +39,10 @@ on:
       - 'COLLABORATOR_START_HERE.md'
       - 'runtime/**'
       - 'tests/test_master_prompt_contract.py'
+      - 'tests/test_handoff_gate.py'
+      - 'tests/test_oos_context.py'
+      - 'scripts/oos_context.py'
+      - 'docs/**'
       - '.github/workflows/universal-bootstrap.yml'
 
 permissions:
@@ -57,7 +65,9 @@ jobs:
       - name: Verify packaged runtime offline
         run: python runtime/check_install.py
       - name: Compile
-        run: python -m py_compile scripts/install_storage_bootstrap.py tests/test_master_prompt_contract.py
+        run: python -m py_compile scripts/install_storage_bootstrap.py scripts/oos_context.py tests/test_master_prompt_contract.py tests/test_handoff_gate.py
+      - name: Context integrity
+        run: python scripts/oos_context.py --root . validate
       - name: Storage installer smoke test
         shell: bash
         run: |

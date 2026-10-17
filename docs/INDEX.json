@@ -48,17 +48,17 @@
     {
       "path": "docs/PROJECT_STATE.md",
       "visibility": "PUBLIC",
-      "sha256": "70a0af371cd37a8177610cd292e43800076bd771889ffaf5e110e6e3994d2ed6"
+      "sha256": "c401f881bf54fd988e2a666c60cde61a46755590d92fc7931f74e47929cacfc2"
     },
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "1a08e00239d2cc9d664ddc4394b85e5b692e6b55ecdc1ac7f46c284556962e68"
+      "sha256": "58d70b61311b109c16d9c26ace1128a45b6dff986cbd9b89bf48f580db6b55ec"
     },
     {
       "path": "scripts/oos_context.py",
       "visibility": "PUBLIC",
-      "sha256": "0e660a4983ba49477666471314f2ac8cbab8f12808e79a8481a06c4782e2a38f"
+      "sha256": "5e0e8252e23e424a9d423bfeb9ffa08a4ce230b01be74aa07f3ad8b805dd14cd"
     },
     {
       "path": "tests/test_oos_context.py",
@@ -68,12 +68,17 @@
     {
       "path": "docs/OOS_CONTEXT_PROTOCOL.md",
       "visibility": "PUBLIC",
-      "sha256": "a8f9d55fb7121070abd709f8ed23ad1cd3df4c987263989602b730cf475c545e"
+      "sha256": "a108bb7d713a4f95809c08d79f47ed993ddcf626fee04411144a38e59290ff1b"
     },
     {
       "path": "MARKO-START-HERE.md",
       "visibility": "PUBLIC",
       "sha256": "c4807273d803f672821a896c69c80d7b92ac1cf4e99b458b99e187ba0c94b0f3"
+    },
+    {
+      "path": "tests/test_handoff_gate.py",
+      "visibility": "PUBLIC",
+      "sha256": "71e6fd732d9ba4aa521dbcd1afc82ff8afcf316e95189b070b34d98e359eac39"
     }
   ],
   "glossary": {
@@ -338,6 +343,72 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "c016edf641e81143b62fd4b0a3db5db1cd83ce2665f3a4eb999a5a726866da84"
+    },
+    {
+      "id": "CTX-20261013-006",
+      "title": "CTX-20261013-006 — Executable handoff precondition prepared for review",
+      "topics": [
+        "handoff",
+        "gate",
+        "tests"
+      ],
+      "recorded_at": "2026-10-13T07:07:52.202629+00:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "f82ad15df357e810ca94ca8f1fa21b54f760774fbe7c203df398f313913e5016"
+    },
+    {
+      "id": "CTX-20261017-HANDOFF-REVIEW-START",
+      "title": "CTX-20261017-HANDOFF-REVIEW-START — Recovery start for requested review correction",
+      "topics": [
+        "handoff",
+        "review"
+      ],
+      "recorded_at": "2026-10-17T04:05:15.109148+02:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "75f1f3fc4b82824e0c1aa99b8a31e0271343568f1d32a6f0ca3724f519964b6a"
+    },
+    {
+      "id": "CTX-20261017-HANDOFF-REVIEW-END",
+      "title": "CTX-20261017-HANDOFF-REVIEW-END — Cross-task schema regression corrected",
+      "topics": [
+        "handoff",
+        "review"
+      ],
+      "recorded_at": "2026-10-17T04:06:39.963248+02:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "61c3db1ce191548c210e16524ddf7e7769da18a40a339d1fac0756f8d7190bc7"
+    },
+    {
+      "id": "CTX-20261017-HANDOFF-SIZE-START",
+      "title": "CTX-20261017-HANDOFF-SIZE-START — Bound artifact reads on every verification pass",
+      "topics": [
+        "handoff",
+        "review"
+      ],
+      "recorded_at": "2026-10-17T04:13:20.176538+02:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "23703570d96a3d08fc0f0f58eee0b5d498d27f1abf49d14494bbfbe40ecbe46a"
+    },
+    {
+      "id": "CTX-20261017-HANDOFF-SIZE-END",
+      "title": "CTX-20261017-HANDOFF-SIZE-END — Artifact read limits enforced on both passes",
+      "topics": [
+        "handoff",
+        "review"
+      ],
+      "recorded_at": "2026-10-17T04:14:35.364633+02:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "f11bbdb9c15e28b9ca0e8fca61cc9c033a6b8748e6c7564e47fdca0e4042ae2c"
     }
   ]
 }

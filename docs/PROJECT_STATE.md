@@ -27,6 +27,9 @@ Clarification is an internal gate with retrieval first. Resume/handoff refreshes
 
 Historical reconciliation remains incomplete: retrieved prior decisions are discovery evidence, not an enumerated audit of all chats or archives. Full export/log coverage remains unverified. Portfolio delta synchronization: PENDING-MJ-SYNC until the existing canonical private journal is updated.
 
+
+Issue #9 implementation: executable handoff precondition and 28 targeted synthetic tests prepared on a review branch from 90c92bc9228fe52ef1efd9cc2f39034498079c3a. The gate validates pinned recorded attestations and local artifact bytes before a caller continuation. It does not authenticate providers or install a dispatcher. Main adoption, external review and live cross-provider execution require separate verification. See CTX-20261013-006 and the existing OOS Context Protocol documentation.
+
 Source reconciliation prepared from `90c92bc9228fe52ef1efd9cc2f39034498079c3a`: bootstrap remains 1.2.3. The public glossary snapshot matches the historical source body; its pinned locator replaces the stale retrieval pointer while retaining provenance. Protocol content was retrieved with authorization, but its public locator remains unresolved. No private destination is exported. Project and portfolio review remain NEEDS-REVIEW; archive completeness, application state and deployment are not established. Next: review this isolated change, reconcile shared-file edits with open PR #10, and verify main after an approved merge.
 
 
@@ -39,3 +42,7 @@ The existing Marko entry now describes candidate source pins, authenticated Git 
 
 
 Runtime review correction (2026-10-17): withdrawn-source pruning, receipt-ID deduplication and removal-aware interest replay prepared on existing PR #12. Local validation: 298 runtime tests, 20 package tests, 440 synthetic contract checks. Context source pin updated to c9d6a6f4d6186585cb8d20b0b53d7433f3077505 (49 tests in PR #10). Current-head external review and CI must be checked before acceptance. Distribution source hashes retained alongside corrected-byte hashes; no live provider, private installation or collaborator receipt claimed.
+
+PR #10 review correction (2026-10-17): isolate schema validation by identified task; 47 tests PASS. Main 5b740989ad331602323778030cd03a47283b0467 reconciled with both journal histories. New correction remains subject to current-head CI and external review; review request is not acceptance.
+
+Artifact size review correction (2026-10-17): bounded stream reads on initial and repeated checks; 49 gate/context tests PASS. Independent current-head acceptance and live authenticated transport remain separate requirements.
