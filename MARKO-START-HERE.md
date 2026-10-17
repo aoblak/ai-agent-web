@@ -168,3 +168,52 @@ MARKO DECISION: simulation | read-only review | not now
 ```
 
 Uspjeh ovog prvog zadatka znači da postoji jasan i kritički provjerljiv plan. **Ne znači** da je sustav time tehnički certificiran ili spreman za produkciju.
+
+## 8. Nastavak preko Gita i potvrda primitka
+
+GitHub može biti zajednički kanal za zadatke i rezultate. Pristup GitHubu sam po sebi
+ne povezuje dva chata, ne otkriva drugi razgovor i ne budi neaktivnog asistenta.
+Status veze ostaje `NIJE POTVRĐENA` dok ne postoji stvarni, provjerljivi primitak.
+
+### Izvori za nastavak
+
+- Pravila: isti `MASTER_PROMPT.md` iz ovog repozitorija; pri svakom nastavku razriješi
+  aktualni `main` i zabilježi točan commit. Ne zamjenjuj pravila drugom kopijom.
+- Provjera predaje: [PR #10](https://github.com/aoblak/ai-agent-web/pull/10), provjereni
+  kandidat `4a71d44acf4f402ceee16fc3a0f4172555e70785`.
+- Zaseban memorijski prostor i runtime: [PR #12](https://github.com/aoblak/ai-agent-web/pull/12),
+  provjereni kandidat `132984baa8d825c7652a2c2bea21468144570f76`. Njegov
+  [ulaz za suradnika](https://github.com/aoblak/ai-agent-web/blob/132984baa8d825c7652a2c2bea21468144570f76/COLLABORATOR_START_HERE.md)
+  opisuje pripremu svih pet slojeva i granice instalacije.
+
+Ovo su kandidati pod recenzijom, ne dokaz integracije ili instalacije. Prije upotrebe
+provjeri aktualni status i commit PR-a. Ako se head promijenio, prethodni rezultat
+testova ili pregled ne vrijedi automatski za novu reviziju. Vlastiti privatni prostor
+ostaje odvojen od Aljošine memorije; priprema ne daje ovlast za upis na Markov račun.
+
+### Prva dopuštena razmjena
+
+1. U Markovu chatu provjeri stvarno povezani GitHub račun i dostupne mogućnosti
+   čitanja/upisa. Ime navedeno u promptu nije dokaz identiteta. Javni ulaz može se
+   pročitati bez privatnog pristupa.
+2. Odaberi postojeći Issue/PR koji odgovara dogovorenom zadatku. Javni kanal smije
+   sadržavati samo odobrene neosjetljive podatke. Za povjerljiv zadatak vlasnici
+   moraju odabrati zajedničko privatno odredište i provjeriti ovlasti oba računa.
+3. Slanje poruke, dodjela zadatka i upis zahtijevaju izričitu ovlast u tom chatu.
+   Ovaj dokument nije poruka poslana Marku niti njegova suglasnost.
+4. U autoriziranom odgovoru poveži isti `task_id` i jedinstveni `delivery_id`,
+   točan izvorni commit, opseg, rezultat ili artefakt s commitom/SHA-256,
+   izvršene provjere, ograničenja i stvarni status prihvaćanja. Za prvi pregled
+   iz odjeljka 5 dovoljan je nalaz; ne treba instalacija ili produkcijski pristup.
+5. Koordinator ponovno dohvati odgovor i provjeri GitHub autora, artefakte i
+   kriterije prihvaćanja. Autora računa treba povezati s ovlaštenim sudionikom;
+   potpis modela u tekstu nije autentifikacija. Vremena preuzmi iz stvarnih događaja.
+
+Odvojeno prati `PRIPREMLJENO → OBJAVLJENO → PRIHVAĆENO → REZULTAT_VRAĆEN → PROVJERENO`.
+Objava nije primitak; primitak nije prihvaćen rezultat. Ponavljanje istog
+`delivery_id` ne smije pokrenuti drugi učinak. Bez stvarnog odgovora nema tvrdnje
+da je Markov chat povezan; bez sljedećeg prihvaćanja nema ovisnog nastavka.
+
+Ako alat ne može poslati ili dohvatiti odgovor, prikaži točan Issue/PR link i
+pripremljeni tekst za prijenos te navedi nedostajuću mogućnost. Automatsko praćenje
+i obavijesti zahtijevaju zasebno instaliran i provjeren mehanizam.

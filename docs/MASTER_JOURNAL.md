@@ -92,3 +92,25 @@ Adverse: Prior journal remains a byte-for-byte prefix; no private destination or
 Rollback: Revert the eventual change commit; preserve earlier journal history.
 Next: Publish draft PR, verify remote bytes, obtain independent review and merge approval, then validate main. Portfolio synchronization remains PENDING-MJ-SYNC; no external-agent receipt is claimed.
 <!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-MARKO-GIT-START", "recorded_at": "2026-10-17T03:13:59.404394+02:00", "occurred_at": "2026-10-17T03:13:59.404394+02:00", "actor": "OpenAI Codex", "topics": ["bootstrap", "handoff", "collaborator"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261017-MARKO-GIT-START — Clarify existing collaborator Git entry
+Summary: Task MARKO-GIT-20261017; prepare a documentation-only continuation under the user request to continue Git cooperation. Role coordinator. Runtime reports GPT-6; exact build, mode, subscription and measured active time UNKNOWN. No message to the collaborator is sent by this change.
+Sources: Base 162a4ceeb0eba22e6eacf4e9fa7b247d8707b8ed; existing MARKO-START-HERE.md; PR #10 head 4a71d44acf4f402ceee16fc3a0f4172555e70785; PR #12 head 132984baa8d825c7652a2c2bea21468144570f76.
+Integrity: Pending index refresh and validation after the documentation edit.
+Independent: GitHub confirms both candidate PRs are open/mergeable with successful current-head CI; independent current-head review/recipient receipt not observed.
+Adverse: Reuse existing entry/journal; public task data only; no permissions or private memory export.
+Rollback: Revert this documentation commit.
+Next: Add explicit source versions, Git return/receipt fields and direct-chat limitations to the existing Marko entry.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-MARKO-GIT-END", "recorded_at": "2026-10-17T03:14:18.203994+02:00", "occurred_at": "2026-10-17T03:14:18.203994+02:00", "actor": "OpenAI Codex", "topics": ["bootstrap", "handoff", "collaborator"], "status": "VERIFIED", "visibility": "PUBLIC"} -->
+## CTX-20261017-MARKO-GIT-END — Git collaboration procedure prepared and checked
+Summary: Task MARKO-GIT-20261017 END for local preparation. Added a Git cooperation section to the existing Marko entry and linked the verified public portfolio synchronization in project state. Same actor as START; precise model build/mode/plan and measured active time UNKNOWN. Output is a documentation procedure, not a live bridge or collaborator receipt.
+Sources: MARKO-START-HERE.md section 8; public portfolio PR #13 merge 12df0e9688fa4e61d257659f6749c8a7ae803f80; candidate PR #10 and #12 immutable sources recorded in START.
+Integrity: PASS — context validator VALID, new Marko entry included in existing hash index, whitespace diff clean and existing journal bytes preserved.
+Independent: PASS — candidate SHAs, open/draft states and current-head CI checked through GitHub; portfolio main bytes previously matched the tested four-file change. Independent implementation approval remains absent.
+Adverse: PASS — prepared/publication/acceptance/result/verification distinguished; wrong or stale sources, duplicate delivery, unverified author identity, unavailable tools and private data boundaries are explicit. No new master, account permissions, remote installation or direct-chat access claim.
+Rollback: Revert this documentation commit; retain earlier journal history.
+Next: Publish and verify this documentation through PR; obtain authorized current-head review and actual collaborator acknowledgement before claiming live cooperation.
+<!-- /oos:event -->
