@@ -194,6 +194,17 @@ class PromptRegistryTest(unittest.TestCase):
         self.assertIsNone(summarize_executions([rows[2]])["avg_total_tokens"])
         self.assertEqual(summarize_executions([rows[0]])["avg_total_tokens"], 100)
 
+    def test_non_finite_and_overflowing_metrics_fail_validation(self) -> None:
+        manifest = sample_manifest(self.prompt)
+        for key in ("input_tokens", "output_tokens", "latency_ms", "cost"):
+            for value in (float("nan"), float("inf"), -float("inf"), 10 ** 1000):
+                with self.subTest(key=key, value=str(value)):
+                    record = sample_record(manifest, success=True, cost=0, latency=0, tokens=0)
+                    record["metrics"][key] = value
+                    self.assertIn("invalid_metric:" + key, validate_execution_record(record).errors)
+                    with self.assertRaises(ValueError):
+                        summarize_executions([record])
+
     def test_golden_dataset_declares_core_acceptance_cases(self) -> None:
         by_id = {case["case_id"]: case for case in self.golden}
         self.assertTrue(by_id["valid-definition"]["expected_valid"])

@@ -1,6 +1,7 @@
 import json
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -275,6 +276,46 @@ class WebhookTests(unittest.TestCase):
         self.assertEqual(event.object_id, "example-owner/repo#42")
         self.assertEqual(event.occurred_at, "2026-09-25T00:55:00Z")
 
+
+
+class PollAtomicityTests(unittest.TestCase):
+    def test_failed_snapshot_rolls_back_each_complete_poll_diff(self):
+        class Client:
+            changed = False
+
+            def list_starred(self):
+                return {"owner/repo": {"starred_at": "2026-09-25T01:00:00Z"}} if self.changed else {}
+
+            def list_following(self):
+                return {"person": {"item": {"login": "person"}}} if self.changed else {}
+
+            def is_watching(self, repository):
+                return self.changed
+
+        for kind in ("star", "follow", "watch"):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as tmp:
+                with GitHubSignalStore(Path(tmp) / "signals.sqlite") as store:
+                    client = Client()
+                    sync = GitHubSignalSynchronizer(client, store, actor="owner")
+                    def run(when):
+                        if kind == "star":
+                            return sync.sync_stars(observed_at=when)
+                        if kind == "follow":
+                            return sync.sync_following(observed_at=when)
+                        return sync.sync_watch_targets(["owner/repo"], observed_at=when)
+                    run("2026-09-25T00:00:00Z")
+                    baseline = store.poll_snapshot(kind)
+                    client.changed = True
+                    with patch.object(store, "replace_poll_snapshot", side_effect=RuntimeError("interrupted")):
+                        with self.assertRaisesRegex(RuntimeError, "interrupted"):
+                            run("2026-09-25T01:00:00Z")
+                    self.assertEqual(store.poll_snapshot(kind), baseline)
+                    self.assertEqual(store.signal_rows(), [])
+                    self.assertEqual(store.conn.execute("SELECT COUNT(*) FROM github_raw_events").fetchone()[0], 0)
+                    self.assertEqual(run("2026-09-25T02:00:00Z").emitted, 1)
+                    self.assertEqual(len(store.signal_rows()), 1)
+                    self.assertEqual(run("2026-09-25T03:00:00Z").emitted, 0)
+                    self.assertEqual(len(store.signal_rows()), 1)
 
 if __name__ == "__main__":
     unittest.main()

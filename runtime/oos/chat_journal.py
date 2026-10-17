@@ -182,7 +182,29 @@ class ChatJournalIngress:
 
     def journal_path(self, chat_id: str) -> Path:
         safe = self._safe_chat_id(chat_id)
-        return self.root / f"{safe}.ndjson"
+        digest = sha256(chat_id.encode("utf-8")).hexdigest()
+        path = self.root / f"{safe[:40]}--{digest}.ndjson"
+        if path.is_symlink():
+            raise ValueError("journal paths cannot be symlinks")
+        if path.exists():
+            return path
+        # Reuse a legacy journal only when its recorded identity matches. A
+        # colliding legacy filename belongs to the other chat and stays intact.
+        if len(safe.encode("utf-8")) <= 240:
+            legacy = self.root / f"{safe}.ndjson"
+            if legacy.is_symlink():
+                raise ValueError("journal paths cannot be symlinks")
+            if legacy.exists() and legacy.stat().st_size:
+                try:
+                    with legacy.open("r", encoding="utf-8") as source:
+                        first = json.loads(source.readline())
+                except (ValueError, UnicodeError) as exc:
+                    raise ValueError("cannot identify existing legacy journal") from exc
+                if not isinstance(first, dict) or not isinstance(first.get("chat_id"), str):
+                    raise ValueError("cannot identify existing legacy journal")
+                if first["chat_id"] == chat_id:
+                    return legacy
+        return path
 
     def ingest(self, chat_id: str, role: str, event_type: str, content: Any, *, metadata: dict[str, Any] | None = None) -> AppendResult:
         path = self.journal_path(chat_id)

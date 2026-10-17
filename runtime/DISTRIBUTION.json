@@ -31,7 +31,7 @@
     {
       "path": "README.md",
       "origin": "distribution-packaging",
-      "sha256": "7048459306ec4b0b211fe370b31bd0d0bc922fbd8ac2d41bddffed168a909740"
+      "sha256": "65c783e197f6006875b500486a35986527d0b505d3df5c8480aeb78b876bbc9c"
     },
     {
       "path": "benchmarks/oos-torture-test-v0.1/fixtures/SEARCHED-complete.json",
@@ -122,10 +122,11 @@
     },
     {
       "path": "oos/chat_journal.py",
-      "sha256": "790fb332aea5b8d59184fb5ef2c69921fc125a543e8e4e4f2722ec3042a96944",
+      "sha256": "aeeab988099f2aa3e287668680d9244b2312a9fc33b1c4496fe335ceea89a25b",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "790fb332aea5b8d59184fb5ef2c69921fc125a543e8e4e4f2722ec3042a96944",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "oos/company.py",
@@ -143,7 +144,7 @@
     },
     {
       "path": "oos/github_signal_adapter.py",
-      "sha256": "32e018e9cedc6ff9072913884c4276a4d196751ea6b083caceb24cd661e3c04e",
+      "sha256": "d5e98d7c1d779e1dd8df011fb8c4175566a55ad0a8c8c671e470098dfd09097e",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "3c24894c949b9afdd87c7f6b64d43076c27c108e89b82d67422fd0f44c53004a",
       "modified": true,
@@ -159,7 +160,7 @@
     },
     {
       "path": "oos/github_signal_ingester.py",
-      "sha256": "480370ca04cc2f623f8ec462db16965b2d63d8219ef7e322bbe9be931c76aae0",
+      "sha256": "9fac9dc07d06621feb80ecd56bcb1c3b5b6272b2c9828f988669eefe95303c0a",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "cde34ebf50001f3bbaa4649b35547c7fee0ee82853ef65e5483f7bcc4eb40eef",
       "modified": true,
@@ -174,7 +175,7 @@
     },
     {
       "path": "oos/prompt_registry.py",
-      "sha256": "96302c0a6441e4b66f5d080e113d07546f15cccf61d2beb55684ad71c7c90384",
+      "sha256": "0b5deac080d0428bd058c4204731c88e87c162cfe70979a143f485f989cbb45a",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "113f73cf46e63d2985a351f0b2590b2d978958e7cc0e3af189bf51a581237148",
       "modified": true,
@@ -337,10 +338,11 @@
     },
     {
       "path": "tests/test_chat_journal.py",
-      "sha256": "8ad66b9a6e87066ae88ac1e640b324219b3e23ff160df622a4c9d7500213e22a",
+      "sha256": "636282db1cfc074a7c240a1e504ba106d43586e3ae029acd6bac52ecd0c4300b",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "8ad66b9a6e87066ae88ac1e640b324219b3e23ff160df622a4c9d7500213e22a",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "tests/test_company.py",
@@ -365,7 +367,7 @@
     },
     {
       "path": "tests/test_github_signal_adapter.py",
-      "sha256": "fb35578991bdd2fb5151c426ce0ff2f6da3d47595d6e42f751582b778a61acfe",
+      "sha256": "78abc92ec0b3f52d6b8c8f469010a97ab23adfbaed662949c7ef3d0780aa269a",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "95a572828ceaaec82d545d23f32eee1d174f5432b900f51aa901e9979aafabd7",
       "modified": true,
@@ -408,7 +410,7 @@
     },
     {
       "path": "tests/test_prompt_registry.py",
-      "sha256": "f05cb2f69abf1e0eca71693e2b089b8133a0a10e4d5b049f2a5f135ce401ccc8",
+      "sha256": "6f332f5b5f7fbd6adc0dcc778ef9db49131905b7377066a6a55b189e14528fed",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "c8d7f08cf0b4f41117862bf33d3b0e639101721d37deb614c0fd5cb5fae8b6ef",
       "modified": true,
@@ -501,7 +503,10 @@
       4300835905,
       4300886359,
       4300886362,
-      4300886367
+      4300886367,
+      4300916367,
+      4300916372,
+      4300916376
     ],
     "scope": "Directory reconciliation; webhook delivery deduplication; effective interest-state replay; regression tests. Original upstream source provenance retained."
   }

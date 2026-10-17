@@ -105,3 +105,11 @@ and average token totals per execution. Token totals sum observed components per
 missing components contribute zero and runs with neither token metric are excluded.
 Partial telemetry is not an estimate of unobserved consumption. The Context pin also
 rejects replayed message IDs across attempts and caps journal/index reads before allocation.
+
+Poll diffs and their replacement snapshots now commit atomically through composable
+SQLite transactions/savepoints. A failed snapshot update rolls back raw events and
+signals for that poll; retrying does not duplicate a transition. Chat ingress uses
+a bounded readable label plus SHA-256 of the complete chat ID. Existing legacy
+journals are reused only by their recorded identity, preserving bytes and continuity;
+colliding IDs get separate journals. NaN, infinities and overflowing numeric telemetry
+are rejected before averaging or serialization.

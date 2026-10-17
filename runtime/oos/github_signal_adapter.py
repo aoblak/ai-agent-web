@@ -323,104 +323,106 @@ class GitHubSignalSynchronizer:
 
     def sync_stars(self, *, observed_at: str) -> SyncSummary:
         current = self.client.list_starred()
-        initialized, previous = self.store.poll_snapshot("star")
-        emitted = 0
+        with self.store.transaction():
+            initialized, previous = self.store.poll_snapshot("star")
+            emitted = 0
 
-        if not initialized:
-            for repository, metadata in current.items():
-                starred_at = metadata.get("starred_at")
-                if not isinstance(starred_at, str) or not starred_at:
-                    continue
-                self._ingest(
-                    event_type="star",
-                    action="added",
-                    object_type="repository",
-                    object_id=repository,
-                    occurred_at=starred_at,
-                    payload=_poll_payload(
-                        "GET /user/starred",
-                        metadata,
-                        observed_at,
-                    ),
-                )
-                emitted += 1
-        else:
-            for repository in sorted(current.keys() - previous.keys()):
-                metadata = current[repository]
-                starred_at = metadata.get("starred_at")
-                occurred_at = (
-                    starred_at
-                    if isinstance(starred_at, str) and starred_at
-                    else observed_at
-                )
-                self._ingest(
-                    event_type="star",
-                    action="added",
-                    object_type="repository",
-                    object_id=repository,
-                    occurred_at=occurred_at,
-                    payload=_poll_payload(
-                        "GET /user/starred",
-                        metadata,
-                        observed_at,
-                    ),
-                )
-                emitted += 1
-            for repository in sorted(previous.keys() - current.keys()):
-                self._ingest(
-                    event_type="star",
-                    action="removed",
-                    object_type="repository",
-                    object_id=repository,
-                    occurred_at=observed_at,
-                    payload={
-                        "source": "snapshot_diff:/user/starred",
-                        "observed_at": observed_at,
-                        "previous": previous[repository],
-                    },
-                )
-                emitted += 1
+            if not initialized:
+                for repository, metadata in current.items():
+                    starred_at = metadata.get("starred_at")
+                    if not isinstance(starred_at, str) or not starred_at:
+                        continue
+                    self._ingest(
+                        event_type="star",
+                        action="added",
+                        object_type="repository",
+                        object_id=repository,
+                        occurred_at=starred_at,
+                        payload=_poll_payload(
+                            "GET /user/starred",
+                            metadata,
+                            observed_at,
+                        ),
+                    )
+                    emitted += 1
+            else:
+                for repository in sorted(current.keys() - previous.keys()):
+                    metadata = current[repository]
+                    starred_at = metadata.get("starred_at")
+                    occurred_at = (
+                        starred_at
+                        if isinstance(starred_at, str) and starred_at
+                        else observed_at
+                    )
+                    self._ingest(
+                        event_type="star",
+                        action="added",
+                        object_type="repository",
+                        object_id=repository,
+                        occurred_at=occurred_at,
+                        payload=_poll_payload(
+                            "GET /user/starred",
+                            metadata,
+                            observed_at,
+                        ),
+                    )
+                    emitted += 1
+                for repository in sorted(previous.keys() - current.keys()):
+                    self._ingest(
+                        event_type="star",
+                        action="removed",
+                        object_type="repository",
+                        object_id=repository,
+                        occurred_at=observed_at,
+                        payload={
+                            "source": "snapshot_diff:/user/starred",
+                            "observed_at": observed_at,
+                            "previous": previous[repository],
+                        },
+                    )
+                    emitted += 1
 
-        self.store.replace_poll_snapshot("star", current, observed_at=observed_at)
-        return SyncSummary("star", len(current), emitted, not initialized)
+            self.store.replace_poll_snapshot("star", current, observed_at=observed_at)
+            return SyncSummary("star", len(current), emitted, not initialized)
 
     def sync_following(self, *, observed_at: str) -> SyncSummary:
         current = self.client.list_following()
-        initialized, previous = self.store.poll_snapshot("follow")
-        emitted = 0
+        with self.store.transaction():
+            initialized, previous = self.store.poll_snapshot("follow")
+            emitted = 0
 
-        if initialized:
-            for login in sorted(current.keys() - previous.keys()):
-                self._ingest(
-                    event_type="follow",
-                    action="added",
-                    object_type="user",
-                    object_id=login,
-                    occurred_at=observed_at,
-                    payload=_poll_payload(
-                        "GET /user/following",
-                        current[login],
-                        observed_at,
-                    ),
-                )
-                emitted += 1
-            for login in sorted(previous.keys() - current.keys()):
-                self._ingest(
-                    event_type="follow",
-                    action="removed",
-                    object_type="user",
-                    object_id=login,
-                    occurred_at=observed_at,
-                    payload={
-                        "source": "snapshot_diff:/user/following",
-                        "observed_at": observed_at,
-                        "previous": previous[login],
-                    },
-                )
-                emitted += 1
+            if initialized:
+                for login in sorted(current.keys() - previous.keys()):
+                    self._ingest(
+                        event_type="follow",
+                        action="added",
+                        object_type="user",
+                        object_id=login,
+                        occurred_at=observed_at,
+                        payload=_poll_payload(
+                            "GET /user/following",
+                            current[login],
+                            observed_at,
+                        ),
+                    )
+                    emitted += 1
+                for login in sorted(previous.keys() - current.keys()):
+                    self._ingest(
+                        event_type="follow",
+                        action="removed",
+                        object_type="user",
+                        object_id=login,
+                        occurred_at=observed_at,
+                        payload={
+                            "source": "snapshot_diff:/user/following",
+                            "observed_at": observed_at,
+                            "previous": previous[login],
+                        },
+                    )
+                    emitted += 1
 
-        self.store.replace_poll_snapshot("follow", current, observed_at=observed_at)
-        return SyncSummary("follow", len(current), emitted, not initialized)
+            self.store.replace_poll_snapshot("follow", current, observed_at=observed_at)
+            return SyncSummary("follow", len(current), emitted, not initialized)
 
     def sync_watch_targets(
         self,
@@ -433,38 +435,39 @@ class GitHubSignalSynchronizer:
             watched = self.client.is_watching(repository)
             current[repository] = {"watched": watched}
 
-        initialized, previous = self.store.poll_snapshot("watch")
-        emitted = 0
-        if initialized:
-            for repository, metadata in current.items():
-                previous_metadata = previous.get(repository)
-                if previous_metadata is None:
-                    continue
-                before = previous_metadata.get("watched")
-                after = metadata.get("watched")
-                if not isinstance(before, bool) or not isinstance(after, bool):
-                    raise GitHubAdapterError("watch snapshot must contain booleans")
-                if before == after:
-                    continue
-                self._ingest(
-                    event_type="watch",
-                    action="added" if after else "removed",
-                    object_type="repository",
-                    object_id=repository,
-                    occurred_at=observed_at,
-                    payload={
-                        "source": f"GET /repos/{repository}/subscription",
-                        "observed_at": observed_at,
-                        "previous_watched": before,
-                        "watched": after,
-                    },
-                )
-                emitted += 1
+        with self.store.transaction():
+            initialized, previous = self.store.poll_snapshot("watch")
+            emitted = 0
+            if initialized:
+                for repository, metadata in current.items():
+                    previous_metadata = previous.get(repository)
+                    if previous_metadata is None:
+                        continue
+                    before = previous_metadata.get("watched")
+                    after = metadata.get("watched")
+                    if not isinstance(before, bool) or not isinstance(after, bool):
+                        raise GitHubAdapterError("watch snapshot must contain booleans")
+                    if before == after:
+                        continue
+                    self._ingest(
+                        event_type="watch",
+                        action="added" if after else "removed",
+                        object_type="repository",
+                        object_id=repository,
+                        occurred_at=observed_at,
+                        payload={
+                            "source": f"GET /repos/{repository}/subscription",
+                            "observed_at": observed_at,
+                            "previous_watched": before,
+                            "watched": after,
+                        },
+                    )
+                    emitted += 1
 
-        merged = dict(previous) if initialized else {}
-        merged.update(current)
-        self.store.replace_poll_snapshot("watch", merged, observed_at=observed_at)
-        return SyncSummary("watch", len(current), emitted, not initialized)
+            merged = dict(previous) if initialized else {}
+            merged.update(current)
+            self.store.replace_poll_snapshot("watch", merged, observed_at=observed_at)
+            return SyncSummary("watch", len(current), emitted, not initialized)
 
 
 def _mapping(value: Any, name: str) -> Mapping[str, Any]:

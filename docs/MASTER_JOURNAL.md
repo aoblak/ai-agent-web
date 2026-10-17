@@ -235,3 +235,25 @@ Adverse: PASS — wrong-account identity blocks before store creation, canonical
 Rollback: Revert correction/merge commit without rewriting existing branch history.
 Next: Publish existing PR #12, verify remote bytes and CI, request current-head review. Main merge, destination installation and actual collaborator receipt remain separate unclaimed effects.
 <!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-RUNTIME-DURABILITY-START", "recorded_at": "2026-10-17T04:32:48.216581+02:00", "occurred_at": null, "actor": "OpenAI Codex", "topics": ["runtime", "review", "durability"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261017-RUNTIME-DURABILITY-START — Atomic polls and durable identity corrections
+Summary: Recovery START after earlier local correction: actual start UNKNOWN. Coordinator accepts RUNTIME-DURABILITY-20261017 for external findings 4300916367, 4300916372, 4300916376. Same OpenAI Codex actor; precise model build/mode/plan and active duration UNKNOWN.
+Sources: PR #12 findings 4300916367, 4300916372, 4300916376 on ce102b40d01e1320742aa6630c8d429d388b933f; runtime/DISTRIBUTION.json; PR #10 merge provider response.
+Integrity: PASS — 309 packaged runtime tests and 55 combined repository tests; context VALID; checksums updated while preserving original source hashes.
+Independent: PASS — external reproduction cases corrected; PR #10 no-findings/CI/main tree checked separately. Current PR #12 correction still requires external current-head review, not inferred from tests.
+Adverse: PASS — interrupted snapshot replacement rolls back raw events/signals for star/follow/watch; retries emit once; colliding and long chat IDs remain isolated; existing legacy journal bytes preserved; NaN/infinities/overflowing telemetry rejected. No production/private account operations.
+Rollback: Revert this correction commit; legacy journal data is not migrated or rewritten by packaging.
+Next: Publish existing PR #12, verify remote content and CI, request final current-head review. Private destination installation, private journal sync and live recipient acceptance remain separate gates.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-RUNTIME-DURABILITY-END", "recorded_at": "2026-10-17T04:32:48.216581+02:00", "occurred_at": "2026-10-17T04:32:48.216581+02:00", "actor": "OpenAI Codex", "topics": ["runtime", "review", "durability"], "status": "VERIFIED", "visibility": "PUBLIC"} -->
+## CTX-20261017-RUNTIME-DURABILITY-END — Atomic polls and durable identity corrections
+Summary: END local correction: poll diffs and snapshots commit atomically through composable SQLite transactions; collision-resistant chat paths retain full original ID hashes and reuse verified legacy identities; non-finite and overflowing telemetry is rejected. PR #10 independently returned no findings on b0a19bfebe9eeb9d507c1f6f33f959d34e44da33, passed CI and merged as 264b7751fe4c987dabfba906925862f2eb74ae05; main tree matched the reviewed tree. Same OpenAI Codex actor; precise model build/mode/plan and active duration UNKNOWN.
+Sources: PR #12 findings 4300916367, 4300916372, 4300916376 on ce102b40d01e1320742aa6630c8d429d388b933f; runtime/DISTRIBUTION.json; PR #10 merge provider response.
+Integrity: PASS — 309 packaged runtime tests and 55 combined repository tests; context VALID; checksums updated while preserving original source hashes.
+Independent: PASS — external reproduction cases corrected; PR #10 no-findings/CI/main tree checked separately. Current PR #12 correction still requires external current-head review, not inferred from tests.
+Adverse: PASS — interrupted snapshot replacement rolls back raw events/signals for star/follow/watch; retries emit once; colliding and long chat IDs remain isolated; existing legacy journal bytes preserved; NaN/infinities/overflowing telemetry rejected. No production/private account operations.
+Rollback: Revert this correction commit; legacy journal data is not migrated or rewritten by packaging.
+Next: Publish existing PR #12, verify remote content and CI, request final current-head review. Private destination installation, private journal sync and live recipient acceptance remain separate gates.
+<!-- /oos:event -->

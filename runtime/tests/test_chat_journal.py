@@ -295,6 +295,40 @@ class ChatJournalTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "refusing append to corrupted journal"):
                 ingress.ingest("chat-corrupt", "assistant", "message", "must not append")
 
+    def test_lossy_chat_ids_and_matching_safe_labels_remain_separate(self):
+        with tempfile.TemporaryDirectory() as td:
+            ingress = ChatJournalIngress(td)
+            ids = ("chat/a", "chat?a", "chat_a")
+            for chat_id in ids:
+                ingress.ingest(chat_id, "user", "message", {"text": chat_id})
+            paths = [ingress.journal_path(chat_id) for chat_id in ids]
+            self.assertEqual(len(set(paths)), 3)
+            for chat_id, path in zip(ids, paths):
+                self.assertTrue(ChatJournalWriter(path, chat_id).verify_chain()[0])
+
+    def test_legacy_journal_is_reused_only_by_its_original_identity(self):
+        with tempfile.TemporaryDirectory() as td:
+            legacy = Path(td) / "chat_a.ndjson"
+            writer = ChatJournalWriter(legacy, "chat/a")
+            writer.append_event("user", "message", {"text": "original"})
+            before = legacy.read_bytes()
+            ingress = ChatJournalIngress(td)
+            self.assertEqual(ingress.journal_path("chat/a"), legacy)
+            ingress.ingest("chat?a", "user", "message", {"text": "other chat"})
+            self.assertEqual(legacy.read_bytes(), before)
+            self.assertNotEqual(ingress.journal_path("chat?a"), legacy)
+            ingress.ingest("chat/a", "user", "message", {"text": "continuation"})
+            self.assertTrue(legacy.read_bytes().startswith(before))
+
+    def test_long_chat_identity_produces_a_bounded_filename(self):
+        with tempfile.TemporaryDirectory() as td:
+            ingress = ChatJournalIngress(td)
+            chat_id = "long/" + "x" * 1000
+            ingress.ingest(chat_id, "user", "message", {"text": "record"})
+            path = ingress.journal_path(chat_id)
+            self.assertLess(len(path.name.encode()), 255)
+            self.assertTrue(ChatJournalWriter(path, chat_id).verify_chain()[0])
+
     def test_no_update_or_delete_api(self):
         self.assertFalse(hasattr(ChatJournalWriter, "update"))
         self.assertFalse(hasattr(ChatJournalWriter, "delete"))

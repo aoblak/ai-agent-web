@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import sqlite3
+from contextlib import contextmanager
 from datetime import datetime
 from dataclasses import dataclass
 from pathlib import Path
@@ -201,6 +202,7 @@ class GitHubSignalStore:
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         self.conn = sqlite3.connect(self.db_path)
         self.conn.row_factory = sqlite3.Row
+        self._transaction_counter = 0
         self.conn.execute("PRAGMA foreign_keys = ON")
         self.conn.executescript(
             """
@@ -272,6 +274,28 @@ class GitHubSignalStore:
         )
         self.conn.commit()
 
+    @contextmanager
+    def transaction(self):
+        """Atomic writes compose without inner helpers committing an outer diff."""
+        nested = self.conn.in_transaction
+        self._transaction_counter += 1
+        savepoint = "oos_signal_" + str(self._transaction_counter)
+        self.conn.execute("SAVEPOINT " + savepoint if nested else "BEGIN IMMEDIATE")
+        try:
+            yield
+        except BaseException:
+            if nested:
+                self.conn.execute("ROLLBACK TO " + savepoint)
+                self.conn.execute("RELEASE " + savepoint)
+            else:
+                self.conn.rollback()
+            raise
+        else:
+            if nested:
+                self.conn.execute("RELEASE " + savepoint)
+            else:
+                self.conn.commit()
+
     def close(self) -> None:
         self.conn.close()
 
@@ -287,10 +311,9 @@ class GitHubSignalStore:
         payload_json = event.canonical_payload_json()
         payload_sha256 = hashlib.sha256(payload_json.encode("utf-8")).hexdigest()
         fingerprint = event.fingerprint()
-        with self.conn:
+        with self.transaction():
             # Serialize the lookup and insert across connections. Delivery IDs
             # survive redelivery even when the fallback receipt time changes.
-            self.conn.execute("BEGIN IMMEDIATE")
             if event.transport == "webhook" and event.source_event_id is not None:
                 existing = self.conn.execute(
                     "SELECT * FROM github_raw_events WHERE transport = 'webhook' "
@@ -347,7 +370,7 @@ class GitHubSignalStore:
         raw = self.record_raw(event)
         normalized = normalize_github_event(event)
 
-        with self.conn:
+        with self.transaction():
             signal_row = self.conn.execute(
                 "SELECT id FROM github_signals WHERE raw_event_id = ?",
                 (raw.raw_event_id,),
@@ -439,7 +462,7 @@ class GitHubSignalStore:
             str(existing["initialized_at"]) if existing is not None else observed_at
         )
 
-        with self.conn:
+        with self.transaction():
             self.conn.execute(
                 "INSERT OR REPLACE INTO github_poll_meta"
                 "(kind, initialized_at, observed_at) VALUES(?,?,?)",
@@ -491,7 +514,7 @@ class GitHubSignalStore:
         ).fetchone()
         if existing is not None:
             return int(existing["id"])
-        with self.conn:
+        with self.transaction():
             cursor = self.conn.execute(
                 "INSERT INTO github_entity_observations"
                 "(entity_type, entity_id, observed_at, metadata_json, metadata_sha256) "
@@ -575,7 +598,7 @@ class GitHubSignalStore:
         ).fetchone()
         if existing is not None:
             return int(existing["id"])
-        with self.conn:
+        with self.transaction():
             cursor = self.conn.execute(
                 """
                 INSERT INTO github_signal_patterns(

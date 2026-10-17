@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import hashlib
+import math
 import re
 from statistics import mean
 from typing import Any, Iterable
@@ -295,7 +296,12 @@ def validate_execution_record(record: dict[str, Any]) -> ValidationResult:
         for key in ("input_tokens", "output_tokens", "latency_ms", "cost"):
             if key in metrics:
                 value = metrics[key]
-                if not isinstance(value, (int, float)) or isinstance(value, bool) or value < 0:
+                try:
+                    finite = math.isfinite(value)
+                except (TypeError, OverflowError):
+                    finite = False
+                if (not isinstance(value, (int, float)) or isinstance(value, bool)
+                        or not finite or value < 0):
                     errors.append(f"invalid_metric:{key}")
 
     return ValidationResult(not errors, tuple(errors))

@@ -48,12 +48,12 @@
     {
       "path": "docs/PROJECT_STATE.md",
       "visibility": "PUBLIC",
-      "sha256": "db3b48bf3bea941f772e7298b192a78fd5fd0108e5fed06e6ccf44b354d4319c"
+      "sha256": "f7e0cb6de731cb1d9fc5540f65f0bd120aecc5888e0d17ac08c7a15b5594a4b5"
     },
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "8a8da0485bafbc2cac0e28493558907aa5e76bffc769dd2c3f3ca60ab195dc83"
+      "sha256": "3c61b6eac2d2ff16ce3d9b84c66d3f04f8b6c70cfda58397a56bf7457a85ab99"
     },
     {
       "path": "scripts/oos_context.py",
@@ -463,6 +463,34 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "0594874b989e1e65d1541aa233d4138b4c738dc212606906940398f548730af4"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-DURABILITY-START",
+      "title": "CTX-20261017-RUNTIME-DURABILITY-START — Atomic polls and durable identity corrections",
+      "topics": [
+        "runtime",
+        "review",
+        "durability"
+      ],
+      "recorded_at": "2026-10-17T04:32:48.216581+02:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "c7226d180660b01daa81924b074ecc956ee666db90da2463546112da738fb155"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-DURABILITY-END",
+      "title": "CTX-20261017-RUNTIME-DURABILITY-END — Atomic polls and durable identity corrections",
+      "topics": [
+        "runtime",
+        "review",
+        "durability"
+      ],
+      "recorded_at": "2026-10-17T04:32:48.216581+02:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "f550122ab668ec1d5934af30f145f97a46feffd9a4afd9b6b08670a7ff78d0a6"
     }
   ]
 }

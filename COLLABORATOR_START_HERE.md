@@ -69,7 +69,7 @@ Generator odbija postojeće odredište, priprema svih pet slojeva, uključuje po
 validator i `guarded_continue`, provjerava hashove i lokalni ponovni dohvat.
 Uključuje i svih 17 modula OOS Python runtimea, VITA provjere, adaptere i testove iz
 `runtime/`. Prije stvaranja odredišta provjerava distribucijske hashove, kontekst i
-304 runtime testova uz blokiranu mrežu. Ne stvara GitHub repozitorij niti upisuje na
+309 runtime testova uz blokiranu mrežu. Ne stvara GitHub repozitorij niti upisuje na
 Markov račun. `LOCAL_OOS_PREPARED` i `OFFLINE_TESTED_CANDIDATE` označavaju lokalno
 pripremljen i testiran paket; nisu potvrda produkcijske instalacije ili povezivanja.
 
