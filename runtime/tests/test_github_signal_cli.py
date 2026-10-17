@@ -89,6 +89,20 @@ class SignalCliTests(unittest.TestCase):
                     self.assertIn(b"payload exceeds size limit", result.stderr)
                     self.assertFalse(db.exists())
 
+    def test_documented_webhook_invocation_is_one_complete_shell_command(self):
+        import shlex
+
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        section = readme.split("## Authenticated webhook ingestion", 1)[1]
+        example = section.split("```sh\n", 1)[1].split("\n```", 1)[0]
+        commands = [line.strip() for line in example.splitlines() if line.strip()]
+        self.assertEqual(len(commands), 1, "webhook example must be one copyable command")
+        tokens = shlex.split(commands[0])
+        self.assertTrue(tokens[0].startswith("GITHUB_WEBHOOK_SECRET="))
+        self.assertIn("runtime/scripts/github_signal_ingest_webhook.py", tokens)
+        for required in ("--db", "--event", "--delivery", "--signature", "--payload"):
+            self.assertIn(required, tokens)
+
     def test_wrong_actor_blocks_before_creating_database(self):
         with tempfile.TemporaryDirectory() as tmp:
             args = argparse.Namespace(db=Path(tmp) / "signals.sqlite", actor="WrongOwner",
