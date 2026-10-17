@@ -74,6 +74,21 @@ class SignalCliTests(unittest.TestCase):
                 self.assertEqual(store.conn.execute(
                     "SELECT COUNT(*) FROM github_raw_events").fetchone()[0], 1)
 
+    def test_oversized_file_and_stdin_fail_without_creating_database(self):
+        body = b"x" * (4 * 1024 * 1024 + 1)
+        with tempfile.TemporaryDirectory() as tmp:
+            db = Path(tmp) / "signals.sqlite"
+            path = Path(tmp) / "large-event.json"
+            for payload_path in (path, None):
+                with self.subTest(source="file" if payload_path else "stdin"):
+                    result = self._run_webhook(
+                        db, body, secret="correct-secret",
+                        signature="sha256=" + "0" * 64, payload_path=payload_path,
+                    )
+                    self.assertEqual(result.returncode, 2)
+                    self.assertIn(b"payload exceeds size limit", result.stderr)
+                    self.assertFalse(db.exists())
+
     def test_wrong_actor_blocks_before_creating_database(self):
         with tempfile.TemporaryDirectory() as tmp:
             args = argparse.Namespace(db=Path(tmp) / "signals.sqlite", actor="WrongOwner",
