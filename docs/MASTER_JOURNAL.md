@@ -148,3 +148,25 @@ Adverse: PASS — added unrelated-future-schema success, requested-unsupported-s
 Rollback: Revert the resulting correction/merge commit; do not rewrite remote history.
 Next: Publish existing PR #10, verify CI and request review of the new exact head; no live collaborator receipt or runtime installation claimed.
 <!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-HANDOFF-SIZE-START", "recorded_at": "2026-10-17T04:13:20.176538+02:00", "occurred_at": "2026-10-17T04:13:20.176538+02:00", "actor": "OpenAI Codex", "topics": ["handoff", "review"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261017-HANDOFF-SIZE-START — Bound artifact reads on every verification pass
+Summary: HANDOFF-SIZE-20261017 accepted by current coordinator. External review of 67eb18fbabe53403e20a3b2b6d442dca48912a89 found unbounded artifact rereads after concurrent growth. Runtime reports GPT-6; precise build/mode/plan and active duration UNKNOWN.
+Sources: PR #10 review finding 4300857618.
+Integrity: Pending bounded-read and concurrent-growth regressions.
+Independent: New externally reproduced adverse case; correction not accepted yet.
+Adverse: Enforce 64 MiB during actual reads, including when stat is stale; no continuation on oversized result.
+Rollback: Revert correction commit.
+Next: Test both initial and repeated reads, publish and request current-head review.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-HANDOFF-SIZE-END", "recorded_at": "2026-10-17T04:14:35.364633+02:00", "occurred_at": "2026-10-17T04:14:35.364633+02:00", "actor": "OpenAI Codex", "topics": ["handoff", "review"], "status": "VERIFIED", "visibility": "PUBLIC"} -->
+## CTX-20261017-HANDOFF-SIZE-END — Artifact read limits enforced on both passes
+Summary: HANDOFF-SIZE-20261017 local correction complete. Initial and consistency reads use a capped stream read; oversized files fail before downstream continuation even after stale stat or concurrent growth. Same runtime actor; exact build/mode/plan and active duration UNKNOWN.
+Sources: Review finding 4300857618; read_handoff_artifact; new tests in test_handoff_gate.py.
+Integrity: PASS — 49 regression tests, context VALID and diff checks.
+Independent: PASS — external review reproduction matched; new current-head acceptance still pending.
+Adverse: PASS — stale stat exposes a growing stream while every read remains capped; growth during artifact recheck raises and never invokes continuation. Prior task isolation and gate regressions retained.
+Rollback: Revert this correction commit, retain historical evidence.
+Next: Publish on existing PR #10, verify CI and current-head review; update collaborator Context source pin to this corrected commit.
+<!-- /oos:event -->

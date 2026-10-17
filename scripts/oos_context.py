@@ -25,6 +25,7 @@ HANDOFF_STEPS = [("READY", "coordinator"), ("ASSIGNED", "coordinator"),
                  ("ACCEPTED", "owner"), ("IN_PROGRESS", "owner"),
                  ("RESULT_RETURNED", "owner"), ("VERIFIED", "reviewer"),
                  ("VERIFIED", "coordinator"), ("HANDED_OFF", "next_owner")]
+HANDOFF_ARTIFACT_LIMIT = 64 * 1024 * 1024
 HANDOFF_BINDINGS = ["task_id", "attempt_id", "owner", "reviewer", "coordinator",
                     "next_owner", "source_commit"]
 EVENT = re.compile(r'<!-- oos:event (\{[^\n]+\}) -->\n(.*?)<!-- /oos:event -->', re.S)
@@ -143,6 +144,17 @@ def required_text(value, field):
     return value
 
 
+def read_handoff_artifact(file):
+    """Bound allocation even if an artifact grows after stat or a prior pass."""
+    if file.stat().st_size > HANDOFF_ARTIFACT_LIMIT:
+        raise ContextError("Artifact exceeds 64 MiB gate limit")
+    with file.open("rb") as source:
+        data = source.read(HANDOFF_ARTIFACT_LIMIT + 1)
+    if len(data) > HANDOFF_ARTIFACT_LIMIT:
+        raise ContextError("Artifact exceeds 64 MiB gate limit")
+    return data
+
+
 def handoff_gate(root, policy):
     """Read-only gate over the existing journal; policy comes from a trusted caller.
 
@@ -242,9 +254,7 @@ def handoff_gate(root, policy):
                 if PurePosixPath(path).as_posix() != path:
                     raise ContextError("Artifact path must be canonical and relative")
                 file = local_file(root, path)
-                if file.stat().st_size > 64 * 1024 * 1024:
-                    raise ContextError("Artifact exceeds 64 MiB gate limit")
-                data = file.read_bytes()
+                data = read_handoff_artifact(file)
                 if sha(data) != digest:
                     raise ContextError("Returned artifact hash mismatch: " + path)
                 artifacts[artifact_id] = artifact
@@ -275,7 +285,7 @@ def handoff_gate(root, policy):
     if local_file(root, "docs/MASTER_JOURNAL.md").read_bytes() != journal:
         raise ContextError("Handoff journal changed during verification")
     for path, data in file_snapshots.items():
-        if local_file(root, path).read_bytes() != data:
+        if read_handoff_artifact(local_file(root, path)) != data:
             raise ContextError("Handoff artifact changed during verification")
     return {"status": "HANDOFF_VERIFIED", "scope": "recorded-attestations-and-local-bytes",
             **{field: policy[field] for field in HANDOFF_BINDINGS + ["journal_sha256"]},
@@ -434,7 +444,7 @@ def run(args):
             if index_path.read_bytes() != index_before:
                 raise ContextError("Index changed during reindex; retry from current state")
             for path, data in snapshots.items():
-                if local_file(root, path).read_bytes() != data:
+                if read_handoff_artifact(local_file(root, path)) != data:
                     raise ContextError("Source changed during reindex: " + path)
             with tempfile.NamedTemporaryFile(dir=index_path.parent, prefix=".oos-index-", delete=False) as stream:
                 temporary = Path(stream.name)

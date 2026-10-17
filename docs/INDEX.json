@@ -48,17 +48,17 @@
     {
       "path": "docs/PROJECT_STATE.md",
       "visibility": "PUBLIC",
-      "sha256": "ba474084c5373ef665ecac4f08e30854a3ba85d5bee5679cf924f246dc3a17e8"
+      "sha256": "f1c2d89ab7581de86c2e67e6f07ebf789666ad18720775494677b36e3924b2cd"
     },
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "6116d025e3f42e27222417b9e5e056391b00dbb6bec418ed5dd68bcc605eda81"
+      "sha256": "a213751d762018bfbd17da781e212d739c027c25670d6ca76c92c7b3d1b90509"
     },
     {
       "path": "scripts/oos_context.py",
       "visibility": "PUBLIC",
-      "sha256": "909e2b4bcb4ff1adf91e74465bbd971151bca6be399ef8144544bdfe04860875"
+      "sha256": "5e0e8252e23e424a9d423bfeb9ffa08a4ce230b01be74aa07f3ad8b805dd14cd"
     },
     {
       "path": "tests/test_oos_context.py",
@@ -73,7 +73,7 @@
     {
       "path": "tests/test_handoff_gate.py",
       "visibility": "PUBLIC",
-      "sha256": "6f550bb2e8711414765e3d698ca1a7c62602ba565094ebc4d31818d148be08a3"
+      "sha256": "71e6fd732d9ba4aa521dbcd1afc82ff8afcf316e95189b070b34d98e359eac39"
     },
     {
       "path": "MARKO-START-HERE.md",
@@ -355,6 +355,32 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "61c3db1ce191548c210e16524ddf7e7769da18a40a339d1fac0756f8d7190bc7"
+    },
+    {
+      "id": "CTX-20261017-HANDOFF-SIZE-START",
+      "title": "CTX-20261017-HANDOFF-SIZE-START — Bound artifact reads on every verification pass",
+      "topics": [
+        "handoff",
+        "review"
+      ],
+      "recorded_at": "2026-10-17T04:13:20.176538+02:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "23703570d96a3d08fc0f0f58eee0b5d498d27f1abf49d14494bbfbe40ecbe46a"
+    },
+    {
+      "id": "CTX-20261017-HANDOFF-SIZE-END",
+      "title": "CTX-20261017-HANDOFF-SIZE-END — Artifact read limits enforced on both passes",
+      "topics": [
+        "handoff",
+        "review"
+      ],
+      "recorded_at": "2026-10-17T04:14:35.364633+02:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "f11bbdb9c15e28b9ca0e8fca61cc9c033a6b8748e6c7564e47fdca0e4042ae2c"
     }
   ]
 }

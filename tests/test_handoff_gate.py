@@ -2,6 +2,8 @@
 import copy
 import importlib.util
 import json
+import io
+from types import SimpleNamespace
 from pathlib import Path
 import shutil
 import subprocess
@@ -293,6 +295,49 @@ class HandoffGateChecks(unittest.TestCase):
 
         with patch.object(context, "local_file", side_effect=read):
             self.assert_blocked()
+
+    def test_artifact_growth_during_recheck_is_capped_and_blocks_callback(self):
+        self.persist()
+        original_reader = context.local_file
+        reads = 0
+
+        def read(root, relative):
+            nonlocal reads
+            file = original_reader(root, relative)
+            if relative == "result.txt":
+                reads += 1
+                if reads == 2:
+                    file.write_bytes(b"x" * 129)
+            return file
+
+        with patch.object(context, "HANDOFF_ARTIFACT_LIMIT", 128), \
+                patch.object(context, "local_file", side_effect=read):
+            calls = []
+            with self.assertRaisesRegex(context.ContextError, "exceeds"):
+                context.guarded_continue(self.root, self.policy, calls.append)
+            self.assertEqual(calls, [])
+
+    def test_artifact_read_remains_capped_with_stale_stat(self):
+        sizes = []
+
+        class GrowingStream(io.BytesIO):
+            def read(self, size=-1):
+                sizes.append(size)
+                if size < 0:
+                    raise AssertionError("Unbounded artifact read")
+                return super().read(size)
+
+        class StaleFile:
+            def stat(self):
+                return SimpleNamespace(st_size=1)
+
+            def open(self, mode):
+                return GrowingStream(b"x" * 1024)
+
+        with patch.object(context, "HANDOFF_ARTIFACT_LIMIT", 128):
+            with self.assertRaisesRegex(context.ContextError, "exceeds"):
+                context.read_handoff_artifact(StaleFile())
+        self.assertEqual(sizes, [129])
 
     def test_callback_exception_is_not_reported_as_success(self):
         self.persist()
