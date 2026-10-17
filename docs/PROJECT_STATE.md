@@ -27,6 +27,9 @@ Clarification is an internal gate with retrieval first. Resume/handoff refreshes
 
 Historical reconciliation remains incomplete: retrieved prior decisions are discovery evidence, not an enumerated audit of all chats or archives. Full export/log coverage remains unverified. Portfolio delta synchronization: PENDING-MJ-SYNC until the existing canonical private journal is updated.
 
+
+Issue #9 implementation: executable handoff precondition and 28 targeted synthetic tests prepared on a review branch from 90c92bc9228fe52ef1efd9cc2f39034498079c3a. The gate validates pinned recorded attestations and local artifact bytes before a caller continuation. It does not authenticate providers or install a dispatcher. Main adoption, external review and live cross-provider execution require separate verification. See CTX-20261013-006 and the existing OOS Context Protocol documentation.
+
 Source reconciliation prepared from `90c92bc9228fe52ef1efd9cc2f39034498079c3a`: bootstrap remains 1.2.3. The public glossary snapshot matches the historical source body; its pinned locator replaces the stale retrieval pointer while retaining provenance. Protocol content was retrieved with authorization, but its public locator remains unresolved. No private destination is exported. Project and portfolio review remain NEEDS-REVIEW; archive completeness, application state and deployment are not established. Next: review this isolated change, reconcile shared-file edits with open PR #10, and verify main after an approved merge.
 
 
@@ -36,3 +39,10 @@ The public portfolio delta was merged in aoblak/aljosa-oblak PR #13 at `12df0e96
 Current-head CI for ai-agent-web PR #10 (`4a71d44acf4f402ceee16fc3a0f4172555e70785`) and PR #12 (`132984baa8d825c7652a2c2bea21468144570f76`) is successful. Both are unmerged; #10 is draft, #12 is ready for review. Current-head independent review is not observed. Fresh local results recorded in the public portfolio delta are 44 handoff tests and, separately, 288 runtime tests, 20 package tests and 440 synthetic contract checks.
 
 The existing Marko entry now describes candidate source pins, authenticated Git return/receipt checks and the limits of direct chat access. This is a prepared procedure, not an installed bridge, a sent message or recipient acceptance. Next: review the exact candidate heads and obtain an actual authorized collaborator return through the agreed Issue/PR. No private destination, account permissions or production service was changed.
+
+
+PR #10 review correction (2026-10-17): isolate schema validation by identified task; 47 tests PASS. Main 5b740989ad331602323778030cd03a47283b0467 reconciled with both journal histories. New correction remains subject to current-head CI and external review; review request is not acceptance.
+
+Artifact size review correction (2026-10-17): bounded stream reads on initial and repeated checks; 49 gate/context tests PASS. Independent current-head acceptance and live authenticated transport remain separate requirements.
+
+Further PR #10 review hardening: message replay across earlier attempts rejected; context/index reads bounded before allocation, including consistency reads. 51 tests PASS; current-head CI and independent acceptance pending.

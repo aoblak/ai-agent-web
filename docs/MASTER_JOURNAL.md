@@ -71,6 +71,18 @@ Rollback: Revert the adoption commit while retaining historical event records.
 Next: Verify publication; synchronize existing portfolio journal; full historical reconciliation remains open.
 <!-- /oos:event -->
 
+
+<!-- oos:event {"id": "CTX-20261013-006", "recorded_at": "2026-10-13T07:07:52.202629+00:00", "occurred_at": "2026-10-13T07:07:52.202629+00:00", "actor": "Codex", "topics": ["handoff", "gate", "tests"], "status": "PROPOSED", "visibility": "PUBLIC", "task_id": "github:993693501/issues/9", "phase_id": "IMPL-01", "event_kind": "IMPLEMENTATION-RECORD", "model_id": "UNKNOWN", "chat_id": "UNKNOWN"} -->
+## CTX-20261013-006 — Executable handoff precondition prepared for review
+Summary: Extend the existing Python context tool with a read-only handoff-gate and guarded_continue API over structured events in the existing journal. Issue #9 owns the task; no parallel ledger or bootstrap is introduced. Contract remains v1.2.3.
+Sources: https://github.com/aoblak/ai-agent-web/issues/9; base 90c92bc9228fe52ef1efd9cc2f39034498079c3a; scripts/oos_context.py; tests/test_handoff_gate.py; docs/OOS_CONTEXT_PROTOCOL.md.
+Integrity: 28 focused handoff tests passed before this record; full regression/index/CI verification follows before delivery. Reindex is a derived manifest update, not approval of recorded claims.
+Independent: Existing contract and provider main/issue state inspected; reviewer/caller identity authentication remains outside this local gate. No external independent agent review has occurred.
+Adverse: Missing stages/results, wrong hashes/source/actors, self-review, failed checks, stale journals, changed evidence, duplicate receipts and superseded attempts block the continuation; callback failures propagate.
+Rollback: Close the review PR or revert its eventual merge; preserve prior journal bytes and unrelated commits.
+Next: Review and verify CI; authenticated transport, writer authorization, transactional/idempotent dispatch and real cross-provider execution remain unimplemented by this change. Portfolio synchronization remains PENDING-MJ-SYNC.
+<!-- /oos:event -->
+
 <!-- oos:event {"id": "CTX-20261013-LOCATORS-START", "recorded_at": "2026-10-13T07:31:16.327832+00:00", "occurred_at": null, "actor": "ChatGPT/Codex", "topics": ["context", "provenance"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
 ## CTX-20261013-LOCATORS-START — Source locator reconciliation
 Summary: START; task CONTEXT-LOCATORS; owner ChatGPT/Codex; attempt 1. Scope: existing index, glossary provenance, state and local journal. Bootstrap 1.2.3 read at 90c92bc9228fe52ef1efd9cc2f39034498079c3a. Chat ID, model ID, original request timestamp and external reviewer: UNKNOWN. Earlier read-only discovery preceded this event; no historical start time is invented.
@@ -113,4 +125,70 @@ Independent: PASS — candidate SHAs, open/draft states and current-head CI chec
 Adverse: PASS — prepared/publication/acceptance/result/verification distinguished; wrong or stale sources, duplicate delivery, unverified author identity, unavailable tools and private data boundaries are explicit. No new master, account permissions, remote installation or direct-chat access claim.
 Rollback: Revert this documentation commit; retain earlier journal history.
 Next: Publish and verify this documentation through PR; obtain authorized current-head review and actual collaborator acknowledgement before claiming live cooperation.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-HANDOFF-REVIEW-START", "recorded_at": "2026-10-17T04:05:15.109148+02:00", "occurred_at": null, "actor": "OpenAI Codex", "topics": ["handoff", "review"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261017-HANDOFF-REVIEW-START — Recovery start for requested review correction
+Summary: User-authorized @codex review returned finding 4300833478 on head 4a71d44acf4f402ceee16fc3a0f4172555e70785. Current coordinator accepts task HANDOFF-REVIEW-20261017; earlier local merge/edit preceded this record, exact start UNKNOWN. Runtime reports GPT-6; precise build/mode/plan UNKNOWN.
+Sources: PR #10 review comment 4300833478; main 5b740989ad331602323778030cd03a47283b0467.
+Integrity: Pending regression and derived-index validation.
+Independent: External review found cross-task schema coupling; current correction is not independently accepted yet.
+Adverse: Preserve both journal histories; malformed/unidentifiable records and unsupported requested-task schemas still block.
+Rollback: Revert the resulting merge/correction commit without rewriting branch history.
+Next: Test valid chain with unrelated future schema and negative requested-task/unidentifiable cases; publish on existing PR.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-HANDOFF-REVIEW-END", "recorded_at": "2026-10-17T04:06:39.963248+02:00", "occurred_at": "2026-10-17T04:06:39.963248+02:00", "actor": "OpenAI Codex", "topics": ["handoff", "review"], "status": "VERIFIED", "visibility": "PUBLIC"} -->
+## CTX-20261017-HANDOFF-REVIEW-END — Cross-task schema regression corrected
+Summary: HANDOFF-REVIEW-20261017 local correction complete. Identifiable unrelated task records are skipped before schema validation; requested-task and unidentifiable malformed handoffs still fail closed. Reconciled current main and retained its Marko entry/hash index without force push. Model build/mode/plan and measured active duration UNKNOWN.
+Sources: Review comment 4300833478; tests/test_handoff_gate.py; scripts/oos_context.py; both merge parents.
+Integrity: PASS — 47 tests, context VALID and diff checks pass; existing journal event bodies from both parents retained exactly once.
+Independent: PASS — fix matches the external reproduction and direct provider evidence for original reviewed SHA; independent acceptance of this new correction remains pending.
+Adverse: PASS — added unrelated-future-schema success, requested-unsupported-schema rejection and malformed/unidentifiable handoff rejection; invalid cases never invoke continuation.
+Rollback: Revert the resulting correction/merge commit; do not rewrite remote history.
+Next: Publish existing PR #10, verify CI and request review of the new exact head; no live collaborator receipt or runtime installation claimed.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-HANDOFF-SIZE-START", "recorded_at": "2026-10-17T04:13:20.176538+02:00", "occurred_at": "2026-10-17T04:13:20.176538+02:00", "actor": "OpenAI Codex", "topics": ["handoff", "review"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261017-HANDOFF-SIZE-START — Bound artifact reads on every verification pass
+Summary: HANDOFF-SIZE-20261017 accepted by current coordinator. External review of 67eb18fbabe53403e20a3b2b6d442dca48912a89 found unbounded artifact rereads after concurrent growth. Runtime reports GPT-6; precise build/mode/plan and active duration UNKNOWN.
+Sources: PR #10 review finding 4300857618.
+Integrity: Pending bounded-read and concurrent-growth regressions.
+Independent: New externally reproduced adverse case; correction not accepted yet.
+Adverse: Enforce 64 MiB during actual reads, including when stat is stale; no continuation on oversized result.
+Rollback: Revert correction commit.
+Next: Test both initial and repeated reads, publish and request current-head review.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-HANDOFF-SIZE-END", "recorded_at": "2026-10-17T04:14:35.364633+02:00", "occurred_at": "2026-10-17T04:14:35.364633+02:00", "actor": "OpenAI Codex", "topics": ["handoff", "review"], "status": "VERIFIED", "visibility": "PUBLIC"} -->
+## CTX-20261017-HANDOFF-SIZE-END — Artifact read limits enforced on both passes
+Summary: HANDOFF-SIZE-20261017 local correction complete. Initial and consistency reads use a capped stream read; oversized files fail before downstream continuation even after stale stat or concurrent growth. Same runtime actor; exact build/mode/plan and active duration UNKNOWN.
+Sources: Review finding 4300857618; read_handoff_artifact; new tests in test_handoff_gate.py.
+Integrity: PASS — 49 regression tests, context VALID and diff checks.
+Independent: PASS — external review reproduction matched; new current-head acceptance still pending.
+Adverse: PASS — stale stat exposes a growing stream while every read remains capped; growth during artifact recheck raises and never invokes continuation. Prior task isolation and gate regressions retained.
+Rollback: Revert this correction commit, retain historical evidence.
+Next: Publish on existing PR #10, verify CI and current-head review; update collaborator Context source pin to this corrected commit.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-HANDOFF-REPLAY-START", "recorded_at": "2026-10-17T04:22:46.524523+02:00", "occurred_at": null, "actor": "OpenAI Codex", "topics": ["handoff", "review"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261017-HANDOFF-REPLAY-START — Replay and context read hardening
+Summary: Recovery START: earlier correction and local checks preceded this record; actual start UNKNOWN. Coordinator accepts HANDOFF-REPLAY-20261017 for external findings 4300883379 and 4300883381. Runtime actor OpenAI Codex; exact model build/mode/plan and measured active duration UNKNOWN.
+Sources: PR #10 findings 4300883379, 4300883381; prior head c9d6a6f4d6186585cb8d20b0b53d7433f3077505; scripts/oos_context.py; tests/test_handoff_gate.py.
+Integrity: PASS — 51 regression tests and context VALID before recording this recovery event; index regenerated after append.
+Independent: PASS — external reproductions addressed; no current-head independent approval inferred.
+Adverse: PASS — reused prior-attempt message IDs block callback; new IDs allow explicit retry; concurrently oversized journal is rejected by bounded read; all previous adverse cases retained.
+Rollback: Revert this correction commit.
+Next: Publish existing PR #10, verify CI/review and update dependent runtime Context pin.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-HANDOFF-REPLAY-END", "recorded_at": "2026-10-17T04:22:46.524523+02:00", "occurred_at": "2026-10-17T04:22:46.524523+02:00", "actor": "OpenAI Codex", "topics": ["handoff", "review"], "status": "VERIFIED", "visibility": "PUBLIC"} -->
+## CTX-20261017-HANDOFF-REPLAY-END — Replay and context read hardening
+Summary: END: message IDs are unique across all attempts for the requested task; retries require fresh authenticated message identities. Context/index/artifact reads are capped during actual reads, including final consistency checks. 51 local tests PASS; current-head external acceptance is pending. Runtime actor OpenAI Codex; exact model build/mode/plan and measured active duration UNKNOWN.
+Sources: PR #10 findings 4300883379, 4300883381; prior head c9d6a6f4d6186585cb8d20b0b53d7433f3077505; scripts/oos_context.py; tests/test_handoff_gate.py.
+Integrity: PASS — 51 regression tests and context VALID before recording this recovery event; index regenerated after append.
+Independent: PASS — external reproductions addressed; no current-head independent approval inferred.
+Adverse: PASS — reused prior-attempt message IDs block callback; new IDs allow explicit retry; concurrently oversized journal is rejected by bounded read; all previous adverse cases retained.
+Rollback: Revert this correction commit.
+Next: Publish existing PR #10, verify CI/review and update dependent runtime Context pin.
 <!-- /oos:event -->

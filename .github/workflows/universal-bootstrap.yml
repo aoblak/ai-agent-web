@@ -13,6 +13,10 @@ on:
       - '.github/copilot-instructions.md'
       - 'scripts/install_storage_bootstrap.py'
       - 'tests/test_master_prompt_contract.py'
+      - 'tests/test_handoff_gate.py'
+      - 'tests/test_oos_context.py'
+      - 'scripts/oos_context.py'
+      - 'docs/**'
       - '.github/workflows/universal-bootstrap.yml'
   push:
     branches: [main]
@@ -27,6 +31,10 @@ on:
       - '.github/copilot-instructions.md'
       - 'scripts/install_storage_bootstrap.py'
       - 'tests/test_master_prompt_contract.py'
+      - 'tests/test_handoff_gate.py'
+      - 'tests/test_oos_context.py'
+      - 'scripts/oos_context.py'
+      - 'docs/**'
       - '.github/workflows/universal-bootstrap.yml'
 
 permissions:
@@ -45,7 +53,9 @@ jobs:
       - name: Existing repository regression suite
         run: python -m unittest discover -s tests -v
       - name: Compile
-        run: python -m py_compile scripts/install_storage_bootstrap.py tests/test_master_prompt_contract.py
+        run: python -m py_compile scripts/install_storage_bootstrap.py scripts/oos_context.py tests/test_master_prompt_contract.py tests/test_handoff_gate.py
+      - name: Context integrity
+        run: python scripts/oos_context.py --root . validate
       - name: Storage installer smoke test
         shell: bash
         run: |
