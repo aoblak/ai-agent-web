@@ -199,6 +199,9 @@ class ModelRouter:
         self.evidence_confidence_threshold = evidence_confidence_threshold
 
     def _provisional_capability(self, task: TaskProfile) -> Capability:
+        # Consequential work never uses the fast path, regardless of task label.
+        if task.consequential:
+            return Capability.HIGH
         if task.task_type in self._FAST_TYPES and not task.risks and task.failed_attempts < 2:
             return Capability.FAST
         if task.task_type in self._HIGH_TYPES or task.failed_attempts >= 2:
@@ -207,7 +210,8 @@ class ModelRouter:
 
     def _needs_evidence(self, task: TaskProfile, provisional: Capability) -> bool:
         return bool(
-            task.conflicting_evidence
+            task.consequential
+            or task.conflicting_evidence
             or task.risks
             or task.failed_attempts
             or provisional is Capability.HIGH
