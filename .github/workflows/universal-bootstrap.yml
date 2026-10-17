@@ -12,6 +12,10 @@ on:
       - 'llms.txt'
       - '.github/copilot-instructions.md'
       - 'scripts/install_storage_bootstrap.py'
+      - 'scripts/prepare_collaborator_workspace.py'
+      - 'tests/test_collaborator_workspace.py'
+      - 'COLLABORATOR_START_HERE.md'
+      - 'runtime/**'
       - 'tests/test_master_prompt_contract.py'
       - 'tests/test_handoff_gate.py'
       - 'tests/test_oos_context.py'
@@ -30,6 +34,10 @@ on:
       - 'llms.txt'
       - '.github/copilot-instructions.md'
       - 'scripts/install_storage_bootstrap.py'
+      - 'scripts/prepare_collaborator_workspace.py'
+      - 'tests/test_collaborator_workspace.py'
+      - 'COLLABORATOR_START_HERE.md'
+      - 'runtime/**'
       - 'tests/test_master_prompt_contract.py'
       - 'tests/test_handoff_gate.py'
       - 'tests/test_oos_context.py'
@@ -50,8 +58,12 @@ jobs:
           python-version: '3.11'
       - name: Universal contract suite
         run: python tests/test_master_prompt_contract.py
+      - name: Fetch pinned public OOS Context implementation
+        run: git fetch origin b0a19bfebe9eeb9d507c1f6f33f959d34e44da33
       - name: Existing repository regression suite
         run: python -m unittest discover -s tests -v
+      - name: Verify packaged runtime offline
+        run: python runtime/check_install.py
       - name: Compile
         run: python -m py_compile scripts/install_storage_bootstrap.py scripts/oos_context.py tests/test_master_prompt_contract.py tests/test_handoff_gate.py
       - name: Context integrity

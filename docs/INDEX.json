@@ -48,12 +48,12 @@
     {
       "path": "docs/PROJECT_STATE.md",
       "visibility": "PUBLIC",
-      "sha256": "701b98f8ea52992a3f991f47be6a9639094a060fce1eb31c5c4470d35b334995"
+      "sha256": "da2430ecadd1076db5c380736af6f7780a77f17c63228215108ae9d956876501"
     },
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "c6769b1b752db0e5961176f234c24a4d89b548f647fdd2c2b7ab39be7bd4791f"
+      "sha256": "a657553b2307cf482479eaa2764a3d6edadf1c00551f77aaaba8d9c1673bce4f"
     },
     {
       "path": "scripts/oos_context.py",
@@ -71,14 +71,14 @@
       "sha256": "a108bb7d713a4f95809c08d79f47ed993ddcf626fee04411144a38e59290ff1b"
     },
     {
+      "path": "MARKO-START-HERE.md",
+      "visibility": "PUBLIC",
+      "sha256": "9c46a2490727ffe4584f1965ce8d4661ea50ba29cd2d524af4a5e3f259e55137"
+    },
+    {
       "path": "tests/test_handoff_gate.py",
       "visibility": "PUBLIC",
       "sha256": "41c27ec8d7ca80f9dcc0a94d032c9fa0c8366b8717ffb8123943e48f065d2b07"
-    },
-    {
-      "path": "MARKO-START-HERE.md",
-      "visibility": "PUBLIC",
-      "sha256": "c4807273d803f672821a896c69c80d7b92ac1cf4e99b458b99e187ba0c94b0f3"
     }
   ],
   "glossary": {
@@ -263,20 +263,6 @@
       "sha256": "960b3a581726771afea2d56e3573a2b005ed2805a5fce1cea35ebcc404ab339d"
     },
     {
-      "id": "CTX-20261013-006",
-      "title": "CTX-20261013-006 — Executable handoff precondition prepared for review",
-      "topics": [
-        "handoff",
-        "gate",
-        "tests"
-      ],
-      "recorded_at": "2026-10-13T07:07:52.202629+00:00",
-      "status": "PROPOSED",
-      "visibility": "PUBLIC",
-      "path": "docs/MASTER_JOURNAL.md",
-      "sha256": "f82ad15df357e810ca94ca8f1fa21b54f760774fbe7c203df398f313913e5016"
-    },
-    {
       "id": "CTX-20261013-LOCATORS-START",
       "title": "CTX-20261013-LOCATORS-START — Source locator reconciliation",
       "topics": [
@@ -329,6 +315,48 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "54e5e9c2253358e65faa7a0e87c2c509058cd5ac7a238dfc866bf49741e75f2b"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-REVIEW-START",
+      "title": "CTX-20261017-RUNTIME-REVIEW-START — Runtime review correction start",
+      "topics": [
+        "runtime",
+        "review",
+        "collaborator"
+      ],
+      "recorded_at": "2026-10-17T04:07:41.603599+02:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "9a46a0dd7f6d006cc0ca5830dba8e37c95e573f374ccc3c2a497bfee2b82e4b8"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-REVIEW-END",
+      "title": "CTX-20261017-RUNTIME-REVIEW-END — Runtime findings corrected with regression evidence",
+      "topics": [
+        "runtime",
+        "review",
+        "collaborator"
+      ],
+      "recorded_at": "2026-10-17T04:15:14.302809+02:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "c016edf641e81143b62fd4b0a3db5db1cd83ce2665f3a4eb999a5a726866da84"
+    },
+    {
+      "id": "CTX-20261013-006",
+      "title": "CTX-20261013-006 — Executable handoff precondition prepared for review",
+      "topics": [
+        "handoff",
+        "gate",
+        "tests"
+      ],
+      "recorded_at": "2026-10-13T07:07:52.202629+00:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "f82ad15df357e810ca94ca8f1fa21b54f760774fbe7c203df398f313913e5016"
     },
     {
       "id": "CTX-20261017-HANDOFF-REVIEW-START",
@@ -407,6 +435,118 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "7b4adab7d131152e37f0e949bc33bc03bc88df9b1e0a1b40d1841078f50e53da"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-INTEGRATION-START",
+      "title": "CTX-20261017-RUNTIME-INTEGRATION-START — Reviewed runtime and Context integration",
+      "topics": [
+        "runtime",
+        "review",
+        "integration"
+      ],
+      "recorded_at": "2026-10-17T04:25:15.716696+02:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "8d62cf29d38c5710c8c87eb4494f083c0389fc91689dfae2517b93a14b58b3bb"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-INTEGRATION-END",
+      "title": "CTX-20261017-RUNTIME-INTEGRATION-END — Reviewed runtime and Context integration",
+      "topics": [
+        "runtime",
+        "review",
+        "integration"
+      ],
+      "recorded_at": "2026-10-17T04:25:15.716696+02:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "0594874b989e1e65d1541aa233d4138b4c738dc212606906940398f548730af4"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-DURABILITY-START",
+      "title": "CTX-20261017-RUNTIME-DURABILITY-START — Atomic polls and durable identity corrections",
+      "topics": [
+        "runtime",
+        "review",
+        "durability"
+      ],
+      "recorded_at": "2026-10-17T04:32:48.216581+02:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "c7226d180660b01daa81924b074ecc956ee666db90da2463546112da738fb155"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-DURABILITY-END",
+      "title": "CTX-20261017-RUNTIME-DURABILITY-END — Atomic polls and durable identity corrections",
+      "topics": [
+        "runtime",
+        "review",
+        "durability"
+      ],
+      "recorded_at": "2026-10-17T04:32:48.216581+02:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "f550122ab668ec1d5934af30f145f97a46feffd9a4afd9b6b08670a7ff78d0a6"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-AUTHORITY-START",
+      "title": "CTX-20261017-RUNTIME-AUTHORITY-START — Operation authority and active-content boundaries",
+      "topics": [
+        "runtime",
+        "review",
+        "authority"
+      ],
+      "recorded_at": "2026-10-17T04:44:09.702003+02:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "990bf05c4950953880d72de1fcf28fa7803c5de22216c898e32e32c645ef7429"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-AUTHORITY-END",
+      "title": "CTX-20261017-RUNTIME-AUTHORITY-END — Operation authority and active-content boundaries",
+      "topics": [
+        "runtime",
+        "review",
+        "authority"
+      ],
+      "recorded_at": "2026-10-17T04:44:09.702003+02:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "7fc7c4c14dddda017c96861fd0443d4063082c39faa2767b9e27f246cbe59c80"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-POLICY-START",
+      "title": "CTX-20261017-RUNTIME-POLICY-START — Strict policy values and workspace rollback",
+      "topics": [
+        "runtime",
+        "review",
+        "policy"
+      ],
+      "recorded_at": "2026-10-17T04:53:17.914631+02:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "7075b13cbd974dce6fb635c4c96ca6350d76e2b0bac15af95bf30d388f8670e3"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-POLICY-END",
+      "title": "CTX-20261017-RUNTIME-POLICY-END — Strict policy values and workspace rollback",
+      "topics": [
+        "runtime",
+        "review",
+        "policy"
+      ],
+      "recorded_at": "2026-10-17T04:53:17.914631+02:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "3dd7ce233cb13c37a6c29d48d7d66c12dc51f9022b1ef5ecb166db1d23c01739"
     }
   ]
 }

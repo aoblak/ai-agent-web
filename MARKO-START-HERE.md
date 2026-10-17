@@ -180,11 +180,13 @@ Status veze ostaje `NIJE POTVRĐENA` dok ne postoji stvarni, provjerljivi primit
 - Pravila: isti `MASTER_PROMPT.md` iz ovog repozitorija; pri svakom nastavku razriješi
   aktualni `main` i zabilježi točan commit. Ne zamjenjuj pravila drugom kopijom.
 - Provjera predaje: [PR #10](https://github.com/aoblak/ai-agent-web/pull/10), provjereni
-  kandidat `4a71d44acf4f402ceee16fc3a0f4172555e70785`.
+  kandidat `b0a19bfebe9eeb9d507c1f6f33f959d34e44da33` s ispravcima recenzije.
 - Zaseban memorijski prostor i runtime: [PR #12](https://github.com/aoblak/ai-agent-web/pull/12),
-  provjereni kandidat `132984baa8d825c7652a2c2bea21468144570f76`. Njegov
-  [ulaz za suradnika](https://github.com/aoblak/ai-agent-web/blob/132984baa8d825c7652a2c2bea21468144570f76/COLLABORATOR_START_HERE.md)
-  opisuje pripremu svih pet slojeva i granice instalacije.
+  sadrži aktualni kandidat. Razriješi njegov točan head SHA i iz te revizije dohvati
+  [ulaz za suradnika](https://github.com/aoblak/ai-agent-web/blob/docs/independent-collaborator-bootstrap/COLLABORATOR_START_HERE.md),
+  generator i cijeli `runtime/`. Ovaj link je promjenjivi lokator; zabilježeni SHA
+  mora odgovarati svim preuzetim datotekama. Starije revizije iz ranijih poruka ne
+  uključuju nužno kasnije ispravke.
 
 Ovo su kandidati pod recenzijom, ne dokaz integracije ili instalacije. Prije upotrebe
 provjeri aktualni status i commit PR-a. Ako se head promijenio, prethodni rezultat

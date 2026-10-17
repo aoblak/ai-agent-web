@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://oos.local/schemas/github-signal-event-v0.1.json",
+  "title": "OOS GitHub Signal Raw Event v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "transport",
+    "event_type",
+    "action",
+    "actor",
+    "object_type",
+    "object_id",
+    "occurred_at",
+    "payload"
+  ],
+  "properties": {
+    "transport": {
+      "type": "string",
+      "enum": ["webhook", "events_api", "poller"]
+    },
+    "event_type": {"type": "string", "minLength": 1},
+    "action": {"type": "string", "minLength": 1},
+    "actor": {"type": "string", "minLength": 1},
+    "object_type": {"type": "string", "minLength": 1},
+    "object_id": {"type": "string", "minLength": 1},
+    "occurred_at": {"type": "string", "format": "date-time"},
+    "payload": {"type": "object"},
+    "source_event_id": {"type": ["string", "null"], "minLength": 1}
+  }
+}

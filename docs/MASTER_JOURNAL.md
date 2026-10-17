@@ -71,18 +71,6 @@ Rollback: Revert the adoption commit while retaining historical event records.
 Next: Verify publication; synchronize existing portfolio journal; full historical reconciliation remains open.
 <!-- /oos:event -->
 
-
-<!-- oos:event {"id": "CTX-20261013-006", "recorded_at": "2026-10-13T07:07:52.202629+00:00", "occurred_at": "2026-10-13T07:07:52.202629+00:00", "actor": "Codex", "topics": ["handoff", "gate", "tests"], "status": "PROPOSED", "visibility": "PUBLIC", "task_id": "github:993693501/issues/9", "phase_id": "IMPL-01", "event_kind": "IMPLEMENTATION-RECORD", "model_id": "UNKNOWN", "chat_id": "UNKNOWN"} -->
-## CTX-20261013-006 — Executable handoff precondition prepared for review
-Summary: Extend the existing Python context tool with a read-only handoff-gate and guarded_continue API over structured events in the existing journal. Issue #9 owns the task; no parallel ledger or bootstrap is introduced. Contract remains v1.2.3.
-Sources: https://github.com/aoblak/ai-agent-web/issues/9; base 90c92bc9228fe52ef1efd9cc2f39034498079c3a; scripts/oos_context.py; tests/test_handoff_gate.py; docs/OOS_CONTEXT_PROTOCOL.md.
-Integrity: 28 focused handoff tests passed before this record; full regression/index/CI verification follows before delivery. Reindex is a derived manifest update, not approval of recorded claims.
-Independent: Existing contract and provider main/issue state inspected; reviewer/caller identity authentication remains outside this local gate. No external independent agent review has occurred.
-Adverse: Missing stages/results, wrong hashes/source/actors, self-review, failed checks, stale journals, changed evidence, duplicate receipts and superseded attempts block the continuation; callback failures propagate.
-Rollback: Close the review PR or revert its eventual merge; preserve prior journal bytes and unrelated commits.
-Next: Review and verify CI; authenticated transport, writer authorization, transactional/idempotent dispatch and real cross-provider execution remain unimplemented by this change. Portfolio synchronization remains PENDING-MJ-SYNC.
-<!-- /oos:event -->
-
 <!-- oos:event {"id": "CTX-20261013-LOCATORS-START", "recorded_at": "2026-10-13T07:31:16.327832+00:00", "occurred_at": null, "actor": "ChatGPT/Codex", "topics": ["context", "provenance"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
 ## CTX-20261013-LOCATORS-START — Source locator reconciliation
 Summary: START; task CONTEXT-LOCATORS; owner ChatGPT/Codex; attempt 1. Scope: existing index, glossary provenance, state and local journal. Bootstrap 1.2.3 read at 90c92bc9228fe52ef1efd9cc2f39034498079c3a. Chat ID, model ID, original request timestamp and external reviewer: UNKNOWN. Earlier read-only discovery preceded this event; no historical start time is invented.
@@ -125,6 +113,39 @@ Independent: PASS — candidate SHAs, open/draft states and current-head CI chec
 Adverse: PASS — prepared/publication/acceptance/result/verification distinguished; wrong or stale sources, duplicate delivery, unverified author identity, unavailable tools and private data boundaries are explicit. No new master, account permissions, remote installation or direct-chat access claim.
 Rollback: Revert this documentation commit; retain earlier journal history.
 Next: Publish and verify this documentation through PR; obtain authorized current-head review and actual collaborator acknowledgement before claiming live cooperation.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-RUNTIME-REVIEW-START", "recorded_at": "2026-10-17T04:07:41.603599+02:00", "occurred_at": "2026-10-17T04:07:41.603599+02:00", "actor": "OpenAI Codex", "topics": ["runtime", "review", "collaborator"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261017-RUNTIME-REVIEW-START — Runtime review correction start
+Summary: RUNTIME-REVIEW-20261017 accepted by current coordinator after authorized external review. Scope: directory re-ingestion reconciliation, webhook delivery deduplication, effective interest state, regression tests and distribution provenance. Current main merged locally; source histories retained. Runtime reports GPT-6; precise build/mode/plan and active duration UNKNOWN.
+Sources: PR #12 head 132984baa8d825c7652a2c2bea21468144570f76; review comments 4300835900, 4300835903, 4300835905; corrected Context source 67eb18fbabe53403e20a3b2b6d442dca48912a89 in PR #10.
+Integrity: Pending meaningful regression and complete packaged runtime verification.
+Independent: External review returned all three findings; new changes are not yet independently accepted.
+Adverse: Keep unrelated corpus/root data and historical raw events; no live network or owner data.
+Rollback: Revert the correction commit; no account or production changes.
+Next: Reproduce/fix the failures, refresh modified-file hashes while retaining original provenance, test and publish on existing PR #12.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-RUNTIME-REVIEW-END", "recorded_at": "2026-10-17T04:15:14.302809+02:00", "occurred_at": "2026-10-17T04:15:14.302809+02:00", "actor": "OpenAI Codex", "topics": ["runtime", "review", "collaborator"], "status": "VERIFIED", "visibility": "PUBLIC"} -->
+## CTX-20261017-RUNTIME-REVIEW-END — Runtime findings corrected with regression evidence
+Summary: RUNTIME-REVIEW-20261017 local correction complete. Directory snapshots prune withdrawn/disallowed sources only in their corpus/root namespace and roll back on replacement failure. Webhook receipt IDs deduplicate changed fallback timestamps and reject conflicting evidence. Interest patterns replay reversible actions by occurrence time. Corrected Context source pin c9d6a6f4d6186585cb8d20b0b53d7433f3077505 includes both PR #10 fixes. Onboarding keeps username/destination questions outside the five-question interview. Actor unchanged; exact build/mode/plan and active duration UNKNOWN.
+Sources: Review findings 4300835900, 4300835903, 4300835905 and earlier onboarding finding 4257678736; runtime/DISTRIBUTION.json retains original upstream hashes and identifies changed bytes.
+Integrity: PASS — 298 packaged runtime tests; 20 repository tests after final Context pin update; 440 separate synthetic checks on the unchanged contract; context VALID; all distribution hashes and provenance flags checked. Initial repository check failed because the newly appended START event had not been reindexed; derived index refreshed, both previously failing checks pass in the complete 20-test rerun.
+Independent: PASS — changes address external review reproductions; current new-head independent acceptance and CI remain pending, not inferred from these local checks.
+Adverse: PASS — deleted/disallowed source withdrawal, unrelated roots/corpora, explicit-file preservation, pruning rollback, redelivery/changed receipt times, conflicting evidence, fallback IDs, removal/out-of-order signals, reactivation and retained raw history covered. Main and existing journal event bodies retained. No credentials or live provider access.
+Rollback: Revert correction commit without resetting source history. Existing runtime databases are not modified by packaging tests.
+Next: Publish existing PR #12, verify remote bytes and CI, obtain current-head review; destination installation and real collaborator receipt remain separate gates.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261013-006", "recorded_at": "2026-10-13T07:07:52.202629+00:00", "occurred_at": "2026-10-13T07:07:52.202629+00:00", "actor": "Codex", "topics": ["handoff", "gate", "tests"], "status": "PROPOSED", "visibility": "PUBLIC", "task_id": "github:993693501/issues/9", "phase_id": "IMPL-01", "event_kind": "IMPLEMENTATION-RECORD", "model_id": "UNKNOWN", "chat_id": "UNKNOWN"} -->
+## CTX-20261013-006 — Executable handoff precondition prepared for review
+Summary: Extend the existing Python context tool with a read-only handoff-gate and guarded_continue API over structured events in the existing journal. Issue #9 owns the task; no parallel ledger or bootstrap is introduced. Contract remains v1.2.3.
+Sources: https://github.com/aoblak/ai-agent-web/issues/9; base 90c92bc9228fe52ef1efd9cc2f39034498079c3a; scripts/oos_context.py; tests/test_handoff_gate.py; docs/OOS_CONTEXT_PROTOCOL.md.
+Integrity: 28 focused handoff tests passed before this record; full regression/index/CI verification follows before delivery. Reindex is a derived manifest update, not approval of recorded claims.
+Independent: Existing contract and provider main/issue state inspected; reviewer/caller identity authentication remains outside this local gate. No external independent agent review has occurred.
+Adverse: Missing stages/results, wrong hashes/source/actors, self-review, failed checks, stale journals, changed evidence, duplicate receipts and superseded attempts block the continuation; callback failures propagate.
+Rollback: Close the review PR or revert its eventual merge; preserve prior journal bytes and unrelated commits.
+Next: Review and verify CI; authenticated transport, writer authorization, transactional/idempotent dispatch and real cross-provider execution remain unimplemented by this change. Portfolio synchronization remains PENDING-MJ-SYNC.
 <!-- /oos:event -->
 
 <!-- oos:event {"id": "CTX-20261017-HANDOFF-REVIEW-START", "recorded_at": "2026-10-17T04:05:15.109148+02:00", "occurred_at": null, "actor": "OpenAI Codex", "topics": ["handoff", "review"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
@@ -191,4 +212,92 @@ Independent: PASS — external reproductions addressed; no current-head independ
 Adverse: PASS — reused prior-attempt message IDs block callback; new IDs allow explicit retry; concurrently oversized journal is rejected by bounded read; all previous adverse cases retained.
 Rollback: Revert this correction commit.
 Next: Publish existing PR #10, verify CI/review and update dependent runtime Context pin.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-RUNTIME-INTEGRATION-START", "recorded_at": "2026-10-17T04:25:15.716696+02:00", "occurred_at": null, "actor": "OpenAI Codex", "topics": ["runtime", "review", "integration"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261017-RUNTIME-INTEGRATION-START — Reviewed runtime and Context integration
+Summary: Recovery START records the actual current time after local correction began; actual start UNKNOWN. Coordinator accepts RUNTIME-INTEGRATION-20261017 to reconcile both candidates and address external findings 4300886359, 4300886362, 4300886367. Same OpenAI Codex actor; exact model build/mode/plan and measured active duration UNKNOWN.
+Sources: PR #12 findings 4300886359, 4300886362, 4300886367; PR #10 source b0a19bfebe9eeb9d507c1f6f33f959d34e44da33; runtime/DISTRIBUTION.json.
+Integrity: PASS — combined 55 repository tests, 304 packaged runtime tests and 440 separate synthetic checks; context VALID; all original source hashes retained alongside modified distribution hashes.
+Independent: PASS — external review reproductions matched; new-head independent acceptance and CI still pending, not claimed by local validation.
+Adverse: PASS — wrong-account identity blocks before store creation, canonical provider case retained, inactive patterns omitted from fresh CLI output while raw/history retained, mixed optional token metrics average per execution. Both parent journal event bodies preserved exactly once; no production/private account change.
+Rollback: Revert correction/merge commit without rewriting existing branch history.
+Next: Publish existing PR #12, verify remote bytes and CI, request current-head review. Main merge, destination installation and actual collaborator receipt remain separate unclaimed effects.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-RUNTIME-INTEGRATION-END", "recorded_at": "2026-10-17T04:25:15.716696+02:00", "occurred_at": "2026-10-17T04:25:15.716696+02:00", "actor": "OpenAI Codex", "topics": ["runtime", "review", "integration"], "status": "VERIFIED", "visibility": "PUBLIC"} -->
+## CTX-20261017-RUNTIME-INTEGRATION-END — Reviewed runtime and Context integration
+Summary: END local preparation: sync CLI validates the actor through authenticated /user before opening the database; current CLI output excludes withdrawn historical patterns; token totals average observed per-run sums with an explicit missing-value policy. Both source histories integrated without force push. Marko entry resolves the current runtime PR head instead of installing the old candidate. Same OpenAI Codex actor; exact model build/mode/plan and measured active duration UNKNOWN.
+Sources: PR #12 findings 4300886359, 4300886362, 4300886367; PR #10 source b0a19bfebe9eeb9d507c1f6f33f959d34e44da33; runtime/DISTRIBUTION.json.
+Integrity: PASS — combined 55 repository tests, 304 packaged runtime tests and 440 separate synthetic checks; context VALID; all original source hashes retained alongside modified distribution hashes.
+Independent: PASS — external review reproductions matched; new-head independent acceptance and CI still pending, not claimed by local validation.
+Adverse: PASS — wrong-account identity blocks before store creation, canonical provider case retained, inactive patterns omitted from fresh CLI output while raw/history retained, mixed optional token metrics average per execution. Both parent journal event bodies preserved exactly once; no production/private account change.
+Rollback: Revert correction/merge commit without rewriting existing branch history.
+Next: Publish existing PR #12, verify remote bytes and CI, request current-head review. Main merge, destination installation and actual collaborator receipt remain separate unclaimed effects.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-RUNTIME-DURABILITY-START", "recorded_at": "2026-10-17T04:32:48.216581+02:00", "occurred_at": null, "actor": "OpenAI Codex", "topics": ["runtime", "review", "durability"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261017-RUNTIME-DURABILITY-START — Atomic polls and durable identity corrections
+Summary: Recovery START after earlier local correction: actual start UNKNOWN. Coordinator accepts RUNTIME-DURABILITY-20261017 for external findings 4300916367, 4300916372, 4300916376. Same OpenAI Codex actor; precise model build/mode/plan and active duration UNKNOWN.
+Sources: PR #12 findings 4300916367, 4300916372, 4300916376 on ce102b40d01e1320742aa6630c8d429d388b933f; runtime/DISTRIBUTION.json; PR #10 merge provider response.
+Integrity: PASS — 309 packaged runtime tests and 55 combined repository tests; context VALID; checksums updated while preserving original source hashes.
+Independent: PASS — external reproduction cases corrected; PR #10 no-findings/CI/main tree checked separately. Current PR #12 correction still requires external current-head review, not inferred from tests.
+Adverse: PASS — interrupted snapshot replacement rolls back raw events/signals for star/follow/watch; retries emit once; colliding and long chat IDs remain isolated; existing legacy journal bytes preserved; NaN/infinities/overflowing telemetry rejected. No production/private account operations.
+Rollback: Revert this correction commit; legacy journal data is not migrated or rewritten by packaging.
+Next: Publish existing PR #12, verify remote content and CI, request final current-head review. Private destination installation, private journal sync and live recipient acceptance remain separate gates.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-RUNTIME-DURABILITY-END", "recorded_at": "2026-10-17T04:32:48.216581+02:00", "occurred_at": "2026-10-17T04:32:48.216581+02:00", "actor": "OpenAI Codex", "topics": ["runtime", "review", "durability"], "status": "VERIFIED", "visibility": "PUBLIC"} -->
+## CTX-20261017-RUNTIME-DURABILITY-END — Atomic polls and durable identity corrections
+Summary: END local correction: poll diffs and snapshots commit atomically through composable SQLite transactions; collision-resistant chat paths retain full original ID hashes and reuse verified legacy identities; non-finite and overflowing telemetry is rejected. PR #10 independently returned no findings on b0a19bfebe9eeb9d507c1f6f33f959d34e44da33, passed CI and merged as 264b7751fe4c987dabfba906925862f2eb74ae05; main tree matched the reviewed tree. Same OpenAI Codex actor; precise model build/mode/plan and active duration UNKNOWN.
+Sources: PR #12 findings 4300916367, 4300916372, 4300916376 on ce102b40d01e1320742aa6630c8d429d388b933f; runtime/DISTRIBUTION.json; PR #10 merge provider response.
+Integrity: PASS — 309 packaged runtime tests and 55 combined repository tests; context VALID; checksums updated while preserving original source hashes.
+Independent: PASS — external reproduction cases corrected; PR #10 no-findings/CI/main tree checked separately. Current PR #12 correction still requires external current-head review, not inferred from tests.
+Adverse: PASS — interrupted snapshot replacement rolls back raw events/signals for star/follow/watch; retries emit once; colliding and long chat IDs remain isolated; existing legacy journal bytes preserved; NaN/infinities/overflowing telemetry rejected. No production/private account operations.
+Rollback: Revert this correction commit; legacy journal data is not migrated or rewritten by packaging.
+Next: Publish existing PR #12, verify remote content and CI, request final current-head review. Private destination installation, private journal sync and live recipient acceptance remain separate gates.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-RUNTIME-AUTHORITY-START", "recorded_at": "2026-10-17T04:44:09.702003+02:00", "occurred_at": null, "actor": "OpenAI Codex", "topics": ["runtime", "review", "authority"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261017-RUNTIME-AUTHORITY-START — Operation authority and active-content boundaries
+Summary: Recovery START: coordinator accepts RUNTIME-AUTHORITY-20261017 for findings 4300940423–4300940426; earlier local edits preceded this record, actual start UNKNOWN. Same OpenAI Codex actor; exact model build/mode/plan and active duration UNKNOWN.
+Sources: PR #12 findings 4300940423, 4300940424, 4300940425, 4300940426 on fa8cbbd2ee89a3165a2248f54a756c20bb12e750; runtime/DISTRIBUTION.json.
+Integrity: PASS — 315 packaged runtime tests; 55 combined repository tests; context VALID. Updated examples require explicit approved postconditions, and prior authorizations/receipts are not silently migrated.
+Independent: PASS — external P1/P2 reproduction cases addressed; corrected current-head review and CI remain pending. 2600 deterministic execution simulations reported zero false executed/verified, unsafe retry or accepted illegal transitions; this is not live provider testing.
+Adverse: PASS — invented matching states rejected, changed/missing expected result blocked, post-execution input mutation blocked, foreign executor rejected for all outcomes and reconciliation, comment/BOM/XML/meta-prefixed HTML/SVG quarantined even with positive text verifier, non-verifiable contradiction population excluded from factual rate.
+Rollback: Revert correction commit; obtain fresh operation authorization after restoring any older execution API. No production data or live effects were changed.
+Next: Publish existing PR #12, verify remote bytes/CI and request current-head review. Production adapters must authenticate actual authorities/receipts; these offline field-binding tests do not establish live identity or deployment.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-RUNTIME-AUTHORITY-END", "recorded_at": "2026-10-17T04:44:09.702003+02:00", "occurred_at": "2026-10-17T04:44:09.702003+02:00", "actor": "OpenAI Codex", "topics": ["runtime", "review", "authority"], "status": "VERIFIED", "visibility": "PUBLIC"} -->
+## CTX-20261017-RUNTIME-AUTHORITY-END — Operation authority and active-content boundaries
+Summary: END local correction: approved Operation.expected_state is part of the authorization/input digest, missing expectations block authorization and verifiers cannot substitute them. Receipts require the admitted execution authority for every outcome and reconciliation. Active tag-like markup is conservatively quarantined beyond leading nodes. Factual-rate numerator excludes non-verifiable contradictions without hiding their raw count. Same OpenAI Codex actor; exact model build/mode/plan and active duration UNKNOWN.
+Sources: PR #12 findings 4300940423, 4300940424, 4300940425, 4300940426 on fa8cbbd2ee89a3165a2248f54a756c20bb12e750; runtime/DISTRIBUTION.json.
+Integrity: PASS — 315 packaged runtime tests; 55 combined repository tests; context VALID. Updated examples require explicit approved postconditions, and prior authorizations/receipts are not silently migrated.
+Independent: PASS — external P1/P2 reproduction cases addressed; corrected current-head review and CI remain pending. 2600 deterministic execution simulations reported zero false executed/verified, unsafe retry or accepted illegal transitions; this is not live provider testing.
+Adverse: PASS — invented matching states rejected, changed/missing expected result blocked, post-execution input mutation blocked, foreign executor rejected for all outcomes and reconciliation, comment/BOM/XML/meta-prefixed HTML/SVG quarantined even with positive text verifier, non-verifiable contradiction population excluded from factual rate.
+Rollback: Revert correction commit; obtain fresh operation authorization after restoring any older execution API. No production data or live effects were changed.
+Next: Publish existing PR #12, verify remote bytes/CI and request current-head review. Production adapters must authenticate actual authorities/receipts; these offline field-binding tests do not establish live identity or deployment.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-RUNTIME-POLICY-START", "recorded_at": "2026-10-17T04:53:17.914631+02:00", "occurred_at": null, "actor": "OpenAI Codex", "topics": ["runtime", "review", "policy"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261017-RUNTIME-POLICY-START — Strict policy values and workspace rollback
+Summary: Recovery START: coordinator accepts RUNTIME-POLICY-20261017 for findings 4300973485, 4300973489, 4300973493, 4300973494. Local correction preceded this record; actual start UNKNOWN. Same OpenAI Codex actor; exact model build/mode/plan and active duration UNKNOWN.
+Sources: PR #12 findings 4300973485, 4300973489, 4300973493, 4300973494 on 5a72facdf764f5f05a424c003ca18de95cc329ff; runtime/DISTRIBUTION.json.
+Integrity: PASS — 319 runtime tests and 59 combined repository tests; context VALID; source checksums retained and distribution hashes refreshed.
+Independent: PASS — external reproductions addressed; new-head CI and independent acceptance still pending.
+Adverse: PASS — truthy non-boolean grants blocked at both boundaries; omitted/false/malformed canonical flags cannot waive approval/provenance; NaN/inf/out-of-range thresholds/tolerances rejected; copy/readback failure cleanup enables retry; existing stores and a concurrently replaced destination remain untouched.
+Rollback: Revert correction commit. The publication helper removes only its own newly claimed directory; a replacement remains blocked for explicit reconciliation.
+Next: Publish existing PR #12, verify remote bytes and CI, request current-head review. No owner-account installation or live chat receipt claimed.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-RUNTIME-POLICY-END", "recorded_at": "2026-10-17T04:53:17.914631+02:00", "occurred_at": "2026-10-17T04:53:17.914631+02:00", "actor": "OpenAI Codex", "topics": ["runtime", "review", "policy"], "status": "VERIFIED", "visibility": "PUBLIC"} -->
+## CTX-20261017-RUNTIME-POLICY-END — Strict policy values and workspace rollback
+Summary: END local correction: capability grants require literal True at discovery and fresh admission. Canonical event types always enforce explicit user approval and complete user-source coverage; flags cannot disable this. Promotion thresholds, regression tolerances and rate metrics reject non-finite/out-of-range inputs. Copy/readback failures roll back only the newly claimed workspace, preserving existing or replaced stores. Same OpenAI Codex actor; exact model build/mode/plan and active duration UNKNOWN.
+Sources: PR #12 findings 4300973485, 4300973489, 4300973493, 4300973494 on 5a72facdf764f5f05a424c003ca18de95cc329ff; runtime/DISTRIBUTION.json.
+Integrity: PASS — 319 runtime tests and 59 combined repository tests; context VALID; source checksums retained and distribution hashes refreshed.
+Independent: PASS — external reproductions addressed; new-head CI and independent acceptance still pending.
+Adverse: PASS — truthy non-boolean grants blocked at both boundaries; omitted/false/malformed canonical flags cannot waive approval/provenance; NaN/inf/out-of-range thresholds/tolerances rejected; copy/readback failure cleanup enables retry; existing stores and a concurrently replaced destination remain untouched.
+Rollback: Revert correction commit. The publication helper removes only its own newly claimed directory; a replacement remains blocked for explicit reconciliation.
+Next: Publish existing PR #12, verify remote bytes and CI, request current-head review. No owner-account installation or live chat receipt claimed.
 <!-- /oos:event -->

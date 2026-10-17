@@ -1,0 +1,529 @@
+{
+  "schema": "oos-runtime-distribution/1",
+  "status": "REVIEW_CANDIDATE",
+  "bootstrap_version": "1.2.3",
+  "python": ">=3.11 with SQLite",
+  "third_party_dependencies": [],
+  "source_commits": {
+    "runtime": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+    "artifact_hardening_candidate": "201a597134428f6c982f3ec69907346cbc733578"
+  },
+  "review": "Artifact hardening and this combined distribution await independent acceptance; no production release claimed.",
+  "sanitization": [
+    "Neutral company identity and disabled optional skills",
+    "Synthetic usernames and business labels in tests",
+    "Generic prompt registry only",
+    "Historical benchmark records replaced by synthetic cases"
+  ],
+  "excluded": [
+    "Personal journals, chat history, archives and Git history",
+    "Credentials, deployment targets and customer records",
+    "Project-specific website plugins and rental-publishing components"
+  ],
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "a01bfbb29e5f9d9bcc5f233e484265be984acb74d6418ab6bc6aef61ca31800c",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "a01bfbb29e5f9d9bcc5f233e484265be984acb74d6418ab6bc6aef61ca31800c",
+      "modified": false
+    },
+    {
+      "path": "README.md",
+      "origin": "distribution-packaging",
+      "sha256": "1794d88f9097653302076c0055ccbe27e097393cd07e40d9f68698e47f28a219"
+    },
+    {
+      "path": "benchmarks/oos-torture-test-v0.1/fixtures/SEARCHED-complete.json",
+      "sha256": "c3ff4066c66f452d171002ef2f7b561edb8adfb305115c22d7a7f7f31e6edc67",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "c3ff4066c66f452d171002ef2f7b561edb8adfb305115c22d7a7f7f31e6edc67",
+      "modified": false
+    },
+    {
+      "path": "benchmarks/oos-torture-test-v0.1/fixtures/SEARCHED-incomplete.json",
+      "sha256": "b86b86f0690bfab381823a1f55f888a6dec483520fb281822242bdf0b4f93a9c",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "b86b86f0690bfab381823a1f55f888a6dec483520fb281822242bdf0b4f93a9c",
+      "modified": false
+    },
+    {
+      "path": "benchmarks/oos-torture-test-v0.1/fixtures/T1-conflicting-context.json",
+      "sha256": "1d92e428f101ebc0a949850d74b1ee5e5a728b0e0b123b4daf01cf33d71580a2",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "1d92e428f101ebc0a949850d74b1ee5e5a728b0e0b123b4daf01cf33d71580a2",
+      "modified": false
+    },
+    {
+      "path": "benchmarks/oos-torture-test-v0.1/fixtures/T2-stale-state.json",
+      "sha256": "cef96b4e61747a9961d4157924a9c4ba59c1b3a73578a619f714a8ac1e8dda91",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "cef96b4e61747a9961d4157924a9c4ba59c1b3a73578a619f714a8ac1e8dda91",
+      "modified": false
+    },
+    {
+      "path": "benchmarks/oos-torture-test-v0.1/fixtures/T3-interrupted-write.json",
+      "sha256": "f8adc3da3825f1dd3327aa48f7016deaf0ec7bfe13aadb981a833b9743a70b80",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "f8adc3da3825f1dd3327aa48f7016deaf0ec7bfe13aadb981a833b9743a70b80",
+      "modified": false
+    },
+    {
+      "path": "benchmarks/oos-torture-test-v0.1/fixtures/T4-false-success.json",
+      "sha256": "6a2c53ee95973c0825c09b1ebb65f132352747453f689c5f6b8e96d59a39bb29",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "6a2c53ee95973c0825c09b1ebb65f132352747453f689c5f6b8e96d59a39bb29",
+      "modified": false
+    },
+    {
+      "path": "benchmarks/oos-torture-test-v0.1/fixtures/T5-agent-conflict.json",
+      "sha256": "e606153c40dfd9603a198ad0dca805954f67ece0c17f252dfc41b982a73c73fa",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "e606153c40dfd9603a198ad0dca805954f67ece0c17f252dfc41b982a73c73fa",
+      "modified": false
+    },
+    {
+      "path": "benchmarks/prompt-reliability-v0.1/example-run.json",
+      "sha256": "8e5faae8b0a2dd64dd50704db37461b42fed629d831a32523978b5a5091dec2d",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "8e5faae8b0a2dd64dd50704db37461b42fed629d831a32523978b5a5091dec2d",
+      "modified": false
+    },
+    {
+      "path": "benchmarks/prompt-reliability-v0.1/synthetic-backfill.json",
+      "origin": "distribution-packaging",
+      "sha256": "e6d3ebdb94e579d6f271d78753329b2a7bba8a785e1bd068d1d4e021692323e4"
+    },
+    {
+      "path": "check_install.py",
+      "origin": "distribution-packaging",
+      "sha256": "a89f855cfbc976a39176f062ffab9bd80807ecae1b399ff91a3f53e55b304ef9"
+    },
+    {
+      "path": "evals/datasets/prompt-registry-golden.json",
+      "sha256": "a7d0f12af1c9d6c541331e8080a71a2f1302ad2568661cab97a7639e1e3db5fc",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "a7d0f12af1c9d6c541331e8080a71a2f1302ad2568661cab97a7639e1e3db5fc",
+      "modified": false
+    },
+    {
+      "path": "oos/__init__.py",
+      "sha256": "53623f97077a63192ab9e7a9f0cc52b8fc8b67963739d359d968907c49a12e5b",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "53623f97077a63192ab9e7a9f0cc52b8fc8b67963739d359d968907c49a12e5b",
+      "modified": false
+    },
+    {
+      "path": "oos/artifact_ingestion.py",
+      "sha256": "19535f0653a903b97681a5710d76f4da61e0d4997b5a99a6f275af6784bac744",
+      "source_commit": "201a597134428f6c982f3ec69907346cbc733578",
+      "source_sha256": "a60566e1faed930a4539f85f2304170b7657aca37ab39e4c81449151cb1323e6",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "oos/chat_journal.py",
+      "sha256": "a8bf161821b4051be6fb77286d0350a52267a44aecd619c2912adf1bf840a1a2",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "790fb332aea5b8d59184fb5ef2c69921fc125a543e8e4e4f2722ec3042a96944",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "oos/company.py",
+      "sha256": "6433788a28dc3c674c5e7551efb11edc0800b78a2b846e530e40933b009a63ec",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "6433788a28dc3c674c5e7551efb11edc0800b78a2b846e530e40933b009a63ec",
+      "modified": false
+    },
+    {
+      "path": "oos/execution.py",
+      "sha256": "0d1ed171cfa6bcab6304df1dbcec9cdd23b41064e9ec9966fc4be15e72176102",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "fc82a55da6625cdcce6bfd94042f1b613a67761b431a11d8b4673d4b11e6c630",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "oos/github_signal_adapter.py",
+      "sha256": "d5e98d7c1d779e1dd8df011fb8c4175566a55ad0a8c8c671e470098dfd09097e",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "3c24894c949b9afdd87c7f6b64d43076c27c108e89b82d67422fd0f44c53004a",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "oos/github_signal_analysis.py",
+      "sha256": "6d608b3f0b5bd2002f8e7ad6a7b4f154320d1e0ba57fcda248b8192fb0d09c51",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "8e7af6ad49249bd74cbe459b866287bf5cea24c49ca516484547e14854ed08cc",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "oos/github_signal_ingester.py",
+      "sha256": "9fac9dc07d06621feb80ecd56bcb1c3b5b6272b2c9828f988669eefe95303c0a",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "cde34ebf50001f3bbaa4649b35547c7fee0ee82853ef65e5483f7bcc4eb40eef",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "oos/model_router.py",
+      "sha256": "0b453bb1fa20e2ec2c3991a28f8bba1f561b8911c3359320674512582e6a10bd",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "0b453bb1fa20e2ec2c3991a28f8bba1f561b8911c3359320674512582e6a10bd",
+      "modified": false
+    },
+    {
+      "path": "oos/prompt_registry.py",
+      "sha256": "0b5deac080d0428bd058c4204731c88e87c162cfe70979a143f485f989cbb45a",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "113f73cf46e63d2985a351f0b2590b2d978958e7cc0e3af189bf51a581237148",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "oos/prompt_reliability.py",
+      "sha256": "53ee816f53c9b52d3a4c67f93ad3174bba106926292a4d2dc82db30d5d5cb273",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "d11eda6e0f23cf236d27666de1bd011bc50675f5c44b88ed4125b307732bb996",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "oos/providers.py",
+      "sha256": "1d26b3b9aca2eac12f4bedb62ebdc08bfa90f266dbabd0a69d86e9221e61a902",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "1d26b3b9aca2eac12f4bedb62ebdc08bfa90f266dbabd0a69d86e9221e61a902",
+      "modified": false
+    },
+    {
+      "path": "oos/retrieval.py",
+      "sha256": "976524a0e8d89d614e1036cd3e989af049919ac367f615592804e830058030e5",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "0bf00893112543c2d111a2210481af52fc62b9686b9ccdeafc6b11a5b053f5d7",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "oos/signals.py",
+      "sha256": "70f9acf15a7bc1eb2530dd23bc0e161dfb8a13ef79d3b4be20861fb7ade8ec9e",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "70f9acf15a7bc1eb2530dd23bc0e161dfb8a13ef79d3b4be20861fb7ade8ec9e",
+      "modified": false
+    },
+    {
+      "path": "oos/smoke.py",
+      "sha256": "136f2ecf3ccb6616f1dec4eea88e8bb7359965d17486d64f8032f11081aada3c",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "136f2ecf3ccb6616f1dec4eea88e8bb7359965d17486d64f8032f11081aada3c",
+      "modified": false
+    },
+    {
+      "path": "oos/torture.py",
+      "sha256": "a61b30b03848f2392f149db22cd331827796da437fdae85417a22029765c97af",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "a61b30b03848f2392f149db22cd331827796da437fdae85417a22029765c97af",
+      "modified": false
+    },
+    {
+      "path": "oos/turboai_security.py",
+      "sha256": "821dff7632223a444b6eab3b5045e62659f0c974390bc45129b84b6c51ad81bc",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "821dff7632223a444b6eab3b5045e62659f0c974390bc45129b84b6c51ad81bc",
+      "modified": false
+    },
+    {
+      "path": "registry/company-os.json",
+      "sha256": "3f493d2f9b7dc6e9dbdf655d0d6a3dd26c1d792faa1efc7dba4f2f67b512d6f5",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "071df00668661888b28b89bd7ef2fe9efa519dfdcfaf9f0376307dde63ed5011",
+      "modified": true
+    },
+    {
+      "path": "registry/execution-ledger.schema.json",
+      "sha256": "d6607690adbb9ffc8951d5fb89fe5ef8acbc06b117c5fac37fd776c040d72ac9",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "d6607690adbb9ffc8951d5fb89fe5ef8acbc06b117c5fac37fd776c040d72ac9",
+      "modified": false
+    },
+    {
+      "path": "registry/execution-manifest.schema.json",
+      "sha256": "fd538b65aa664e4289965ceebfd41d4ec6693cd6ed524b4ed571ce56d2378810",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "fd538b65aa664e4289965ceebfd41d4ec6693cd6ed524b4ed571ce56d2378810",
+      "modified": false
+    },
+    {
+      "path": "registry/github-signal.schema.json",
+      "sha256": "139905872d11f53ae947a9205b20f59910b7da8ff7b3f99b23384d838d5851ae",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "139905872d11f53ae947a9205b20f59910b7da8ff7b3f99b23384d838d5851ae",
+      "modified": false
+    },
+    {
+      "path": "registry/prompt-definition.schema.json",
+      "sha256": "4e4b05b83579d77344bf6d2b7288926e6f28bdfa28c393da583dcb21d7fd92db",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "4e4b05b83579d77344bf6d2b7288926e6f28bdfa28c393da583dcb21d7fd92db",
+      "modified": false
+    },
+    {
+      "path": "registry/prompts.json",
+      "sha256": "5cbb4b3db8c76199ec9c01bd05af65b666a98eeb02793cfa6666140456c3a07f",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "8cd16715eb2c0c534317db15fd2763733d011853bd9a6d9252021baa2df4309e",
+      "modified": true
+    },
+    {
+      "path": "registry/skills.json",
+      "origin": "distribution-packaging",
+      "sha256": "955b504a87646510421f981ab91501591640ee927a6e5c60f78dcfcf0a4bd910"
+    },
+    {
+      "path": "scripts/execution_enforcement_sim.py",
+      "sha256": "607ba431f6d66f7c74b0cfa50ae02ede8909dc172433531ae4f60e6334a94549",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "2552488b89e09de2b7a9805ef35c22624a2704e77a1e961bc8e1611403493804",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "scripts/github_signal_analyze.py",
+      "sha256": "f03282744687c6c6bd85b88bc4bbcd1a581f6b41fb2172a772b5fcb76d3916d3",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "d89602c291b523d82e55eaf9612535c520ed512bceee379644775adb3630ada6",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "scripts/github_signal_ingest_webhook.py",
+      "sha256": "02b74cdc9c82d6b1d67370251bb717683a9f6dc1c1a7d2a540c40c8646e1d721",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "02b74cdc9c82d6b1d67370251bb717683a9f6dc1c1a7d2a540c40c8646e1d721",
+      "modified": false
+    },
+    {
+      "path": "scripts/github_signal_sync.py",
+      "sha256": "59140d6c82e25a59b6465b0b006f06482f9586903f30fafa28c9f4d8cbac71b4",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "1a8c0556dfce9265d2ea239b6e5def42610b802596ac72a4a645e502349c8e7b",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "scripts/ollama_live_smoke.py",
+      "sha256": "a08cac6c2256d7ca9537439f4ba29df4aecbae31e5e14d1dfd5e059057599668",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "a08cac6c2256d7ca9537439f4ba29df4aecbae31e5e14d1dfd5e059057599668",
+      "modified": false
+    },
+    {
+      "path": "scripts/route_model_task.py",
+      "sha256": "6905ae4a781bdad4e290e48e63a6643c0c296b90717531c44669f17b6073964d",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "6905ae4a781bdad4e290e48e63a6643c0c296b90717531c44669f17b6073964d",
+      "modified": false
+    },
+    {
+      "path": "tests/test_artifact_ingestion.py",
+      "sha256": "9dbea08b30e40cd8b108935a86f2fe39b6184a6f330b6d81e2619483df90e486",
+      "source_commit": "201a597134428f6c982f3ec69907346cbc733578",
+      "source_sha256": "89a65dcadba60cc6fae2e7221af010bd59dfdf0064624fc3a27960d7c8c188da",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "tests/test_bnt_0001_principal_binding.py",
+      "sha256": "449965fefd715876fc4023e95d1f6e1dd1a09439436471df03cd0ea99e10f599",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "33d83bc70ac35e51cfc4102c70a9c0f41a517da468f4286262880c8aa7144134",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "tests/test_chat_journal.py",
+      "sha256": "0b7d941fce41b881df291dbb07d830778b8d322a565b8bacc002b666f461544e",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "8ad66b9a6e87066ae88ac1e640b324219b3e23ff160df622a4c9d7500213e22a",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "tests/test_company.py",
+      "sha256": "ddaf04a6bfa22f8c26911e0028db0231c16918eea03fa11efad237c7ae36f910",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "bf99bdb3e9997aef245d3e9a68e74bb0a6eb9e24d29533137f7cca95a00937b5",
+      "modified": true
+    },
+    {
+      "path": "tests/test_epistemic_ecc_faults.py",
+      "sha256": "e1da68e90b1e32bfd58cb47cf44538482cad081583a1b99019b2e50af882f92b",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "e210ae99b1d1f6b9e8bc71ff2daacf8a3ed9b2144dca381ed411a74f55846182",
+      "modified": true
+    },
+    {
+      "path": "tests/test_execution_enforcement.py",
+      "sha256": "d102d60e4aea941a1893c81d7a7e6951efb9891feaa97fc8c52b3237138648d2",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "afdc9d8fa2f56e5a7fb462b20576802a82143e20d8b0b73447f535dbc2669110",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "tests/test_github_signal_adapter.py",
+      "sha256": "78abc92ec0b3f52d6b8c8f469010a97ab23adfbaed662949c7ef3d0780aa269a",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "95a572828ceaaec82d545d23f32eee1d174f5432b900f51aa901e9979aafabd7",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "tests/test_github_signal_analysis.py",
+      "sha256": "2ac2fc79caa6b66fda657201a6e81c060eecd6cb1a1fb4dbfeb7bf94131ef87b",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "225c68b5beeb7683c5d036ca7e8ede82669d1d286c0bed303d8688f1cda43d94",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "tests/test_github_signal_cli.py",
+      "origin": "review-regression-tests",
+      "sha256": "3ee3cda25e75f70238db13355484278bcad33e57bd6c2bda3253dddf1488a43e"
+    },
+    {
+      "path": "tests/test_github_signal_ingester.py",
+      "sha256": "5d2f7a3e8dbe5a68282176e261db523f9d9adc4d689b2591190b793e1041ee01",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "17f97fe1a2d0525e19725283f57d7b20ffd5131218139fa87f8656d8ede64e9e",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "tests/test_model_router.py",
+      "sha256": "f00e266639c5a1e8af0961d38c893ed9a9506faa3c3f600ca65ecc3eb609dfd5",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "f00e266639c5a1e8af0961d38c893ed9a9506faa3c3f600ca65ecc3eb609dfd5",
+      "modified": false
+    },
+    {
+      "path": "tests/test_oos_torture_harness.py",
+      "sha256": "436713322f7734241911db9d89adb63ddab50ebb5771bf2c1c87e1322c41fa0f",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "436713322f7734241911db9d89adb63ddab50ebb5771bf2c1c87e1322c41fa0f",
+      "modified": false
+    },
+    {
+      "path": "tests/test_prompt_registry.py",
+      "sha256": "6f332f5b5f7fbd6adc0dcc778ef9db49131905b7377066a6a55b189e14528fed",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "c8d7f08cf0b4f41117862bf33d3b0e639101721d37deb614c0fd5cb5fae8b6ef",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "tests/test_prompt_reliability.py",
+      "sha256": "66116d632d6f0f4090e61c423dc4088c7a72f7530751021842ec22586eeab599",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "6410eed42b82981895390e95adbe0cf98d7a139e91c052deb9f77c06b21d6e41",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "tests/test_providers.py",
+      "sha256": "672d8bb8b2aecb62b721a39efb4e9050e9c90168f37dfbadde9f2222dd5c7346",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "672d8bb8b2aecb62b721a39efb4e9050e9c90168f37dfbadde9f2222dd5c7346",
+      "modified": false
+    },
+    {
+      "path": "tests/test_retrieval.py",
+      "sha256": "c51bfd29d20569fc2c7571730ab5d3a6ad0623e7324a65a78427e6c48c359868",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "81ae9e9bc25ebed9bafd8077d5c25a0c82c08bf8da4c3130653551f2599aea7a",
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "tests/test_signals.py",
+      "sha256": "19e7c7a3a7c6af10df68a42f7de7e48f4ca62d8ec17195fd1e03d8243172621e",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "19e7c7a3a7c6af10df68a42f7de7e48f4ca62d8ec17195fd1e03d8243172621e",
+      "modified": false
+    },
+    {
+      "path": "tests/test_smoke.py",
+      "sha256": "285483505b26a85eb6dcb2433757427cf6d1b525b323cc753834a1c3fa3742e4",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "285483505b26a85eb6dcb2433757427cf6d1b525b323cc753834a1c3fa3742e4",
+      "modified": false
+    },
+    {
+      "path": "tests/test_turboai_security.py",
+      "sha256": "0699ac3a934021bdaa92c0d309e7fbb57dc0e77777b62b5c37eb7c6ea8cc41a4",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "0699ac3a934021bdaa92c0d309e7fbb57dc0e77777b62b5c37eb7c6ea8cc41a4",
+      "modified": false
+    },
+    {
+      "path": "tests/test_vita1_os.py",
+      "sha256": "5f007493f6884cc26a96a50ab070cf28ede1e7949e9947b7cf544516ac12dfb3",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "5f007493f6884cc26a96a50ab070cf28ede1e7949e9947b7cf544516ac12dfb3",
+      "modified": false
+    },
+    {
+      "path": "tests/test_vita2_verify.py",
+      "sha256": "65037df5ca2f38b48465091c882b6442090ced46cb823895ba023b48720eae12",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "65037df5ca2f38b48465091c882b6442090ced46cb823895ba023b48720eae12",
+      "modified": false
+    },
+    {
+      "path": "vita/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modified": false
+    },
+    {
+      "path": "vita/vita1_os.py",
+      "sha256": "d062324a2075fa5f015541723f90c7a585623f2d569c720d2212e5dc6aba46b7",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "d062324a2075fa5f015541723f90c7a585623f2d569c720d2212e5dc6aba46b7",
+      "modified": false
+    },
+    {
+      "path": "vita/vita2_verify.py",
+      "sha256": "717f5252d529f054eb043e55e948a544645d5982914494adeab2420417a390ee",
+      "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
+      "source_sha256": "717f5252d529f054eb043e55e948a544645d5982914494adeab2420417a390ee",
+      "modified": false
+    }
+  ],
+  "review_corrections": {
+    "source_candidate": "132984baa8d825c7652a2c2bea21468144570f76",
+    "review_comments": [
+      4300835900,
+      4300835903,
+      4300835905,
+      4300886359,
+      4300886362,
+      4300886367,
+      4300916367,
+      4300916372,
+      4300916376,
+      4300940423,
+      4300940424,
+      4300940425,
+      4300940426,
+      4300973485,
+      4300973489,
+      4300973493,
+      4300973494
+    ],
+    "scope": "Directory reconciliation; webhook delivery deduplication; effective interest-state replay; regression tests. Original upstream source provenance retained."
+  }
+}

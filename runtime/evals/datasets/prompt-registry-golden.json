@@ -1,0 +1,33 @@
+{
+  "schema_version": "0.1",
+  "dataset_id": "oos.prompt-registry-golden@1.0.0",
+  "cases": [
+    {
+      "case_id": "valid-definition",
+      "operation": "validate_definition",
+      "expected_valid": true
+    },
+    {
+      "case_id": "silent-mutation",
+      "operation": "mutate_template_without_digest",
+      "expected_valid": false,
+      "expected_error": "content_digest_mismatch"
+    },
+    {
+      "case_id": "same-version-mutated-identity",
+      "operation": "same_version_with_recomputed_digest",
+      "expected_valid": false,
+      "expected_error": "VERSION_IMMUTABILITY_VIOLATION"
+    },
+    {
+      "case_id": "bounded-reproducibility",
+      "operation": "manifest_without_model_revision",
+      "expected_level": "BOUNDED"
+    },
+    {
+      "case_id": "strong-reproducibility",
+      "operation": "manifest_with_model_revision",
+      "expected_level": "STRONG"
+    }
+  ]
+}

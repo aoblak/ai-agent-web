@@ -1,0 +1,101 @@
+{
+  "note": "Synthetic fixtures only; no historical user data.",
+  "records": [
+    {
+      "record_id": "synthetic-raw",
+      "source_fidelity": "RAW",
+      "source_verified": true,
+      "raw_excerpt": "Synthetic exact output",
+      "claims": [
+        {
+          "status": "VERIFIED",
+          "verifiable": true,
+          "evidence_refs": [
+            "synthetic:oracle"
+          ]
+        },
+        {
+          "status": "VERIFIED",
+          "verifiable": true,
+          "evidence_refs": [
+            "synthetic:oracle"
+          ]
+        }
+      ]
+    },
+    {
+      "record_id": "synthetic-partial",
+      "source_fidelity": "PARTIAL",
+      "source_verified": true,
+      "claim_scope_bounded": true,
+      "raw_excerpt": "Synthetic bounded output",
+      "claims": [
+        {
+          "status": "VERIFIED",
+          "verifiable": true,
+          "evidence_refs": [
+            "synthetic:oracle"
+          ]
+        },
+        {
+          "status": "VERIFIED",
+          "verifiable": true,
+          "evidence_refs": [
+            "synthetic:oracle"
+          ]
+        }
+      ]
+    },
+    {
+      "record_id": "synthetic-summary",
+      "source_fidelity": "SUMMARY"
+    },
+    {
+      "record_id": "synthetic-unverified",
+      "source_fidelity": "RAW",
+      "source_verified": false
+    },
+    {
+      "record_id": "synthetic-no-output",
+      "source_fidelity": "RAW",
+      "source_verified": true
+    },
+    {
+      "record_id": "synthetic-invalid",
+      "source_fidelity": "INVALID"
+    },
+    {
+      "record_id": "synthetic-reconstructed",
+      "source_fidelity": "RECONSTRUCTED"
+    },
+    {
+      "record_id": "synthetic-no-claims",
+      "source_fidelity": "RAW",
+      "source_verified": true,
+      "raw_excerpt": "example",
+      "claims": []
+    },
+    {
+      "record_id": "synthetic-unbounded",
+      "source_fidelity": "PARTIAL",
+      "source_verified": true,
+      "raw_excerpt": "example",
+      "claims": [
+        {
+          "status": "VERIFIED",
+          "verifiable": true,
+          "evidence_refs": [
+            "synthetic:oracle"
+          ]
+        },
+        {
+          "status": "VERIFIED",
+          "verifiable": true,
+          "evidence_refs": [
+            "synthetic:oracle"
+          ]
+        }
+      ]
+    }
+  ]
+}

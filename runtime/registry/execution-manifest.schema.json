@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "oos://schemas/execution-manifest/1.0.0",
+  "title": "OOS Execution Manifest",
+  "type": "object",
+  "required": ["manifest_version", "prompt", "model", "context", "policy", "toolset", "output_schema"],
+  "properties": {
+    "manifest_version": {"type": "string"},
+    "prompt": {
+      "type": "object",
+      "required": ["prompt_id", "version", "content_digest"],
+      "properties": {
+        "prompt_id": {"type": "string"},
+        "version": {"type": "string"},
+        "content_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+      }
+    },
+    "model": {
+      "type": "object",
+      "required": ["provider", "name", "config"],
+      "properties": {
+        "provider": {"type": "string"},
+        "name": {"type": "string"},
+        "revision": {"type": "string"},
+        "config": {"type": "object"}
+      }
+    },
+    "context": {
+      "type": "object",
+      "required": ["profile", "ref", "digest"],
+      "properties": {
+        "profile": {"type": "string"},
+        "ref": {"type": "string"},
+        "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+      }
+    },
+    "policy": {"$ref": "#/$defs/versioned_ref"},
+    "toolset": {"$ref": "#/$defs/versioned_ref"},
+    "output_schema": {"$ref": "#/$defs/versioned_ref"}
+  },
+  "$defs": {
+    "versioned_ref": {
+      "type": "object",
+      "required": ["id", "version"],
+      "properties": {
+        "id": {"type": "string"},
+        "version": {"type": "string"}
+      }
+    }
+  },
+  "additionalProperties": true
+}

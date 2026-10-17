@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "oos://schemas/prompt-definition/1.0.0",
+  "title": "OOS Prompt Definition",
+  "type": "object",
+  "required": [
+    "prompt_id",
+    "name",
+    "version",
+    "status",
+    "purpose",
+    "template",
+    "variables_schema",
+    "required_context",
+    "allowed_tools",
+    "policy_refs",
+    "output_schema",
+    "evaluation_refs",
+    "content_digest"
+  ],
+  "properties": {
+    "prompt_id": {"type": "string", "minLength": 1},
+    "name": {"type": "string", "minLength": 1},
+    "version": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$"},
+    "status": {"enum": ["draft", "test", "approved", "deprecated"]},
+    "purpose": {"type": "string"},
+    "template": {"type": "string"},
+    "variables_schema": {"type": "object"},
+    "required_context": {"type": "array", "items": {"type": "string"}},
+    "allowed_tools": {"type": "array", "items": {"type": "string"}},
+    "policy_refs": {"type": "array", "items": {"type": "string"}},
+    "output_schema": {"type": "object"},
+    "evaluation_refs": {"type": "array", "items": {"type": "string"}},
+    "content_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "supersedes": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}
