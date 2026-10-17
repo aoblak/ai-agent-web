@@ -65,9 +65,10 @@ def main() -> int:
     args = parse_args()
     try:
         if args.payload is not None:
-            if args.payload.stat().st_size > MAX_PAYLOAD_BYTES:
-                raise ValueError("webhook payload exceeds size limit")
-            raw = args.payload.read_bytes()
+            # Read at most the bounded prefix even when the file grows mid-read.
+            # A prior stat() cannot enforce a content-length cap (TOCTOU).
+            with args.payload.open("rb") as stream:
+                raw = stream.read(MAX_PAYLOAD_BYTES + 1)
         else:
             raw = sys.stdin.buffer.read(MAX_PAYLOAD_BYTES + 1)
         if len(raw) > MAX_PAYLOAD_BYTES:
