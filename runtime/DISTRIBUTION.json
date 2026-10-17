@@ -31,7 +31,7 @@
     {
       "path": "README.md",
       "origin": "distribution-packaging",
-      "sha256": "89c445bb9847969098eca01467b9c8a711f529ad7cde63e41b8b4ce3e4063647"
+      "sha256": "75a695fc4ac88dca347e2aaa85787581234bbeb1f20cdd19363edc98a79755c9"
     },
     {
       "path": "benchmarks/oos-torture-test-v0.1/fixtures/SEARCHED-complete.json",
@@ -300,7 +300,7 @@
     },
     {
       "path": "scripts/github_signal_ingest_webhook.py",
-      "sha256": "ea196e2a80aecbef83ca760258d82711c28730eac7c2a12edf2a34bb8f9aacc5",
+      "sha256": "105e05b40982a147e36349bf92a2402dca4a97de465ea690b897b4eb145a9962",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "02b74cdc9c82d6b1d67370251bb717683a9f6dc1c1a7d2a540c40c8646e1d721",
       "modified": true,
@@ -393,7 +393,7 @@
     {
       "path": "tests/test_github_signal_cli.py",
       "origin": "review-regression-tests",
-      "sha256": "3fcb4ffb7f619281f48483352e4a5f7a0caecc4783eba1cfab82f698f97a2e5c"
+      "sha256": "ea4aac4444607568bee335cc20064303ef8101d38f439c63ebc3b97fd37da31e"
     },
     {
       "path": "tests/test_github_signal_ingester.py",
