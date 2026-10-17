@@ -28,6 +28,24 @@ integration. Configuration and authentication belong to the new owner.
 Obtain the entire package from one verified Git commit. The manifest detects changed
 files relative to that package; it is not a signature or proof of sender identity.
 
+## Authenticated webhook ingestion
+
+The optional `runtime/scripts/github_signal_ingest_webhook.py` CLI fails closed
+before opening its database unless `GITHUB_WEBHOOK_SECRET` is set and
+`--signature` contains a valid `X-Hub-Signature-256` value computed over the
+**exact raw payload bytes**. Example from a trusted receiving process:
+
+```sh
+GITHUB_WEBHOOK_SECRET='<from-secret-store>' python3 runtime/scripts/github_signal_ingest_webhook.py \\
+  --db /secure/signals.sqlite --event star --delivery '<original-delivery-id>' \\
+  --signature 'sha256=<signature-from-header>' --payload /secure/raw-webhook.json
+```
+
+Do not expose the secret via a command-line argument or commit it. The receiving
+transport must separately authenticate and preserve the original event/delivery
+headers; the payload HMAC does not sign those headers. Direct unsigned invocation
+is not supported. This is not a hosted webhook receiver or a deployed integration.
+
 ## Components and their actual boundaries
 
 | Component | Implemented behavior | Setup still required |
