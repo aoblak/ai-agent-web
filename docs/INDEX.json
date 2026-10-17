@@ -48,17 +48,17 @@
     {
       "path": "docs/PROJECT_STATE.md",
       "visibility": "PUBLIC",
-      "sha256": "4a5e0679f34f6d787c70e3b886e978e4c70d7e42241596b49283015291a5c17b"
+      "sha256": "ba474084c5373ef665ecac4f08e30854a3ba85d5bee5679cf924f246dc3a17e8"
     },
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "84c88fecd0bfd58c00e2f089779d1797bc788853e322a8d1ab443b2b92b64b12"
+      "sha256": "6116d025e3f42e27222417b9e5e056391b00dbb6bec418ed5dd68bcc605eda81"
     },
     {
       "path": "scripts/oos_context.py",
       "visibility": "PUBLIC",
-      "sha256": "ac6dd79bef1f3d9571ea4399cc0279002d2b68e1a20108605c6b9e2c5a16fa07"
+      "sha256": "909e2b4bcb4ff1adf91e74465bbd971151bca6be399ef8144544bdfe04860875"
     },
     {
       "path": "tests/test_oos_context.py",
@@ -73,7 +73,12 @@
     {
       "path": "tests/test_handoff_gate.py",
       "visibility": "PUBLIC",
-      "sha256": "dd86fa420d2288638978973df2e3897ccdfce8f514162d87e8b3f510bdb41cc6"
+      "sha256": "6f550bb2e8711414765e3d698ca1a7c62602ba565094ebc4d31818d148be08a3"
+    },
+    {
+      "path": "MARKO-START-HERE.md",
+      "visibility": "PUBLIC",
+      "sha256": "c4807273d803f672821a896c69c80d7b92ac1cf4e99b458b99e187ba0c94b0f3"
     }
   ],
   "glossary": {
@@ -296,6 +301,60 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "5e09089b9d92dd4f49da8d2a0f97895449ff2abfd0adb716aff66760e3221154"
+    },
+    {
+      "id": "CTX-20261017-MARKO-GIT-START",
+      "title": "CTX-20261017-MARKO-GIT-START — Clarify existing collaborator Git entry",
+      "topics": [
+        "bootstrap",
+        "handoff",
+        "collaborator"
+      ],
+      "recorded_at": "2026-10-17T03:13:59.404394+02:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "b0851f516291f98f463f0edf458bf320488663c63ec040c5a891630a1ad7848e"
+    },
+    {
+      "id": "CTX-20261017-MARKO-GIT-END",
+      "title": "CTX-20261017-MARKO-GIT-END — Git collaboration procedure prepared and checked",
+      "topics": [
+        "bootstrap",
+        "handoff",
+        "collaborator"
+      ],
+      "recorded_at": "2026-10-17T03:14:18.203994+02:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "54e5e9c2253358e65faa7a0e87c2c509058cd5ac7a238dfc866bf49741e75f2b"
+    },
+    {
+      "id": "CTX-20261017-HANDOFF-REVIEW-START",
+      "title": "CTX-20261017-HANDOFF-REVIEW-START — Recovery start for requested review correction",
+      "topics": [
+        "handoff",
+        "review"
+      ],
+      "recorded_at": "2026-10-17T04:05:15.109148+02:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "75f1f3fc4b82824e0c1aa99b8a31e0271343568f1d32a6f0ca3724f519964b6a"
+    },
+    {
+      "id": "CTX-20261017-HANDOFF-REVIEW-END",
+      "title": "CTX-20261017-HANDOFF-REVIEW-END — Cross-task schema regression corrected",
+      "topics": [
+        "handoff",
+        "review"
+      ],
+      "recorded_at": "2026-10-17T04:06:39.963248+02:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "61c3db1ce191548c210e16524ddf7e7769da18a40a339d1fac0756f8d7190bc7"
     }
   ]
 }

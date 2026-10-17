@@ -93,6 +93,29 @@ class HandoffGateChecks(unittest.TestCase):
         self.assertEqual(calls[0]["artifacts"][0]["sha256"], context.sha(self.artifact.read_bytes()))
         self.assertEqual(self.gate_cli().returncode, 0)
 
+    def test_unrelated_task_with_new_schema_does_not_block_valid_chain(self):
+        unrelated = copy.deepcopy(self.events[0])
+        unrelated["id"] = "UNRELATED-NEW-SCHEMA"
+        unrelated["handoff"].update(task_id="OTHER-TASK", schema="oos-handoff/2")
+        self.persist([unrelated] + self.events)
+        calls = []
+        context.guarded_continue(self.root, self.policy, calls.append)
+        self.assertEqual(len(calls), 1)
+
+    def test_requested_task_with_unsupported_schema_blocks(self):
+        self.events[0]["handoff"]["schema"] = "oos-handoff/2"
+        self.persist()
+        self.assert_blocked()
+
+    def test_unidentifiable_handoff_record_blocks(self):
+        for handoff in ({"schema": "oos-handoff/2"}, "invalid"):
+            with self.subTest(handoff=handoff):
+                unrelated = copy.deepcopy(self.events[0])
+                unrelated["id"] = "UNIDENTIFIABLE-HANDOFF"
+                unrelated["handoff"] = handoff
+                self.persist([unrelated] + self.events)
+                self.assert_blocked()
+
     def test_each_missing_stage_blocks_callback(self):
         for i in range(len(self.events)):
             with self.subTest(missing_stage=i):

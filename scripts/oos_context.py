@@ -171,10 +171,16 @@ def handoff_gate(root, policy):
         if "handoff" not in meta:
             continue  # Legacy prose entries cannot authorize a handoff.
         h = meta["handoff"]
-        if not isinstance(h, dict) or h.get("schema") != "oos-handoff/1":
+        if not isinstance(h, dict):
             raise ContextError("Invalid structured handoff record")
+        # A shared journal may contain other tasks using newer schemas. Their
+        # identifiable records do not participate in this task's gate.
         if h.get("task_id") != policy["task_id"]:
-            continue
+            if h.get("task_id"):
+                continue
+            raise ContextError("Missing handoff task identifier")
+        if h.get("schema") != "oos-handoff/1":
+            raise ContextError("Invalid structured handoff record")
         attempt = required_text(h.get("attempt_id"), "attempt_id")
         if not attempts or attempts[-1] != attempt:
             if attempt in attempts:
