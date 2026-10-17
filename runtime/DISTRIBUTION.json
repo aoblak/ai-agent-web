@@ -31,7 +31,7 @@
     {
       "path": "README.md",
       "origin": "distribution-packaging",
-      "sha256": "75a695fc4ac88dca347e2aaa85787581234bbeb1f20cdd19363edc98a79755c9"
+      "sha256": "b4850639c1c17894e1a1838cc7a163d0c84eaff4ee7a0008df4b9099e79a1ecb"
     },
     {
       "path": "benchmarks/oos-torture-test-v0.1/fixtures/SEARCHED-complete.json",
@@ -393,7 +393,7 @@
     {
       "path": "tests/test_github_signal_cli.py",
       "origin": "review-regression-tests",
-      "sha256": "ea4aac4444607568bee335cc20064303ef8101d38f439c63ebc3b97fd37da31e"
+      "sha256": "a3f2c9d7b669d97ead7d7696b541ef675af3585f03dc9459ffeccd0b93f8921c"
     },
     {
       "path": "tests/test_github_signal_ingester.py",
