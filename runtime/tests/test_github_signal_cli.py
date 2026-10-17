@@ -38,7 +38,7 @@ class SignalCliTests(unittest.TestCase):
     def test_webhook_rejects_missing_secret_signature_or_tampered_bytes_before_write(self):
         body = (b'{  "action":"created", "sender":{"login":"visitor"}, '
                 b'"repository":{"full_name":"owner/repo"},'
-                b'"starred_at":"2026-09-01T00:00:00Z" }\\n')
+                b'"starred_at":"2026-09-01T00:00:00Z" }\n')
         signature = "sha256=" + hmac.new(b"correct-secret", body, hashlib.sha256).hexdigest()
         with tempfile.TemporaryDirectory() as tmp:
             db = Path(tmp) / "signals.sqlite"
@@ -60,7 +60,7 @@ class SignalCliTests(unittest.TestCase):
     def test_webhook_accepts_exact_raw_signed_bytes_and_deduplicates_delivery(self):
         body = (b'{  "action":"created", "sender":{"login":"visitor"}, '
                 b'"repository":{"full_name":"owner/repo"},'
-                b'"starred_at":"2026-09-01T00:00:00Z" }\\n')
+                b'"starred_at":"2026-09-01T00:00:00Z" }\n')
         signature = "sha256=" + hmac.new(b"correct-secret", body, hashlib.sha256).hexdigest()
         with tempfile.TemporaryDirectory() as tmp:
             db = Path(tmp) / "signals.sqlite"
