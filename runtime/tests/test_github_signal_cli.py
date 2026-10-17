@@ -1,6 +1,9 @@
 import argparse
+import hashlib
+import hmac
 import importlib.util
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -17,6 +20,60 @@ spec.loader.exec_module(sync_cli)
 
 
 class SignalCliTests(unittest.TestCase):
+    def _run_webhook(self, db, body, *, secret=None, signature=None, payload_path=None):
+        cmd = [sys.executable, str(ROOT / "scripts/github_signal_ingest_webhook.py"),
+               "--db", str(db), "--event", "star", "--delivery", "signed-delivery-1"]
+        if signature is not None:
+            cmd.extend(["--signature", signature])
+        if payload_path is not None:
+            payload_path.write_bytes(body)
+            cmd.extend(["--payload", str(payload_path)])
+        env = os.environ.copy()
+        env.pop("GITHUB_WEBHOOK_SECRET", None)
+        if secret is not None:
+            env["GITHUB_WEBHOOK_SECRET"] = secret
+        return subprocess.run(cmd, input=None if payload_path is not None else body,
+                              capture_output=True, env=env)
+
+    def test_webhook_rejects_missing_secret_signature_or_tampered_bytes_before_write(self):
+        body = (b'{  "action":"created", "sender":{"login":"visitor"}, '
+                b'"repository":{"full_name":"owner/repo"},'
+                b'"starred_at":"2026-09-01T00:00:00Z" }\\n')
+        signature = "sha256=" + hmac.new(b"correct-secret", body, hashlib.sha256).hexdigest()
+        with tempfile.TemporaryDirectory() as tmp:
+            db = Path(tmp) / "signals.sqlite"
+            for kwargs in (
+                {"secret": None, "signature": signature},
+                {"secret": "correct-secret", "signature": None},
+                {"secret": "wrong-secret", "signature": signature},
+                {"secret": "correct-secret", "signature": "sha256=not-a-digest"},
+            ):
+                result = self._run_webhook(db, body, **kwargs)
+                self.assertEqual(result.returncode, 2, result.stdout)
+                self.assertFalse(db.exists())
+            changed = body.replace(b'"created"', b'"deleted"')
+            result = self._run_webhook(db, changed, secret="correct-secret", signature=signature)
+            self.assertEqual(result.returncode, 2)
+            self.assertFalse(db.exists())
+            self.assertNotIn(b"correct-secret", result.stderr)
+
+    def test_webhook_accepts_exact_raw_signed_bytes_and_deduplicates_delivery(self):
+        body = (b'{  "action":"created", "sender":{"login":"visitor"}, '
+                b'"repository":{"full_name":"owner/repo"},'
+                b'"starred_at":"2026-09-01T00:00:00Z" }\\n')
+        signature = "sha256=" + hmac.new(b"correct-secret", body, hashlib.sha256).hexdigest()
+        with tempfile.TemporaryDirectory() as tmp:
+            db = Path(tmp) / "signals.sqlite"
+            path = Path(tmp) / "payload.json"
+            for _ in range(2):
+                result = self._run_webhook(db, body, secret="correct-secret",
+                                           signature=signature, payload_path=path)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(json.loads(result.stdout)["status"], "PASS")
+            with GitHubSignalStore(db) as store:
+                self.assertEqual(store.conn.execute(
+                    "SELECT COUNT(*) FROM github_raw_events").fetchone()[0], 1)
+
     def test_wrong_actor_blocks_before_creating_database(self):
         with tempfile.TemporaryDirectory() as tmp:
             args = argparse.Namespace(db=Path(tmp) / "signals.sqlite", actor="WrongOwner",
