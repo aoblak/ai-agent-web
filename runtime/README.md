@@ -36,9 +36,7 @@ before opening its database unless `GITHUB_WEBHOOK_SECRET` is set and
 **exact raw payload bytes**. Example from a trusted receiving process:
 
 ```sh
-GITHUB_WEBHOOK_SECRET='<from-secret-store>' python3 runtime/scripts/github_signal_ingest_webhook.py 
-  --db /secure/signals.sqlite --event star --delivery '<original-delivery-id>' 
-  --signature 'sha256=<signature-from-header>' --payload /secure/raw-webhook.json
+GITHUB_WEBHOOK_SECRET='<from-secret-store>' python3 runtime/scripts/github_signal_ingest_webhook.py --db /secure/signals.sqlite --event star --delivery '<original-delivery-id>' --signature 'sha256=<signature-from-header>' --payload /secure/raw-webhook.json
 ```
 
 Do not expose the secret via a command-line argument or commit it. The receiving
