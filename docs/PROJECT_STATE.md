@@ -44,3 +44,5 @@ The existing Marko entry now describes candidate source pins, authenticated Git 
 PR #10 review correction (2026-10-17): isolate schema validation by identified task; 47 tests PASS. Main 5b740989ad331602323778030cd03a47283b0467 reconciled with both journal histories. New correction remains subject to current-head CI and external review; review request is not acceptance.
 
 Artifact size review correction (2026-10-17): bounded stream reads on initial and repeated checks; 49 gate/context tests PASS. Independent current-head acceptance and live authenticated transport remain separate requirements.
+
+Further PR #10 review hardening: message replay across earlier attempts rejected; context/index reads bounded before allocation, including consistency reads. 51 tests PASS; current-head CI and independent acceptance pending.

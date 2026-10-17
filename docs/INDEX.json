@@ -48,17 +48,17 @@
     {
       "path": "docs/PROJECT_STATE.md",
       "visibility": "PUBLIC",
-      "sha256": "f1c2d89ab7581de86c2e67e6f07ebf789666ad18720775494677b36e3924b2cd"
+      "sha256": "701b98f8ea52992a3f991f47be6a9639094a060fce1eb31c5c4470d35b334995"
     },
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "a213751d762018bfbd17da781e212d739c027c25670d6ca76c92c7b3d1b90509"
+      "sha256": "c6769b1b752db0e5961176f234c24a4d89b548f647fdd2c2b7ab39be7bd4791f"
     },
     {
       "path": "scripts/oos_context.py",
       "visibility": "PUBLIC",
-      "sha256": "5e0e8252e23e424a9d423bfeb9ffa08a4ce230b01be74aa07f3ad8b805dd14cd"
+      "sha256": "7e51ffa97bc5bdc568173faa67970c039745e1f265e2733eba0838cbfebb61a1"
     },
     {
       "path": "tests/test_oos_context.py",
@@ -73,7 +73,7 @@
     {
       "path": "tests/test_handoff_gate.py",
       "visibility": "PUBLIC",
-      "sha256": "71e6fd732d9ba4aa521dbcd1afc82ff8afcf316e95189b070b34d98e359eac39"
+      "sha256": "41c27ec8d7ca80f9dcc0a94d032c9fa0c8366b8717ffb8123943e48f065d2b07"
     },
     {
       "path": "MARKO-START-HERE.md",
@@ -381,6 +381,32 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "f11bbdb9c15e28b9ca0e8fca61cc9c033a6b8748e6c7564e47fdca0e4042ae2c"
+    },
+    {
+      "id": "CTX-20261017-HANDOFF-REPLAY-START",
+      "title": "CTX-20261017-HANDOFF-REPLAY-START — Replay and context read hardening",
+      "topics": [
+        "handoff",
+        "review"
+      ],
+      "recorded_at": "2026-10-17T04:22:46.524523+02:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "c733faec87f8115aa7b338c9ab6f516c8c547f92eb15a522537fd97d5ca96e58"
+    },
+    {
+      "id": "CTX-20261017-HANDOFF-REPLAY-END",
+      "title": "CTX-20261017-HANDOFF-REPLAY-END — Replay and context read hardening",
+      "topics": [
+        "handoff",
+        "review"
+      ],
+      "recorded_at": "2026-10-17T04:22:46.524523+02:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "7b4adab7d131152e37f0e949bc33bc03bc88df9b1e0a1b40d1841078f50e53da"
     }
   ]
 }
