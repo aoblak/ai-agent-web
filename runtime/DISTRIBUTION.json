@@ -393,7 +393,7 @@
     {
       "path": "tests/test_github_signal_cli.py",
       "origin": "review-regression-tests",
-      "sha256": "4d8767e81046114600db52d3b306e387614a3315c744b5ce5e745daf3e42fd1a"
+      "sha256": "3fcb4ffb7f619281f48483352e4a5f7a0caecc4783eba1cfab82f698f97a2e5c"
     },
     {
       "path": "tests/test_github_signal_ingester.py",
