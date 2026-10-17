@@ -302,6 +302,11 @@ def validate_execution_record(record: dict[str, Any]) -> ValidationResult:
 
 
 def summarize_executions(records: Iterable[dict[str, Any]]) -> dict[str, float | int | None]:
+    """Average observed token totals per run, excluding runs with neither metric.
+
+    An absent component contributes zero to that run's observed total; partial
+    telemetry is not an estimate of the unknown component.
+    """
     rows = list(records)
     if not rows:
         return {
@@ -327,9 +332,11 @@ def summarize_executions(records: Iterable[dict[str, Any]]) -> dict[str, float |
 
     input_tokens = avg_metric("input_tokens")
     output_tokens = avg_metric("output_tokens")
-    total_tokens = None
-    if input_tokens is not None and output_tokens is not None:
-        total_tokens = input_tokens + output_tokens
+    totals = [sum(float(row["metrics"].get(key, 0))
+                  for key in ("input_tokens", "output_tokens"))
+              for row in rows if "input_tokens" in row["metrics"]
+              or "output_tokens" in row["metrics"]]
+    total_tokens = mean(totals) if totals else None
 
     count = len(rows)
     return {

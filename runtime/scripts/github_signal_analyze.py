@@ -16,6 +16,7 @@ if str(ROOT) not in sys.path:
 from oos.github_signal_adapter import GitHubAdapterError, GitHubRestClient  # noqa: E402
 from oos.github_signal_analysis import (  # noqa: E402
     analyze,
+    detect_evidence_patterns,
     enrich_repositories,
 )
 from oos.github_signal_ingester import (  # noqa: E402
@@ -55,7 +56,9 @@ def main() -> int:
                     observed_at=timestamp,
                 )
             summary = analyze(store, detected_at=timestamp)
-            patterns = store.patterns()
+            active = {pattern.fingerprint() for pattern in detect_evidence_patterns(store)}
+            patterns = [pattern for pattern in store.patterns()
+                        if pattern["fingerprint"] in active]
     except (GitHubAdapterError, GitHubSignalError, OSError) as exc:
         print(json.dumps({"status": "BLOCKED", "error": str(exc)}), file=sys.stderr)
         return 2

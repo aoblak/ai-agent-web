@@ -339,6 +339,48 @@ class HandoffGateChecks(unittest.TestCase):
                 context.read_handoff_artifact(StaleFile())
         self.assertEqual(sizes, [129])
 
+    def test_message_ids_cannot_be_replayed_from_previous_attempt(self):
+        previous = copy.deepcopy(self.events)
+        current = copy.deepcopy(self.events)
+        self.policy["attempt_id"] = "ATTEMPT-2"
+        for item in current:
+            item["id"] += "-RETRY"
+            item["handoff"]["attempt_id"] = "ATTEMPT-2"
+            for field in ("in_reply_to", "result_event_id", "review_event_id", "confirmation_event_id"):
+                if field in item["handoff"]:
+                    item["handoff"][field] += "-RETRY"
+        self.persist(previous + current)
+        self.assert_blocked()
+        # Fresh messages permit the explicit retry with the same valid artifact.
+        for item in current:
+            item["handoff"]["message_id"] += "-RETRY"
+        self.persist(previous + current)
+        calls = []
+        context.guarded_continue(self.root, self.policy, calls.append)
+        self.assertEqual(len(calls), 1)
+
+    def test_journal_growth_during_final_read_is_bounded(self):
+        self.persist()
+        original_reader = context.local_file
+        reads = 0
+        limit = len(self.journal.read_bytes()) + 128
+
+        def read(root, relative):
+            nonlocal reads
+            file = original_reader(root, relative)
+            if relative == "docs/MASTER_JOURNAL.md":
+                reads += 1
+                if reads == 2:
+                    file.write_bytes(b"x" * (limit + 1))
+            return file
+
+        with patch.object(context, "CONTEXT_FILE_LIMIT", limit), \
+                patch.object(context, "local_file", side_effect=read):
+            calls = []
+            with self.assertRaisesRegex(context.ContextError, "exceeds 4 MB"):
+                context.guarded_continue(self.root, self.policy, calls.append)
+            self.assertEqual(calls, [])
+
     def test_callback_exception_is_not_reported_as_success(self):
         self.persist()
 

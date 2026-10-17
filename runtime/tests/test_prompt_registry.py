@@ -180,6 +180,20 @@ class PromptRegistryTest(unittest.TestCase):
         self.assertLess(delta["avg_latency_ms_delta"], 0)
         self.assertLess(delta["avg_cost_delta"], 0)
 
+    def test_total_tokens_average_uses_each_execution_population(self) -> None:
+        manifest = sample_manifest(self.prompt)
+        rows = [sample_record(manifest, success=True, cost=0, latency=0, tokens=100)
+                for _ in range(3)]
+        rows[0]["metrics"] = {"input_tokens": 100}
+        rows[1]["metrics"] = {"output_tokens": 100}
+        rows[2]["metrics"] = {}
+        summary = summarize_executions(rows)
+        self.assertEqual(summary["avg_input_tokens"], 100)
+        self.assertEqual(summary["avg_output_tokens"], 100)
+        self.assertEqual(summary["avg_total_tokens"], 100)
+        self.assertIsNone(summarize_executions([rows[2]])["avg_total_tokens"])
+        self.assertEqual(summarize_executions([rows[0]])["avg_total_tokens"], 100)
+
     def test_golden_dataset_declares_core_acceptance_cases(self) -> None:
         by_id = {case["case_id"]: case for case in self.golden}
         self.assertTrue(by_id["valid-definition"]["expected_valid"])

@@ -161,6 +161,13 @@ class GitHubRestClient:
                 return items
         raise GitHubAdapterError("GitHub pagination exceeded max_pages")
 
+    def authenticated_login(self) -> str:
+        payload = self._get_json("/user")
+        login = payload.get("login") if isinstance(payload, Mapping) else None
+        if not isinstance(login, str) or not login.strip():
+            raise GitHubAdapterError("authenticated GitHub response lacks login")
+        return login
+
     def list_starred(self) -> dict[str, dict[str, Any]]:
         records = self._paginate(
             "/user/starred?sort=created&direction=asc",

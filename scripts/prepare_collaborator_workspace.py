@@ -16,7 +16,7 @@ import tempfile
 
 PACKAGE = Path(__file__).resolve().parents[1]
 RUNTIME_ROOT = PACKAGE / "runtime"
-SOURCE = "c9d6a6f4d6186585cb8d20b0b53d7433f3077505"
+SOURCE = "b0a19bfebe9eeb9d507c1f6f33f959d34e44da33"
 PUBLIC_REPO = "https://github.com/aoblak/ai-agent-web"
 COPY = ("MASTER_PROMPT.md", "scripts/oos_context.py", "docs/GOVERNANCE.md",
         "docs/GLOSSARY.md", "docs/OOS_CONTEXT_PROTOCOL.md")

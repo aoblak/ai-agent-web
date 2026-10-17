@@ -31,7 +31,7 @@
     {
       "path": "README.md",
       "origin": "distribution-packaging",
-      "sha256": "c8f0b874666b5d54c5c7cf64eb08c64286909990e8aca4d3ff9d8f9e9886c9e9"
+      "sha256": "7048459306ec4b0b211fe370b31bd0d0bc922fbd8ac2d41bddffed168a909740"
     },
     {
       "path": "benchmarks/oos-torture-test-v0.1/fixtures/SEARCHED-complete.json",
@@ -143,10 +143,11 @@
     },
     {
       "path": "oos/github_signal_adapter.py",
-      "sha256": "3c24894c949b9afdd87c7f6b64d43076c27c108e89b82d67422fd0f44c53004a",
+      "sha256": "32e018e9cedc6ff9072913884c4276a4d196751ea6b083caceb24cd661e3c04e",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "3c24894c949b9afdd87c7f6b64d43076c27c108e89b82d67422fd0f44c53004a",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "oos/github_signal_analysis.py",
@@ -173,10 +174,11 @@
     },
     {
       "path": "oos/prompt_registry.py",
-      "sha256": "113f73cf46e63d2985a351f0b2590b2d978958e7cc0e3af189bf51a581237148",
+      "sha256": "96302c0a6441e4b66f5d080e113d07546f15cccf61d2beb55684ad71c7c90384",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "113f73cf46e63d2985a351f0b2590b2d978958e7cc0e3af189bf51a581237148",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "oos/prompt_reliability.py",
@@ -284,10 +286,11 @@
     },
     {
       "path": "scripts/github_signal_analyze.py",
-      "sha256": "d89602c291b523d82e55eaf9612535c520ed512bceee379644775adb3630ada6",
+      "sha256": "f03282744687c6c6bd85b88bc4bbcd1a581f6b41fb2172a772b5fcb76d3916d3",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "d89602c291b523d82e55eaf9612535c520ed512bceee379644775adb3630ada6",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "scripts/github_signal_ingest_webhook.py",
@@ -298,10 +301,11 @@
     },
     {
       "path": "scripts/github_signal_sync.py",
-      "sha256": "1a8c0556dfce9265d2ea239b6e5def42610b802596ac72a4a645e502349c8e7b",
+      "sha256": "59140d6c82e25a59b6465b0b006f06482f9586903f30fafa28c9f4d8cbac71b4",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "1a8c0556dfce9265d2ea239b6e5def42610b802596ac72a4a645e502349c8e7b",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "scripts/ollama_live_smoke.py",
@@ -361,10 +365,11 @@
     },
     {
       "path": "tests/test_github_signal_adapter.py",
-      "sha256": "490b544db8a3786504a4e713f666234db99cc54b82c8041fe9dba615d77549d6",
+      "sha256": "fb35578991bdd2fb5151c426ce0ff2f6da3d47595d6e42f751582b778a61acfe",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "95a572828ceaaec82d545d23f32eee1d174f5432b900f51aa901e9979aafabd7",
-      "modified": true
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "tests/test_github_signal_analysis.py",
@@ -373,6 +378,11 @@
       "source_sha256": "225c68b5beeb7683c5d036ca7e8ede82669d1d286c0bed303d8688f1cda43d94",
       "modified": true,
       "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
+    },
+    {
+      "path": "tests/test_github_signal_cli.py",
+      "origin": "review-regression-tests",
+      "sha256": "3ee3cda25e75f70238db13355484278bcad33e57bd6c2bda3253dddf1488a43e"
     },
     {
       "path": "tests/test_github_signal_ingester.py",
@@ -398,10 +408,11 @@
     },
     {
       "path": "tests/test_prompt_registry.py",
-      "sha256": "c8d7f08cf0b4f41117862bf33d3b0e639101721d37deb614c0fd5cb5fae8b6ef",
+      "sha256": "f05cb2f69abf1e0eca71693e2b089b8133a0a10e4d5b049f2a5f135ce401ccc8",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "c8d7f08cf0b4f41117862bf33d3b0e639101721d37deb614c0fd5cb5fae8b6ef",
-      "modified": false
+      "modified": true,
+      "modification_note": "Local correction for PR #12 external review on 2026-10-17; original source hash retained."
     },
     {
       "path": "tests/test_prompt_reliability.py",
@@ -487,7 +498,10 @@
     "review_comments": [
       4300835900,
       4300835903,
-      4300835905
+      4300835905,
+      4300886359,
+      4300886362,
+      4300886367
     ],
     "scope": "Directory reconciliation; webhook delivery deduplication; effective interest-state replay; regression tests. Original upstream source provenance retained."
   }

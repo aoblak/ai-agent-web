@@ -46,3 +46,7 @@ Runtime review correction (2026-10-17): withdrawn-source pruning, receipt-ID ded
 PR #10 review correction (2026-10-17): isolate schema validation by identified task; 47 tests PASS. Main 5b740989ad331602323778030cd03a47283b0467 reconciled with both journal histories. New correction remains subject to current-head CI and external review; review request is not acceptance.
 
 Artifact size review correction (2026-10-17): bounded stream reads on initial and repeated checks; 49 gate/context tests PASS. Independent current-head acceptance and live authenticated transport remain separate requirements.
+
+Further PR #10 review hardening: message replay across earlier attempts rejected; context/index reads bounded before allocation, including consistency reads. 51 tests PASS; current-head CI and independent acceptance pending.
+
+Final reviewed-candidate integration (2026-10-17): source b0a19bfebe9eeb9d507c1f6f33f959d34e44da33 integrated into runtime PR #12 without force push, preserving both journal event sets. Combined local checks: 55 repository tests, 304 runtime tests, 440 synthetic checks PASS. Actor binding, active-only CLI pattern output and per-execution token averages correct the latest review findings. Marko entry resolves the current candidate head. Current-head CI and independent acceptance remain pending; no main adoption, private installation, private journal sync or live collaborator receipt claimed.

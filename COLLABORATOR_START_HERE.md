@@ -52,14 +52,14 @@ ne pokreći generator preko postojećeg prostora.
 
 Ovaj PR uključuje `scripts/prepare_collaborator_workspace.py`. Generator koristi
 postojeći javni OOS Context kod, bez kopiranja Aljošina dnevnika, stanja ili profila.
-Izvor izvršnog alata je točno `c9d6a6f4d6186585cb8d20b0b53d7433f3077505` (PR #10,
+Izvor izvršnog alata je točno `b0a19bfebe9eeb9d507c1f6f33f959d34e44da33` (PR #10,
 verzija pod recenzijom; nije tvrdnja da je prihvaćena na mainu).
 Preuzmi ovaj ulaz, generator i cijeli direktorij `runtime/` iz istog provjerenog commita PR-a #12.
 Potrebni su Git i Python 3.11+ sa SQLiteom; nema dodatnih Python paketa. U lokalnom
 Git checkoutu javnog repozitorija osiguraj dostupnost navedenog izvornog commita:
 
 ```sh
-git fetch origin c9d6a6f4d6186585cb8d20b0b53d7433f3077505
+git fetch origin b0a19bfebe9eeb9d507c1f6f33f959d34e44da33
 python3 scripts/prepare_collaborator_workspace.py /odabrani/novi/lokalni/paket --repository Fiskalna123/oos-workspace
 python3 /odabrani/novi/lokalni/paket/scripts/oos_context.py --root /odabrani/novi/lokalni/paket validate
 ```
@@ -69,7 +69,7 @@ Generator odbija postojeće odredište, priprema svih pet slojeva, uključuje po
 validator i `guarded_continue`, provjerava hashove i lokalni ponovni dohvat.
 Uključuje i svih 17 modula OOS Python runtimea, VITA provjere, adaptere i testove iz
 `runtime/`. Prije stvaranja odredišta provjerava distribucijske hashove, kontekst i
-298 runtime testova uz blokiranu mrežu. Ne stvara GitHub repozitorij niti upisuje na
+304 runtime testova uz blokiranu mrežu. Ne stvara GitHub repozitorij niti upisuje na
 Markov račun. `LOCAL_OOS_PREPARED` i `OFFLINE_TESTED_CANDIDATE` označavaju lokalno
 pripremljen i testiran paket; nisu potvrda produkcijske instalacije ili povezivanja.
 

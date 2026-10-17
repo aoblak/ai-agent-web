@@ -96,5 +96,12 @@ in DISTRIBUTION.json; distributed hashes identify the corrected bytes.
   observations and previously persisted inferences remain historical evidence.
 
 The corrected Context gate is pinned to PR #10 commit
-`c9d6a6f4d6186585cb8d20b0b53d7433f3077505`. Both candidates still require current-head
+`b0a19bfebe9eeb9d507c1f6f33f959d34e44da33`. Both candidates still require current-head
 review and acceptance. No live provider transport or production deployment is implied.
+
+Further review corrections bind the sync CLI actor to authenticated GET /user before
+opening the local store, exclude withdrawn historical patterns from current CLI output,
+and average token totals per execution. Token totals sum observed components per run;
+missing components contribute zero and runs with neither token metric are excluded.
+Partial telemetry is not an estimate of unobserved consumption. The Context pin also
+rejects replayed message IDs across attempts and caps journal/index reads before allocation.

@@ -57,8 +57,11 @@ def main() -> int:
     token = os.environ.get("GITHUB_TOKEN", "")
     try:
         client = GitHubRestClient(token)
+        actor = client.authenticated_login()
+        if actor.casefold() != args.actor.casefold():
+            raise GitHubAdapterError("requested actor does not match authenticated GitHub account")
         with GitHubSignalStore(args.db) as store:
-            sync = GitHubSignalSynchronizer(client, store, actor=args.actor)
+            sync = GitHubSignalSynchronizer(client, store, actor=actor)
             observed_at = now_utc()
             summaries = []
             if args.stars:

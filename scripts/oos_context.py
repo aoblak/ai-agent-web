@@ -25,6 +25,8 @@ HANDOFF_STEPS = [("READY", "coordinator"), ("ASSIGNED", "coordinator"),
                  ("ACCEPTED", "owner"), ("IN_PROGRESS", "owner"),
                  ("RESULT_RETURNED", "owner"), ("VERIFIED", "reviewer"),
                  ("VERIFIED", "coordinator"), ("HANDED_OFF", "next_owner")]
+CONTEXT_FILE_LIMIT = 4_000_000
+CONTEXT_INDEX_LIMIT = 2_000_000
 HANDOFF_ARTIFACT_LIMIT = 64 * 1024 * 1024
 HANDOFF_BINDINGS = ["task_id", "attempt_id", "owner", "reviewer", "coordinator",
                     "next_owner", "source_commit"]
@@ -72,10 +74,18 @@ def local_file(root, relative):
     return target
 
 
+def read_limited(file, limit, label):
+    """Enforce allocation limits during the read, including concurrent growth."""
+    with file.open("rb") as source:
+        data = source.read(limit + 1)
+    if len(data) > limit:
+        raise ContextError(label)
+    return data
+
+
 def load_manifest(root):
-    data = local_file(root, INDEX).read_bytes()
-    if len(data) > 2_000_000:
-        raise ContextError("Context index exceeds 2 MB")
+    data = read_limited(local_file(root, INDEX), CONTEXT_INDEX_LIMIT,
+                        "Context index exceeds 2 MB")
     manifest = decode_json(data)
     if not isinstance(manifest, dict):
         raise ContextError("Index must be a JSON object")
@@ -148,11 +158,8 @@ def read_handoff_artifact(file):
     """Bound allocation even if an artifact grows after stat or a prior pass."""
     if file.stat().st_size > HANDOFF_ARTIFACT_LIMIT:
         raise ContextError("Artifact exceeds 64 MiB gate limit")
-    with file.open("rb") as source:
-        data = source.read(HANDOFF_ARTIFACT_LIMIT + 1)
-    if len(data) > HANDOFF_ARTIFACT_LIMIT:
-        raise ContextError("Artifact exceeds 64 MiB gate limit")
-    return data
+    return read_limited(file, HANDOFF_ARTIFACT_LIMIT,
+                        "Artifact exceeds 64 MiB gate limit")
 
 
 def handoff_gate(root, policy):
@@ -178,6 +185,7 @@ def handoff_gate(root, policy):
     if sha(journal) != policy["journal_sha256"]:
         raise ContextError("Stale handoff journal revision")
     selected, attempts = [], []
+    message_attempts = {}
     for match in EVENT.finditer(journal.decode("utf-8")):
         meta = decode_json(match.group(1))
         if "handoff" not in meta:
@@ -194,6 +202,11 @@ def handoff_gate(root, policy):
         if h.get("schema") != "oos-handoff/1":
             raise ContextError("Invalid structured handoff record")
         attempt = required_text(h.get("attempt_id"), "attempt_id")
+        if "message_id" in h:
+            message = required_text(h["message_id"], "message_id")
+            previous_attempt = message_attempts.setdefault(message, attempt)
+            if previous_attempt != attempt:
+                raise ContextError("Handoff message replayed across attempts")
         if not attempts or attempts[-1] != attempt:
             if attempt in attempts:
                 raise ContextError("Interleaved or reopened handoff attempt")
@@ -282,7 +295,8 @@ def handoff_gate(root, policy):
         if i == 7 and h.get("confirmation_event_id") != selected[6][0]["id"]:
             raise ContextError("Next owner did not acknowledge this confirmation")
     # Fail if a cooperative writer changed evidence while it was being checked.
-    if local_file(root, "docs/MASTER_JOURNAL.md").read_bytes() != journal:
+    if read_limited(local_file(root, "docs/MASTER_JOURNAL.md"), CONTEXT_FILE_LIMIT,
+                    "Context file exceeds 4 MB: docs/MASTER_JOURNAL.md") != journal:
         raise ContextError("Handoff journal changed during verification")
     for path, data in file_snapshots.items():
         if read_handoff_artifact(local_file(root, path)) != data:
@@ -362,9 +376,8 @@ def inspect(root, manifest, compare_hashes=True):
         if project.get("visibility") == "PUBLIC" and visibility != "PUBLIC":
             errors.append("Public context contains non-public document: " + path)
         try:
-            data = local_file(root, path).read_bytes()
-            if len(data) > 4_000_000:
-                raise ContextError("Context file exceeds 4 MB: " + path)
+            data = read_limited(local_file(root, path), CONTEXT_FILE_LIMIT,
+                                "Context file exceeds 4 MB: " + path)
             snapshots[path] = data
             if compare_hashes and document.get("sha256") != sha(data):
                 errors.append("Stale SHA-256: " + path)
@@ -441,7 +454,8 @@ def run(args):
         temporary = None
         try:
             os.close(lock)
-            if index_path.read_bytes() != index_before:
+            if read_limited(index_path, CONTEXT_INDEX_LIMIT,
+                            "Context index exceeds 2 MB") != index_before:
                 raise ContextError("Index changed during reindex; retry from current state")
             for path, data in snapshots.items():
                 if read_handoff_artifact(local_file(root, path)) != data:

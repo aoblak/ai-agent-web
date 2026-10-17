@@ -59,7 +59,7 @@ jobs:
       - name: Universal contract suite
         run: python tests/test_master_prompt_contract.py
       - name: Fetch pinned public OOS Context implementation
-        run: git fetch origin c9d6a6f4d6186585cb8d20b0b53d7433f3077505
+        run: git fetch origin b0a19bfebe9eeb9d507c1f6f33f959d34e44da33
       - name: Existing repository regression suite
         run: python -m unittest discover -s tests -v
       - name: Verify packaged runtime offline

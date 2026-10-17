@@ -55,6 +55,21 @@ class GitHubRestClientTests(unittest.TestCase):
         self.assertEqual(starred["x/y"]["starred_at"], "2026-09-01T10:00:00Z")
         self.assertTrue(all(call[0] == "GET" for call in fake.calls))
 
+    def test_authenticated_login_uses_provider_identity(self):
+        def handler(method, url, headers):
+            self.assertEqual(method, "GET")
+            self.assertEqual(urlparse(url).path, "/user")
+            return response({"login": "ActualOwner"})
+
+        client = GitHubRestClient("token", transport=FakeTransport(handler))
+        self.assertEqual(client.authenticated_login(), "ActualOwner")
+
+    def test_authenticated_login_rejects_missing_provider_identity(self):
+        client = GitHubRestClient("token", transport=FakeTransport(
+            lambda *args: response({"name": "not a login"})))
+        with self.assertRaises(GitHubAdapterError):
+            client.authenticated_login()
+
     def test_following_uses_authenticated_endpoint(self):
         def handler(method, url, headers):
             self.assertEqual(urlparse(url).path, "/user/following")

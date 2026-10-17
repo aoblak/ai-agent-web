@@ -48,17 +48,17 @@
     {
       "path": "docs/PROJECT_STATE.md",
       "visibility": "PUBLIC",
-      "sha256": "c401f881bf54fd988e2a666c60cde61a46755590d92fc7931f74e47929cacfc2"
+      "sha256": "db3b48bf3bea941f772e7298b192a78fd5fd0108e5fed06e6ccf44b354d4319c"
     },
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "58d70b61311b109c16d9c26ace1128a45b6dff986cbd9b89bf48f580db6b55ec"
+      "sha256": "8a8da0485bafbc2cac0e28493558907aa5e76bffc769dd2c3f3ca60ab195dc83"
     },
     {
       "path": "scripts/oos_context.py",
       "visibility": "PUBLIC",
-      "sha256": "5e0e8252e23e424a9d423bfeb9ffa08a4ce230b01be74aa07f3ad8b805dd14cd"
+      "sha256": "7e51ffa97bc5bdc568173faa67970c039745e1f265e2733eba0838cbfebb61a1"
     },
     {
       "path": "tests/test_oos_context.py",
@@ -73,12 +73,12 @@
     {
       "path": "MARKO-START-HERE.md",
       "visibility": "PUBLIC",
-      "sha256": "c4807273d803f672821a896c69c80d7b92ac1cf4e99b458b99e187ba0c94b0f3"
+      "sha256": "9c46a2490727ffe4584f1965ce8d4661ea50ba29cd2d524af4a5e3f259e55137"
     },
     {
       "path": "tests/test_handoff_gate.py",
       "visibility": "PUBLIC",
-      "sha256": "71e6fd732d9ba4aa521dbcd1afc82ff8afcf316e95189b070b34d98e359eac39"
+      "sha256": "41c27ec8d7ca80f9dcc0a94d032c9fa0c8366b8717ffb8123943e48f065d2b07"
     }
   ],
   "glossary": {
@@ -409,6 +409,60 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "f11bbdb9c15e28b9ca0e8fca61cc9c033a6b8748e6c7564e47fdca0e4042ae2c"
+    },
+    {
+      "id": "CTX-20261017-HANDOFF-REPLAY-START",
+      "title": "CTX-20261017-HANDOFF-REPLAY-START — Replay and context read hardening",
+      "topics": [
+        "handoff",
+        "review"
+      ],
+      "recorded_at": "2026-10-17T04:22:46.524523+02:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "c733faec87f8115aa7b338c9ab6f516c8c547f92eb15a522537fd97d5ca96e58"
+    },
+    {
+      "id": "CTX-20261017-HANDOFF-REPLAY-END",
+      "title": "CTX-20261017-HANDOFF-REPLAY-END — Replay and context read hardening",
+      "topics": [
+        "handoff",
+        "review"
+      ],
+      "recorded_at": "2026-10-17T04:22:46.524523+02:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "7b4adab7d131152e37f0e949bc33bc03bc88df9b1e0a1b40d1841078f50e53da"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-INTEGRATION-START",
+      "title": "CTX-20261017-RUNTIME-INTEGRATION-START — Reviewed runtime and Context integration",
+      "topics": [
+        "runtime",
+        "review",
+        "integration"
+      ],
+      "recorded_at": "2026-10-17T04:25:15.716696+02:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "8d62cf29d38c5710c8c87eb4494f083c0389fc91689dfae2517b93a14b58b3bb"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-INTEGRATION-END",
+      "title": "CTX-20261017-RUNTIME-INTEGRATION-END — Reviewed runtime and Context integration",
+      "topics": [
+        "runtime",
+        "review",
+        "integration"
+      ],
+      "recorded_at": "2026-10-17T04:25:15.716696+02:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "0594874b989e1e65d1541aa233d4138b4c738dc212606906940398f548730af4"
     }
   ]
 }
