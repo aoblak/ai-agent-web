@@ -10,6 +10,7 @@ import importlib.util
 import json
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -34,6 +35,30 @@ def runtime_payload():
     checker = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(checker)
     return checker.verified_payload(RUNTIME_ROOT)
+
+
+def _publish_workspace(destination, files):
+    """Claim a fresh destination and roll back only that claimed directory."""
+    destination.mkdir()  # Exclusive: a racing/existing owner store is untouched.
+    claimed = destination.stat()
+    try:
+        for path, data in files.items():
+            target = destination / path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            with target.open("xb") as output:
+                output.write(data)
+        for path, data in files.items():
+            if (destination / path).read_bytes() != data:
+                raise ValueError("Local readback failed: " + path)
+    except BaseException:
+        # Do not delete a replacement or symlink installed by another writer.
+        if destination.is_symlink():
+            raise ValueError("Preparation failed; destination ownership changed")
+        current = destination.stat()
+        if (current.st_dev, current.st_ino) != (claimed.st_dev, claimed.st_ino):
+            raise ValueError("Preparation failed; destination ownership changed")
+        shutil.rmtree(destination)
+        raise
 
 
 def prepare(destination, repository):
@@ -127,16 +152,7 @@ journal reference, scope, status and last verification. Retain superseded versio
         verified = subprocess.run([sys.executable, str(stage / "runtime/check_install.py")],
                                   check=True, capture_output=True, text=True)
         runtime_result = json.loads(verified.stdout)
-        # Exclusive claim: a racing setup or existing owner store is never replaced.
-        destination.mkdir()
-        for path, data in files.items():
-            target = destination / path
-            target.parent.mkdir(parents=True, exist_ok=True)
-            with target.open("xb") as output:
-                output.write(data)
-        for path, data in files.items():
-            if (destination / path).read_bytes() != data:
-                raise ValueError("Local readback failed: " + path)
+        _publish_workspace(destination, files)
     return dict(status="LOCAL_OOS_PREPARED", path=str(destination), source_commit=SOURCE,
                 files=len(files), remote_persistence="UNVERIFIED", full_oos_runtime="OFFLINE_TESTED_CANDIDATE",
                 runtime_verification=runtime_result,

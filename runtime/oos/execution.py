@@ -160,7 +160,7 @@ class ExecutionRecord:
     def verify_capability(self, evidence: CapabilityEvidence) -> None:
         self._require(ExecutionState.REQUESTED)
         if (
-            not evidence.valid
+            evidence.valid is not True
             or evidence.operation_id != self.operation.operation_id
             or not self.operation.principal
             or evidence.principal != self.operation.principal
@@ -225,7 +225,7 @@ class ExecutionRecord:
         # Admission requires fresh capability evidence.  Falling back to the
         # earlier discovery check would re-open a TOCTOU window.
         evidence = current_capability
-        if evidence is None or not evidence.valid:
+        if evidence is None or evidence.valid is not True:
             self._advance(ExecutionState.BLOCKED, "policy_or_capability_block")
             return
         if not self._capability_fresh(evidence, as_of=as_of):

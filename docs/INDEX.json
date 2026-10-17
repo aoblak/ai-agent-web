@@ -48,12 +48,12 @@
     {
       "path": "docs/PROJECT_STATE.md",
       "visibility": "PUBLIC",
-      "sha256": "ef0a03adb64c7e7dd5d4bb32bbba6396f065a01dda520fbc3f3a6213e8ac1e8c"
+      "sha256": "da2430ecadd1076db5c380736af6f7780a77f17c63228215108ae9d956876501"
     },
     {
       "path": "docs/MASTER_JOURNAL.md",
       "visibility": "PUBLIC",
-      "sha256": "444ad7d553900f5ea400a8be99d4070c569166b5dcb706f971bf968269596e45"
+      "sha256": "a657553b2307cf482479eaa2764a3d6edadf1c00551f77aaaba8d9c1673bce4f"
     },
     {
       "path": "scripts/oos_context.py",
@@ -519,6 +519,34 @@
       "visibility": "PUBLIC",
       "path": "docs/MASTER_JOURNAL.md",
       "sha256": "7fc7c4c14dddda017c96861fd0443d4063082c39faa2767b9e27f246cbe59c80"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-POLICY-START",
+      "title": "CTX-20261017-RUNTIME-POLICY-START — Strict policy values and workspace rollback",
+      "topics": [
+        "runtime",
+        "review",
+        "policy"
+      ],
+      "recorded_at": "2026-10-17T04:53:17.914631+02:00",
+      "status": "PROPOSED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "7075b13cbd974dce6fb635c4c96ca6350d76e2b0bac15af95bf30d388f8670e3"
+    },
+    {
+      "id": "CTX-20261017-RUNTIME-POLICY-END",
+      "title": "CTX-20261017-RUNTIME-POLICY-END — Strict policy values and workspace rollback",
+      "topics": [
+        "runtime",
+        "review",
+        "policy"
+      ],
+      "recorded_at": "2026-10-17T04:53:17.914631+02:00",
+      "status": "VERIFIED",
+      "visibility": "PUBLIC",
+      "path": "docs/MASTER_JOURNAL.md",
+      "sha256": "3dd7ce233cb13c37a6c29d48d7d66c12dc51f9022b1ef5ecb166db1d23c01739"
     }
   ]
 }

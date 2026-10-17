@@ -65,6 +65,65 @@ class CollaboratorChecks(unittest.TestCase):
                     module.prepare(target, name)
                 self.assertFalse(target.exists())
 
+    def test_partial_copy_is_removed_and_the_same_destination_can_be_retried(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp) / "workspace"
+            keep = Path(tmp) / "keep.txt"
+            keep.write_bytes(b"unrelated")
+            files = {"first.txt": b"first", "nested/fail.txt": b"last"}
+            original = Path.open
+            def fail(path, mode="r", *args, **kwargs):
+                if path == target / "nested/fail.txt" and mode == "xb":
+                    raise OSError("disk full")
+                return original(path, mode, *args, **kwargs)
+            with patch.object(Path, "open", new=fail):
+                with self.assertRaisesRegex(OSError, "disk full"):
+                    module._publish_workspace(target, files)
+            self.assertFalse(target.exists())
+            self.assertEqual(keep.read_bytes(), b"unrelated")
+            module._publish_workspace(target, files)
+            self.assertEqual((target / "nested/fail.txt").read_bytes(), b"last")
+
+    def test_readback_failure_removes_only_the_newly_claimed_destination(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp) / "workspace"
+            original = Path.read_bytes
+            def incorrect(path):
+                return b"wrong" if path == target / "file.txt" else original(path)
+            with patch.object(Path, "read_bytes", new=incorrect):
+                with self.assertRaisesRegex(ValueError, "readback failed"):
+                    module._publish_workspace(target, {"file.txt": b"expected"})
+            self.assertFalse(target.exists())
+
+    def test_existing_destination_is_not_removed_by_publication_failure(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp) / "existing"
+            target.mkdir()
+            history = target / "history.txt"
+            history.write_bytes(b"owner history")
+            with self.assertRaises(FileExistsError):
+                module._publish_workspace(target, {"history.txt": b"overwrite"})
+            self.assertEqual(history.read_bytes(), b"owner history")
+
+    def test_replaced_destination_is_not_deleted_during_rollback(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp) / "workspace"
+            abandoned = Path(tmp) / "original-claim"
+            original = Path.open
+            def replace_destination(path, mode="r", *args, **kwargs):
+                if path == target / "file.txt" and mode == "xb":
+                    target.rename(abandoned)
+                    target.mkdir()
+                    with original(target / "owner.txt", "wb") as out:
+                        out.write(b"other writer")
+                    raise OSError("interrupted after replacement")
+                return original(path, mode, *args, **kwargs)
+            with patch.object(Path, "open", new=replace_destination):
+                with self.assertRaisesRegex(ValueError, "ownership changed"):
+                    module._publish_workspace(target, {"file.txt": b"expected"})
+            self.assertEqual((target / "owner.txt").read_bytes(), b"other writer")
+            self.assertTrue(abandoned.is_dir())
+
     def test_tampered_distribution_blocks_preparation(self):
         with tempfile.TemporaryDirectory() as tmp:
             runtime = Path(tmp) / "runtime"

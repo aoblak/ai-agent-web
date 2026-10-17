@@ -31,7 +31,7 @@
     {
       "path": "README.md",
       "origin": "distribution-packaging",
-      "sha256": "d7c741cdd5f47fab358953d232af7ca776ef9158db9133f5022476978ba2a45a"
+      "sha256": "1794d88f9097653302076c0055ccbe27e097393cd07e40d9f68698e47f28a219"
     },
     {
       "path": "benchmarks/oos-torture-test-v0.1/fixtures/SEARCHED-complete.json",
@@ -123,7 +123,7 @@
     },
     {
       "path": "oos/chat_journal.py",
-      "sha256": "aeeab988099f2aa3e287668680d9244b2312a9fc33b1c4496fe335ceea89a25b",
+      "sha256": "a8bf161821b4051be6fb77286d0350a52267a44aecd619c2912adf1bf840a1a2",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "790fb332aea5b8d59184fb5ef2c69921fc125a543e8e4e4f2722ec3042a96944",
       "modified": true,
@@ -138,7 +138,7 @@
     },
     {
       "path": "oos/execution.py",
-      "sha256": "cf228f119877a1cdcd25b812f55f047df1deb294dc41fda52d20532054046daf",
+      "sha256": "0d1ed171cfa6bcab6304df1dbcec9cdd23b41064e9ec9966fc4be15e72176102",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "fc82a55da6625cdcce6bfd94042f1b613a67761b431a11d8b4673d4b11e6c630",
       "modified": true,
@@ -185,7 +185,7 @@
     },
     {
       "path": "oos/prompt_reliability.py",
-      "sha256": "3d9dd960c3f2d0d54566978d44566f10444033fd1bc335c340471944c4b2d761",
+      "sha256": "53ee816f53c9b52d3a4c67f93ad3174bba106926292a4d2dc82db30d5d5cb273",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "d11eda6e0f23cf236d27666de1bd011bc50675f5c44b88ed4125b307732bb996",
       "modified": true,
@@ -344,7 +344,7 @@
     },
     {
       "path": "tests/test_chat_journal.py",
-      "sha256": "636282db1cfc074a7c240a1e504ba106d43586e3ae029acd6bac52ecd0c4300b",
+      "sha256": "0b7d941fce41b881df291dbb07d830778b8d322a565b8bacc002b666f461544e",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "8ad66b9a6e87066ae88ac1e640b324219b3e23ff160df622a4c9d7500213e22a",
       "modified": true,
@@ -366,7 +366,7 @@
     },
     {
       "path": "tests/test_execution_enforcement.py",
-      "sha256": "ce29710d71c9fb79858a904833a229f6fbba27a902c584421478589650c920f8",
+      "sha256": "d102d60e4aea941a1893c81d7a7e6951efb9891feaa97fc8c52b3237138648d2",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "afdc9d8fa2f56e5a7fb462b20576802a82143e20d8b0b73447f535dbc2669110",
       "modified": true,
@@ -425,7 +425,7 @@
     },
     {
       "path": "tests/test_prompt_reliability.py",
-      "sha256": "b3777b9df002d0981a794e1b34d69ea4e2071651ad9c6571f3183c35d0fa8b07",
+      "sha256": "66116d632d6f0f4090e61c423dc4088c7a72f7530751021842ec22586eeab599",
       "source_commit": "1f3903d27f2d248d5879a8ac8e41bb7b4bb84507",
       "source_sha256": "6410eed42b82981895390e95adbe0cf98d7a139e91c052deb9f77c06b21d6e41",
       "modified": true,
@@ -518,7 +518,11 @@
       4300940423,
       4300940424,
       4300940425,
-      4300940426
+      4300940426,
+      4300973485,
+      4300973489,
+      4300973493,
+      4300973494
     ],
     "scope": "Directory reconciliation; webhook delivery deduplication; effective interest-state replay; regression tests. Original upstream source provenance retained."
   }

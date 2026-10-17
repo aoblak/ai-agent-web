@@ -117,6 +117,13 @@ class PromotionGate:
             return True, None
 
         metadata = candidate.get("metadata") or {}
+        if not isinstance(metadata, dict):
+            return False, "promotion metadata must be an object"
+        for flag in ("changes_canon", "authorized_by_user", "external_state_claim", "independent_verification"):
+            if flag in metadata and type(metadata[flag]) is not bool:
+                return False, f"promotion {flag} must be boolean"
+        if "changes_canon" in metadata and metadata["changes_canon"] is not True:
+            return False, "canonical event cannot disable changes_canon"
         source_seqs = metadata.get("source_seqs")
         if not isinstance(source_seqs, list) or not source_seqs:
             return False, "promotion requires non-empty source_seqs"
@@ -130,26 +137,25 @@ class PromotionGate:
         if not direct_user_sources:
             return False, "promotion must reference at least one direct user event"
 
-        if metadata.get("changes_canon") is True:
-            prior_user_seqs = {
-                seq for seq, event in by_seq.items()
-                if event.get("role") == "user"
-            }
-            cited_user_seqs = {
-                seq for seq in source_seqs
-                if by_seq[seq].get("role") == "user"
-            }
-            omitted_user_seqs = sorted(prior_user_seqs - cited_user_seqs)
-            if omitted_user_seqs:
-                return False, (
-                    "canon-changing promotion omits prior user events: "
-                    f"{omitted_user_seqs}"
-                )
+        prior_user_seqs = {
+            seq for seq, event in by_seq.items()
+            if event.get("role") == "user"
+        }
+        cited_user_seqs = {
+            seq for seq in source_seqs
+            if by_seq[seq].get("role") == "user"
+        }
+        omitted_user_seqs = sorted(prior_user_seqs - cited_user_seqs)
+        if omitted_user_seqs:
+            return False, (
+                "canon-changing promotion omits prior user events: "
+                f"{omitted_user_seqs}"
+            )
 
         if metadata.get("contradiction_check") != "pass":
             return False, "promotion contradiction_check must be pass"
 
-        if metadata.get("changes_canon") is True and metadata.get("authorized_by_user") is not True:
+        if metadata.get("authorized_by_user") is not True:
             return False, "canon-changing promotion requires explicit user authorization"
 
         if metadata.get("external_state_claim") is True and metadata.get("independent_verification") is not True:

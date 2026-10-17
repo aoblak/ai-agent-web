@@ -125,3 +125,11 @@ Artifact sniffing conservatively quarantines tag-like markup anywhere in UTF-8 c
 including after comments, BOM/XML declarations and leading HTML nodes, regardless of
 a .txt filename. Reliability rates use contradicted verifiable claims as numerator
 over the same verifiable population; raw non-verifiable contradiction counts remain visible.
+
+CapabilityEvidence.valid must be the literal boolean True at discovery and fresh
+admission; truthy strings/numbers are rejected. Canonical journal event types always
+require explicit user authorization and complete prior-user provenance, even when
+changes_canon is omitted; malformed/false canonical flags cannot weaken those checks.
+Promotion thresholds, regression tolerances and rate metrics must be finite numbers
+in [0,1]. Workspace publication rolls back only the newly claimed directory on copy
+or readback failure, and refuses to delete a replacement created by another writer.

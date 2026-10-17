@@ -96,6 +96,22 @@ class ExecutionEnforcementTests(unittest.TestCase):
                     record.accept_execution_receipt(exec_receipt(operation, result))
                     self.assertEqual(record.execution_receipt.executor_id, record.execution_authority)
 
+    def test_capability_grants_require_literal_true_at_both_boundaries(self):
+        for value in ("false", "true", 1, 0, None, [], {}):
+            with self.subTest(valid=value):
+                operation = op()
+                bad = replace(capability(operation), valid=value)
+                record = ExecutionRecord(operation)
+                record.verify_capability(bad)
+                self.assertEqual(record.state, ExecutionState.BLOCKED)
+                record = ExecutionRecord(operation)
+                record.verify_capability(capability(operation))
+                record.authorize(authorization(operation))
+                record.admit_execution("worker", current_session_id=operation.session_id,
+                                       current_capability=bad, admission_store=InMemoryAdmissionStore())
+                self.assertEqual(record.state, ExecutionState.BLOCKED)
+                self.assertIsNone(record.execution_authority)
+
     def test_happy_path_requires_both_receipts(self):
         operation, record = self.ready()
         er = exec_receipt(operation)

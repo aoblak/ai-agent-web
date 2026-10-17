@@ -279,3 +279,25 @@ Adverse: PASS — invented matching states rejected, changed/missing expected re
 Rollback: Revert correction commit; obtain fresh operation authorization after restoring any older execution API. No production data or live effects were changed.
 Next: Publish existing PR #12, verify remote bytes/CI and request current-head review. Production adapters must authenticate actual authorities/receipts; these offline field-binding tests do not establish live identity or deployment.
 <!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-RUNTIME-POLICY-START", "recorded_at": "2026-10-17T04:53:17.914631+02:00", "occurred_at": null, "actor": "OpenAI Codex", "topics": ["runtime", "review", "policy"], "status": "PROPOSED", "visibility": "PUBLIC"} -->
+## CTX-20261017-RUNTIME-POLICY-START — Strict policy values and workspace rollback
+Summary: Recovery START: coordinator accepts RUNTIME-POLICY-20261017 for findings 4300973485, 4300973489, 4300973493, 4300973494. Local correction preceded this record; actual start UNKNOWN. Same OpenAI Codex actor; exact model build/mode/plan and active duration UNKNOWN.
+Sources: PR #12 findings 4300973485, 4300973489, 4300973493, 4300973494 on 5a72facdf764f5f05a424c003ca18de95cc329ff; runtime/DISTRIBUTION.json.
+Integrity: PASS — 319 runtime tests and 59 combined repository tests; context VALID; source checksums retained and distribution hashes refreshed.
+Independent: PASS — external reproductions addressed; new-head CI and independent acceptance still pending.
+Adverse: PASS — truthy non-boolean grants blocked at both boundaries; omitted/false/malformed canonical flags cannot waive approval/provenance; NaN/inf/out-of-range thresholds/tolerances rejected; copy/readback failure cleanup enables retry; existing stores and a concurrently replaced destination remain untouched.
+Rollback: Revert correction commit. The publication helper removes only its own newly claimed directory; a replacement remains blocked for explicit reconciliation.
+Next: Publish existing PR #12, verify remote bytes and CI, request current-head review. No owner-account installation or live chat receipt claimed.
+<!-- /oos:event -->
+
+<!-- oos:event {"id": "CTX-20261017-RUNTIME-POLICY-END", "recorded_at": "2026-10-17T04:53:17.914631+02:00", "occurred_at": "2026-10-17T04:53:17.914631+02:00", "actor": "OpenAI Codex", "topics": ["runtime", "review", "policy"], "status": "VERIFIED", "visibility": "PUBLIC"} -->
+## CTX-20261017-RUNTIME-POLICY-END — Strict policy values and workspace rollback
+Summary: END local correction: capability grants require literal True at discovery and fresh admission. Canonical event types always enforce explicit user approval and complete user-source coverage; flags cannot disable this. Promotion thresholds, regression tolerances and rate metrics reject non-finite/out-of-range inputs. Copy/readback failures roll back only the newly claimed workspace, preserving existing or replaced stores. Same OpenAI Codex actor; exact model build/mode/plan and active duration UNKNOWN.
+Sources: PR #12 findings 4300973485, 4300973489, 4300973493, 4300973494 on 5a72facdf764f5f05a424c003ca18de95cc329ff; runtime/DISTRIBUTION.json.
+Integrity: PASS — 319 runtime tests and 59 combined repository tests; context VALID; source checksums retained and distribution hashes refreshed.
+Independent: PASS — external reproductions addressed; new-head CI and independent acceptance still pending.
+Adverse: PASS — truthy non-boolean grants blocked at both boundaries; omitted/false/malformed canonical flags cannot waive approval/provenance; NaN/inf/out-of-range thresholds/tolerances rejected; copy/readback failure cleanup enables retry; existing stores and a concurrently replaced destination remain untouched.
+Rollback: Revert correction commit. The publication helper removes only its own newly claimed directory; a replacement remains blocked for explicit reconciliation.
+Next: Publish existing PR #12, verify remote bytes and CI, request current-head review. No owner-account installation or live chat receipt claimed.
+<!-- /oos:event -->

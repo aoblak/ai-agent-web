@@ -329,6 +329,31 @@ class ChatJournalTests(unittest.TestCase):
             self.assertLess(len(path.name.encode()), 255)
             self.assertTrue(ChatJournalWriter(path, chat_id).verify_chain()[0])
 
+    def test_canonical_event_type_always_requires_authorization_and_complete_sources(self):
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "journal.ndjson"
+            writer = ChatJournalWriter(path, "chat")
+            writer.append_event("user", "message", "first instruction")
+            writer.append_event("user", "message", "second instruction")
+            before = path.read_bytes()
+            for event_type in PromotionGate.CANONICAL_EVENT_TYPES:
+                for flag in (None, False, "false", 1):
+                    metadata = {"source_seqs": [1, 2], "contradiction_check": "pass"}
+                    if flag is not None:
+                        metadata["changes_canon"] = flag
+                    with self.subTest(event_type=event_type, flag=flag):
+                        with self.assertRaises(ValueError):
+                            writer.append_event("assistant", event_type, "change", metadata=metadata)
+                        self.assertEqual(path.read_bytes(), before)
+                with self.assertRaises(ValueError):
+                    writer.append_event("assistant", event_type, "change", metadata={
+                        "source_seqs": [2], "contradiction_check": "pass", "authorized_by_user": True})
+                self.assertEqual(path.read_bytes(), before)
+            # Omitted redundant flag cannot disable the event type's strict checks.
+            writer.append_event("assistant", "promotion", "authorized", metadata={
+                "source_seqs": [1, 2], "contradiction_check": "pass", "authorized_by_user": True})
+            self.assertTrue(writer.verify_chain()[0])
+
     def test_no_update_or_delete_api(self):
         self.assertFalse(hasattr(ChatJournalWriter, "update"))
         self.assertFalse(hasattr(ChatJournalWriter, "delete"))

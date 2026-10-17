@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 from typing import Any, Iterable, Mapping
 
 
@@ -228,6 +229,16 @@ def evaluate_run(run: Mapping[str, Any]) -> ReliabilitySummary:
     return summarize_claims(run["claims"])
 
 
+def _validate_rate(value: Any, name: str) -> None:
+    try:
+        finite = math.isfinite(value)
+    except (TypeError, OverflowError):
+        finite = False
+    if (not isinstance(value, (int, float)) or isinstance(value, bool)
+            or not finite or not 0 <= value <= 1):
+        raise ValueError(name + " must be a finite number in [0, 1]")
+
+
 def promotion_gate(
     summary: ReliabilitySummary,
     *,
@@ -236,6 +247,18 @@ def promotion_gate(
     min_evidence_coverage: float = 0.90,
     min_safe_abstention_rate: float | None = None,
 ) -> dict[str, Any]:
+    for name, value in (
+        ("max_factual_hallucination_rate", max_factual_hallucination_rate),
+        ("max_unsupported_claim_rate", max_unsupported_claim_rate),
+        ("min_evidence_coverage", min_evidence_coverage),
+    ):
+        _validate_rate(value, name)
+    if min_safe_abstention_rate is not None:
+        _validate_rate(min_safe_abstention_rate, "min_safe_abstention_rate")
+    for name in ("factual_hallucination_rate", "unsupported_claim_rate", "evidence_coverage"):
+        _validate_rate(getattr(summary, name), "summary." + name)
+    if summary.safe_abstention_rate is not None:
+        _validate_rate(summary.safe_abstention_rate, "summary.safe_abstention_rate")
     failures: list[str] = []
     if summary.factual_hallucination_rate > max_factual_hallucination_rate:
         failures.append("factual_hallucination_rate")
@@ -266,6 +289,19 @@ def compare_runs(
     candidate that stops reporting an abstention metric is itself a regression because
     the benchmark is expected to be materially comparable.
     """
+    for name, value in (
+        ("hallucination_tolerance", hallucination_tolerance),
+        ("unsupported_tolerance", unsupported_tolerance),
+        ("evidence_coverage_tolerance", evidence_coverage_tolerance),
+        ("safe_abstention_tolerance", safe_abstention_tolerance),
+    ):
+        _validate_rate(value, name)
+    for name in ("factual_hallucination_rate", "unsupported_claim_rate", "evidence_coverage"):
+        _validate_rate(getattr(baseline, name), "baseline." + name)
+        _validate_rate(getattr(candidate, name), "candidate." + name)
+    for label, summary in (("baseline", baseline), ("candidate", candidate)):
+        if summary.safe_abstention_rate is not None:
+            _validate_rate(summary.safe_abstention_rate, label + ".safe_abstention_rate")
     regressions: list[str] = []
     if candidate.factual_hallucination_rate > baseline.factual_hallucination_rate + hallucination_tolerance:
         regressions.append("factual_hallucination_rate")

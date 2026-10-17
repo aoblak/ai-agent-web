@@ -1,4 +1,5 @@
 import json
+from dataclasses import replace
 from pathlib import Path
 import unittest
 
@@ -29,6 +30,28 @@ class PromptReliabilityTest(unittest.TestCase):
         summary = summarize_claims(claims)
         self.assertEqual(summary.factual_hallucination_rate, 0.5)
         self.assertLessEqual(summary.factual_hallucination_rate, 1)
+
+    def test_promotion_thresholds_require_finite_unit_interval_values(self) -> None:
+        summary = summarize_claims([{"status": "SUPPORTED", "evidence_refs": ["proof"]}])
+        self.assertTrue(promotion_gate(summary)["promote"])
+        for name in ("max_factual_hallucination_rate", "max_unsupported_claim_rate",
+                     "min_evidence_coverage", "min_safe_abstention_rate"):
+            for value in (float("nan"), float("inf"), -float("inf"), -0.1, 1.1, True, "0.5"):
+                with self.subTest(name=name, value=value):
+                    with self.assertRaises(ValueError):
+                        promotion_gate(summary, **{name: value})
+        with self.assertRaises(ValueError):
+            promotion_gate(replace(summary, factual_hallucination_rate=float("nan")))
+
+    def test_regression_tolerances_and_metrics_cannot_use_nan_to_suppress_failure(self) -> None:
+        summary = summarize_claims([{"status": "SUPPORTED", "evidence_refs": ["proof"]}])
+        for name in ("hallucination_tolerance", "unsupported_tolerance",
+                     "evidence_coverage_tolerance", "safe_abstention_tolerance"):
+            with self.subTest(name=name):
+                with self.assertRaises(ValueError):
+                    compare_runs(summary, summary, **{name: float("nan")})
+        with self.assertRaises(ValueError):
+            compare_runs(summary, replace(summary, evidence_coverage=float("inf")))
 
     def test_source_is_required_for_provenance_but_not_scoring(self) -> None:
         run = json.loads(FIXTURE.read_text(encoding="utf-8"))
